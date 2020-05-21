@@ -1,10 +1,10 @@
-name: "MyLabJournal"
+name: "Wellcome"
 navbar:
   title: "MyLabJournal"
   left:
     - text: "Home"
       href: index.html
-    - text: "Journal"
+    - text: "Research"
       href: Journal.html
     - text: "Links"
       href: Links.html
