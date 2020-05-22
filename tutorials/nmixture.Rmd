@@ -18,6 +18,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # N-mixture models 1
 
+Una prueba para fórmulas:
+
+$$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$
+
+Donde $f(k)$ es fulanito y $p^{k}$ es menganito. Todo correcto.
+
 # N-mixture models 2
 
 # N-mixture models 3
