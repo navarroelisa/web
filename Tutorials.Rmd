@@ -1,0 +1,27 @@
+---
+title: "Tutorials"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+
+
+
+# N-mixture models (Spanish)
+
+Este texto debería aparecer
+test link for [n-mixture models](https://jabiologo.github.io/web/tutorials/nmixture.html)
+
+# Second tutorial
+
+Here should be the link for the second tutorial
+
