@@ -2,12 +2,23 @@
 title: "n-mixture models"
 author: "Javier Fernández-López"
 date: "22 de mayo de 2020"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## N-mixture models
+# N-mixture models 1
+
+# N-mixture models 2
+
+# N-mixture models 3
 
