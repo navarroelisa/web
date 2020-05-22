@@ -1,7 +1,8 @@
 ---
-title: "n-mixture models"
+title: "N-mixture models"
 author: "Javier Fernández-López"
 date: "22 de mayo de 2020"
+bibliography: references_tutorials.bib
 output: 
   html_document:
     toc: true
@@ -16,7 +17,15 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# N-mixture models 1
+# N-mixture models: Generalidades
+
+Los N-mixture models, modelos de mezclas o modelo de conteos [@Royle2004] nos permiten estimar la abundancia de una especie a partir de conteos repetidos. Estos modelos estiman a la vez la abundancia y la probabilidad de detección de la especie estudiada. De forma general, podríamos resumirlo 
+
+$$N = k * I$$
+donde $N$ sería el número de individuos total de una población, $k$ sería la detectabilidad e $I$ un índice de abundancia, es decir, el conteo de individuos que hayamos obtenido durante los muestreos, por ejemplo.
+
+
+
 
 Una prueba para fórmulas:
 

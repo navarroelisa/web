@@ -1,5 +1,6 @@
 ---
 title: "Tutorials"
+bibliography: references.bib
 output:
   html_document:
     toc: true
@@ -24,4 +25,8 @@ test link for [n-mixture models](https://jabiologo.github.io/web/tutorials/nmixt
 # Second tutorial
 
 Here should be the link for the second tutorial
+
+# Prueba para referencias
+
+Incluir cita aquí [@Royle2004]
 

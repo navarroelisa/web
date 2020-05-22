@@ -1,5 +1,6 @@
 ---
 title: "Javi's site"
+bibliography: references.bib
 output: 
   html_document:
     fig_width: 20

@@ -9,8 +9,5 @@ navbar:
       href: Tutorials.html
     - text: "Links"
       href: Links.html
-  right:
-    - icon: fa-question fa-lg
-      href: https://example.com
 output_dir: "docs"
 
