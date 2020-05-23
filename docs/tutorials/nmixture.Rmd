@@ -60,7 +60,7 @@ sarea <- raster(nrows = 10, ncols = 10, xmn = 0, xmx = 10, ymn = 0, ymx = 10)
 Este área de momento está vacía, por lo que tendremos que llenarla de ciervos virtuales. Podemos utilizar una [distribución de Poisson](https://www.youtube.com/watch?v=BbLfV0wOeyc) para "esparcir" nuestros ciervos simulados en el área de estudio. Esta distrubución es una de las más comunmente utilizadas en el estudio de abundancias. Esta distribución maneja la frecuencia con la que un evento ocurre en un intervalo específico. Consta de un único parámetro llamado lambda $\lambda$ que determina el número de eventos que ocurren normalmente en ese intervalo. 
   
     
-```{r poisson, echo = FALSE, fig.height = 3, fig.width = 3, fig.align = "center"}
+```{r poisson, echo = FALSE, fig.height = 4, fig.width = 9, fig.align = "center"}
 par(mfrow=c(1,2))
 hist(rpois(10000,4), main = "Poisson lambda = 4", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 10)
 hist(rpois(10000,8), main = "Poisson lambda = 8", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 20)
@@ -74,7 +74,7 @@ siendo $N_{i}$ el número total de individuos en la celda $i$.
 
 Como podemos ver en el histograma de la izquierda, los valores más probables serán 3 o 4 ciervos, aunque variarán entre cero y 14 aproximadamente (aunque este útimo valor será muy poco probable).
 
-```{r ciervos}
+```{r ciervos,fig.height = 5.8, fig.width = 6, fig.align = "center"}
 # Seleccionamos el lambda deseado
 lambda <- 4
 
@@ -127,7 +127,7 @@ for (j in 1:4){
 
 Una vez realizado el muestreo, veamos el resultado del mismo. Primero graficamos nuestro área de estudio con las celdas muestreadas:
 
-```{r area_muestreos}
+```{r area_muestreos,fig.height = 5.8, fig.width = 6, fig.align = "center"}
 plot(sarea)
 points(xyFromCell(sarea,site_ID), pch = 4, cex = 1.5)
 ```
@@ -142,12 +142,13 @@ La primera columna (site_ID) es un identificador de la cuadrícula. La segunda (
 
 En el mundo real, el problema surge al no conocer esa detectabilidad. Al realizar los distintos muestreos no sabemos realmente cuál es el procentaje de individios que somos capaces de detectar. Una primera estima sería quedarnos con el valor máximo de cada una de nuestras visitas para cada uno de los 15 muestreos. Asumiendo que la población en cada celda es cerrada (sin migración, nacimientos o muerte de individuos) el numero máximo de individuos detectados en cada una de las 4 visitas podría ser un buen punto de partida para aproximar una abundancia total. Lo calculamos y lo comparamos con el número real del siguiente modo:
 
-```{r nmax}
+```{r nmax,fig.height = 5.8, fig.width = 6, fig.align = "center"}
 # Calculamos los individuos máximos detectados por visita
 dataset$maxN <- apply(dataset[,3:6],1, max)
 
 # Graficamos la relación con los individuos reales
-plot(dataset$trueN, dataset$maxN, xlab = "número real de individuos", ylab = "número detectado de individuos")
+plot(dataset$trueN, dataset$maxN, xlim = c(0,7.5), ylim = c(0,7.5), 
+     xlab = "número real de individuos", ylab = "número detectado de individuos")
 abline(0,1)
 ```
 
@@ -165,5 +166,5 @@ sum(dataset$meanN) / sum(dataset$trueN)
 
 Efectivamente, de media estamos viendo un 39% de los individuos que realmente hay. Para poder ajustar un modelo que fuese capaz de calcular el número total de individuos, deberíamos primero ser capaces de calcular esa detectabilidad, esto es, el parámetro $p$ de la distribución binomial.
 
-# Ajuste de un modelo N-mixture con _unmarked_
+# Ajuste de un modelo N-mixture sencillo con _unmarked_
 
