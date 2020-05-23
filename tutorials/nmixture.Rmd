@@ -17,12 +17,69 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Introducción
+
+La abundancia de una especie es un parámetro clave para conocer el estado de cualquier población y poder realizar una correcta gestión de la misma. Sin embargo, conocer el número total de individuos que componenen una población, $N$, no es tarea sencilla. Para aproximarnos a ese número se pueden diseñar muestreos que nos permitan obtener un índice de abundancia de la población, $I$. De forma general, se podría considerar que
+$$N = k * I$$
+donde $N$ sería el número total de individuos de una población, $I$ el índice de abundancia (el conteo de individuos que hayamos obtenido durante unos muestreos, por ejemplo) y la $k$ sería la detectabilidad o capturabilidad, la eficiencia que tenemos para detectar individuos durante los muestreos. Conocer esta $k$ nos permitiría estimar la abundancia total de individuos $N$, pero a menudo es complicada de obtener. Algunas aproximaciones como la captura-marcaje-recaptura se basan en la identificación individual de los individuos para realizar estimas de esta detectabilidad y poder así estimar abundancias absolutas (XXXX), pero esta metodología suele ser costosa de implementar. 
+
+Los N-mixture models, modelos de mezclas o modelo de conteos [@Royle2004] nos permiten estimar la abundancia de una especie a partir de muestreos repetidos. Estos modelos estiman a la vez la abundancia y la probabilidad de detección/capturabilidad de la especie estudiada a partir de conteos repetidos $t$ ocasiones en $n$ sitios diferentes.
+
+En el siguiente tutorial se pretende comprender las generalidades de los N-mixture models a partir de una serie de simulaciones utilizando el lenguaje R y el paquete _unmarked_ (XXXXX)
+
 # N-mixture models: Generalidades
 
-Los N-mixture models, modelos de mezclas o modelo de conteos [@Royle2004] nos permiten estimar la abundancia de una especie a partir de conteos repetidos. Estos modelos estiman a la vez la abundancia y la probabilidad de detección de la especie estudiada. De forma general, podríamos resumirlo 
+Pongamos que salimos al campo a buscar individuos de ciervo _(Cervus elaphus)_. De forma general podemos afirmar que si detectamos un individuo significa que la especie está presente en ese lugar. Sin embargo, el hecho de no detectarla puede estar indicándonos dos cosas:
 
-$$N = k * I$$
-donde $N$ sería el número de individuos total de una población, $k$ sería la detectabilidad e $I$ un índice de abundancia, es decir, el conteo de individuos que hayamos obtenido durante los muestreos, por ejemplo.
+1.   Que la especie no esté presente en ese lugar porque el hábitat no es el adecuado.
+2.   Que la especie esté presente pero no hayamos sido capaces de detectarla.
+
+Para tener en cuenta estas dos opciones, los N-mixture models constan de dos procesos:
+
+* Un proceso (o modelo) que determina la abundancia real de la especie.
+* Un proceso (o modelo) que determina la probabilidad de detección de la especie.
+
+A continuación simularemos una serie de situaciones a modo de ejemplo para entender un poco mejor ambos procesos.
+
+# Simulación del área de estudio
+
+Con ayuda de R, vamos a simular una población de ciervos que se distribuye en un área de 100 km<sup>2</sup> (100 cuadrados de 1 km de lado)
+
+```{r studyarea, message=FALSE}
+library(raster)
+sarea <- raster(nrows = 10, ncols = 10, xmn = 0, xmx = 10, ymn = 0, ymx = 10)  # study area
+
+```
+
+Este área de momento está vacía, por lo que tendremos que llenarla de ciervos virtuales. Podemos utilizar una distribución de _Poisson_ para "esparcir" nuestros ciervos simulados en el área de estudio. Esta distrubución es una de las más comunmente utilizadas en el estudio de abundancias. [Esta distribución](https://www.youtube.com/watch?v=BbLfV0wOeyc) maneja la frecuencia con la que un evento ocurre en un intervalo específico. Consta de un único parámetro llamado lambda $\lambda$ que determina el número de eventos que ocurren normalmente en ese intervalo. 
+  
+    
+```{r poisson, echo = FALSE}
+par(mfrow=c(1,2))
+hist(rpois(10000,4), main = "Poisson lambda = 4", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 10)
+hist(rpois(10000,8), main = "Poisson lambda = 8", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 20)
+```
+  
+  
+En nuestro caso, el número de ciervos virtuales que colocaremos en cada cuadrícula de 1x1 km vendrá determinado por una distribución de Poisson con $\lambda = 4$. Como podemos ver en el histograma de la izquierda, los valores más probables serán 3 o 4 ciervos, aunque variarán entre cero y 14 aproximadamente (aunque este útimo valor será muy poco probable).
+
+```{r ciervos}
+# Seleccionamos el lambda deseado
+lambda <- 4
+
+# Generamos 100 números aleatorios obtenidos de una distribucion
+# de Poisson con una lambda = 4
+sarea[] <- rpois(100, lambda)  
+
+# Calculamos el número total de ciervos virtuales creados (N)
+sum(sarea[])
+
+# Graficamos nuestro área de estudio
+plot(sarea)
+
+```
+
+
 
 
 
@@ -33,7 +90,7 @@ $$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$
 
 Donde $f(k)$ es fulanito y $p^{k}$ es menganito. Todo correcto.
 
-# N-mixture models 2
+
 
 # N-mixture models 3
 
