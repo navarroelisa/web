@@ -160,11 +160,51 @@ dataset$meanN <- apply(dataset[,3:6],1, mean)
 
 #Sumamos las medias de los 15 sitios y lo comparamos con los valores reales
 sum(dataset$meanN) / sum(dataset$trueN)
-
-
 ```
 
 Efectivamente, de media estamos viendo un 39% de los individuos que realmente hay. Para poder ajustar un modelo que fuese capaz de calcular el número total de individuos, deberíamos primero ser capaces de calcular esa detectabilidad, esto es, el parámetro $p$ de la distribución binomial.
 
-# Ajuste de un modelo N-mixture sencillo con _unmarked_
+# Modelo N-mixture sencillo con _unmarked_
 
+Como ya hemos dicho, los N-mixture models nos permiten modelizar a la vez la probabilidad de detección y la abundancia de nuestra especie a partir de muestreos repetidos. Para ajustar este tipo de modelos utilizadremos la función `pcount` del paquete _unmarked_ (XXXX). En primer lugar, debemos preparar los datos para que _unmarked_ pueda leerlos. Utilizaremos la función `unmarkedFramePCount` para indicar cuales son los 15 muestreos repetidos en 4 ocasiones
+
+```{r unmarkedFramePCount, message=FALSE}
+library(unmarked)
+dataUM <- unmarkedFramePCount(y = dataset[,3:6])
+
+# Echamos un vistazo al objeto dataUM
+head(dataUM)
+```
+
+Ahora podremos ajustar nuestro modelo con la función `pcount`. Vamos a ajustar el modelo más sencillo. En este ejemplo, ni la abundancia ni la propabilidad de detección vienen determinados por ninguna variable, simplemente responden a un proceso de Poisson con $\lambda = 4$ y a una distribución binomial con $p = 4$ respectivamente. Lo que intentaremos averiguar con este modelo son esos dos parámetros.
+
+```{r m1}
+# Como en este modelo no hay variables predictoras, las fórmulas de detectabilidad
+# y de abundancia las dejamos como ~1. Más información en help(pcount)
+m1 <- pcount(~1 ~1, data=dataUM, K=50)
+summary(m1)
+```
+
+La función nos devuelve las estimaciones de los parámetros $\lambda$ y $p$ transformados en log y logit respectivamente. Es decir, el modelo realmente ajusta el parámetro $log(\lambda)$ y $logit(p)$, por lo que a estas estimas hay que hacerles la transformación inversa:
+
+```{r backtransform}
+# lambda estimada:
+exp(coef(m1)[1]) # log
+
+# p estimada:
+#exp(coef(m1)[2])/(1+exp(coef(m1)[2])) # log ratio o log odds = logit
+plogis(coef(m1)[2]) # log ratio o log odds = logit; igual que arriba
+
+```
+
+Como vemos, la estima de $\lambda$ es de 4.64 frente a la real, que era de 4. Por otro lado, la estima de $p$ es de 0.35, mientras que la $p$ real o detectabilidad era de 0.4. No es un modelo perfecto, pero se ajusta bastante a la realidad. ¿Cómo podríamos mejorar estas estimas? Incrementando el número de sitios muestreados, aumentando el número de visitas en cada sitio, etc. En cualquier caso, podemos calcular las abundancias predichas por nuestro modelo para cada sitio visitado y ver cómo se ajusta con respecto a la abundancia real. Para ello, usaremos la función `bup`:
+
+```{r pred_m1, fig.height = 5.8, fig.width = 6, fig.align = "center"}
+# Calculamos las predicciones de abundancias
+N_m1<- bup(ranef(m1)) 
+
+# graficamos la relación entre las abundancias reales y las predichas
+plot(dataset$trueN,N_m1, xlab="True density", ylab="Predicted density")
+abline(0,1)# a 1:1 line
+
+```
