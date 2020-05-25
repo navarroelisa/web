@@ -164,7 +164,7 @@ sum(dataset$meanN) / sum(dataset$trueN)
 
 Efectivamente, de media estamos viendo un 39% de los individuos que realmente hay. Para poder ajustar un modelo que fuese capaz de calcular el número total de individuos, deberíamos primero ser capaces de calcular esa detectabilidad, esto es, el parámetro $p$ de la distribución binomial.
 
-# Modelo N-mixture sencillo con _unmarked_
+# Modelo N-mixture sencillo en _unmarked_
 
 Como ya hemos dicho, los N-mixture models nos permiten modelizar a la vez la probabilidad de detección y la abundancia de nuestra especie a partir de muestreos repetidos. Para ajustar este tipo de modelos utilizadremos la función `pcount` del paquete _unmarked_ (XXXX). En primer lugar, debemos preparar los datos para que _unmarked_ pueda leerlos. Utilizaremos la función `unmarkedFramePCount` para indicar cuales son los 15 muestreos repetidos en 4 ocasiones
 
@@ -208,3 +208,12 @@ plot(dataset$trueN,N_m1, xlab="True density", ylab="Predicted density")
 abline(0,1)# a 1:1 line
 
 ```
+
+Vemos ahora que hemos solventado el problema de la infraestima. Este modelo tan sencillo sirve para explicar de forma clara el funcionamiento del modelo N-mixture binomial. Sin embargo, la abundancia normalmente suele venir determinada por alguna covariable predictora que afecta a la distribución de las especies, como disponibilidad de recursos, refucio, etc. Por eso, a continuación simularemos otro set de datos y ajustatemos un modelo algo más complejo.
+
+
+# Modelo N-mixture con covariables en _unmarked_
+
+
+
+
