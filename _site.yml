@@ -7,6 +7,8 @@ navbar:
       href: index.html
     - text: "Tutorials"
       href: Tutorials.html
+    - text: "Research"
+      href: Research.html
     - text: "Links"
       href: Links.html
 output_dir: "docs"

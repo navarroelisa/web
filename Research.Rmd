@@ -1,0 +1,18 @@
+---
+title: "Research"
+output: html_document
+bibliography: references.bib
+nocite: | 
+  @Royle2004
+  @rwind2019
+  @IMA2019
+  
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+Here you have some selected publications. Find more in my [Google Schoolar](https://scholar.google.es/citations?hl=es&user=v3biyuIAAAAJ) profile or in my [Researchgate](https://www.researchgate.net/profile/Javier_Fernandez-Lopez)
+
