@@ -292,7 +292,7 @@ donde de forma similar al modelo de $\lambda$, ahora $\gamma_{0}$ y $\gamma_{1}$
 *   $\gamma_{0} = 0.2$
 *   $\gamma_{1} = 0.8$
 
-Fijémnos que $gamma_{1}$es positivo. Esto querrá decir que "a mayor distancia del punto de agua, mayor probabilidad de detectar un ciervo". Vamos a calcular ahora ese parámetro $p$ para todo nuestro área de estudio al igual que hicimos con $\lambda$.
+Fijémnos que $\gamma_{1}$ es positivo. Esto querrá decir que "a mayor distancia del punto de agua, mayor probabilidad de detectar un ciervo". Vamos a calcular ahora ese parámetro $p$ para todo nuestro área de estudio al igual que hicimos con $\lambda$.
 
 
 ```{r sample_cov, fig.height = 5.8, fig.width = 6, fig.align = "center"}
