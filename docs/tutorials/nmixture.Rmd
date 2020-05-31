@@ -309,4 +309,61 @@ plot(p)
 ```
 
 
-Como vemos, la probabilidad de detección lejos del punto de agua llega casi al 100%. Sin embargo, cerca del punto de agua esta detectabilidad desciente hasta el 50% aproximadamente.
+Como vemos, la probabilidad de detección lejos del punto de agua llega casi al 100%. Sin embargo, cerca del punto de agua esta detectabilidad desciente hasta el 50% aproximadamente. Podemos graficar la relación entre distancia al punto de agua y la probabilidad de detección:
+
+``` {r relacion, fig.height = 5.8, fig.width = 6, fig.align = "center"}
+plot(dwat[], p[], xlab = "distancia al punto de agua", ylab = "detectabilidad", ylim = c(0.4,1))
+
+```
+
+A continuación podemos simular nuestros 15 puntos aleatorios de muestreo. Al igual que en el ejemplo anterior, visitaremos 4 veces cada punto, y aplicaremos la detectabilidad $p$ correspondiente a cada celda.
+
+``` {r sample_covar}
+site_ID <- sample(1:100, 15)
+
+plot(sarea)
+points(xyFromCell(sarea,site_ID), pch = 4, cex = 1.5)
+
+dataset <- data.frame(site_ID)
+dataset$trueN <- extract(sarea,site_ID)
+dataset$O1 <- NA
+dataset$O2 <- NA
+dataset$O3 <- NA
+dataset$O4 <- NA
+
+for (j in 1:4){
+  for (i in 1:length(site_ID)){
+    # Nótese que utilizamos rbinom() con p = al obtenido del raster "p"
+    dataset[i,j+2] <- rbinom(1, extract(sarea,site_ID[i]), extract(p,site_ID[i]))
+  }
+}
+
+dataset
+
+```
+
+Una vez obtenido nuestro conteo de ciervos, necesitamos obtener los valores de nuestra variable predictora para cada uno de los puntos de muestreo:
+
+``` {r sample_dwat}
+
+dataset$dwat <- extract(dwat, site_ID)
+
+```
+
+Finalmente, debemos agrupar todos estos datos en un objeto entendible por el paquete _unmarked_ como ya hicimos en el ejemplo anterior utilizando la función _unmarkedFramePCount()_
+
+``` {r unmarkeddataframe}
+dataUM <- unmarkedFramePCount(y = dataset[,3:6], siteCovs=data.frame(dwat=dataset$dwat))
+
+```
+
+Ahora estamos listos para ajustar un segundo modelo en el que tengamos en cuenta nuestra covariable predictora. En este caso, tanto el modelo de abundancia como el de detectabilidad van a estar determinados por la misma covariable, la distancia al punto de agua $dwat$, así que utilizaremos la función _pcount_ de este modo:
+
+``` {r pcount_covariable}
+
+
+# Tanto el proceso de detección como el de abundancia dependen de dwat, por tanto
+# utilizaremos ~dwat ~dwat en la fórmula. 
+m2 <- pcount(~dwat ~dwat, data=dataUM, K=150)
+
+```
