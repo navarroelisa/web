@@ -46,7 +46,7 @@ Para tener en cuenta estas dos opciones, los N-mixture models constan de dos pro
 
 A continuación simularemos una serie de situaciones a modo de ejemplo para entender un poco mejor ambos procesos.
 
-# Simulación del área de estudio y del muestreo
+# Simulación del área de estudio y del muestreo SIN covariables
 
 Con ayuda de R, vamos a simular una población de ciervos que se distribuye en un área de 100 km<sup>2</sup> (100 cuadrados de 1 km de lado)
 
@@ -209,11 +209,104 @@ abline(0,1)# a 1:1 line
 
 ```
 
-Vemos ahora que hemos solventado el problema de la infraestima. Este modelo tan sencillo sirve para explicar de forma clara el funcionamiento del modelo N-mixture binomial. Sin embargo, la abundancia normalmente suele venir determinada por alguna covariable predictora que afecta a la distribución de las especies, como disponibilidad de recursos, refucio, etc. Por eso, a continuación simularemos otro set de datos y ajustatemos un modelo algo más complejo.
+Vemos ahora que hemos solventado el problema de la infraestima. Este modelo tan sencillo sirve para explicar de forma clara el funcionamiento del modelo N-mixture binomial. Sin embargo, la abundancia normalmente suele venir determinada por alguna covariable predictora que afecta a la distribución de las especies, como disponibilidad de recursos, refugio, etc. Por eso, a continuación simularemos otro set de datos y ajustatemos un modelo algo más complejo.
 
 
-# Modelo N-mixture con covariables en _unmarked_
+# Simulación del área de estudio y del muestreo CON covariables
+
+Supongamos ahora que nuestra población de ciervos virtuales se distribuye en un paisaje como el de la siguiente imagen
+<br/><br/> 
+![](nmixture_files/images/dwat.png)
+<br/><br/>    
+   
+Como vemos, hay un punto de agua en la parte inferior izquierda. Vamos a crear una capa raster que indique la distancia al punto de agua, la cual usaremos posteriormente como variable predictora para distribuir nuestros ciervos.
+
+```{r dwat_create, fig.height = 5.8, fig.width = 6, fig.align = "center"}
+# Nótese que estamos estandarizando las distancias con scale(). 
+# Para no obtener distancias negativas, le sumaremos 2.28668
+dwat <- scale(distanceFromPoints(sarea, c(3.5,3.5))) + 2.28668
+
+plot(dwat)
+```
+
+En el ejemplo anterior, habíamos distribuido los ciervos aleatoriamente siguiendo una distribución de Poisson con $\lambda = 4$ para todo el territorio. 
+
+$$N \sim Poisson(\lambda)$$
+
+Sin embargo, ahora queremos que nuestros ciervos se distribuyan conforme a la distancia al punto de agua, de tal forma que haya más ciervos cerca del agua, y su abundancia disminuya conforme nos vamos alejando de ella. Eso quiere decir que $\lambda$ debe ser mayor en valores bajos de distancia al agua $dwat$, e irá disminuyendo con forme aumente $dwat$. Este comportamiento se puede expresar como
+
+$$ log(\lambda_{i}) = \beta_{0} + \beta_{1} * dwat_{i} $$
+donde $\lambda_{i}$ es la abundancia promedio en la celda $i$, $\beta_{0}$ es el intercepto del modelo lineal que predice la abundancia, $\beta_{1}$ es la fuerza del efecto de la distancia al agua sobre la abundancia de ciervos, y $dwat_{i}$ es la distancia al punto de agua desde la celda $i$. Así, podemos intuir que la $\lambda$de cada celda dependerá de la variable "distancia al agua". Por lo tanto, la ecuación general que gobernará la distribución de nuestros ciervos ahora sera:
+
+$$N \sim Poisson(exp(\beta_{0} + \beta_{1} * dwat))$$
+
+Para que se cumpla nuestra premisa de que haya menos ciervos cuanto más nos alejemos del punto de agua, al coeficiente $\beta_{1}$ deberemos darle un valor negativo. Estos serán nuestros valores:
+
+*   $\beta_{0} = 3$
+*   $\beta_{1} = -0.9$
+
+Calculamos la $\lambda$ para cada celda siguiendo nuestra fórmula y los valores elegidos para los coeficientes
+
+```{r lambda, fig.height = 5.8, fig.width = 6, fig.align = "center"}
+beta_0 <- 3
+beta_1 <- -0.9
+
+lambda <- exp(beta_0 + beta_1*(dwat))
+plot(lambda)
+```
+
+Una vez tenemos el $\lambda$ de cada celda, solo nos queda "rellenar" nuestro área de estudio siguiendo, como en el ejemplo anterior, una distribución de Poisson. Sin embargo esta vez, en vez de utilizar $\lambda = 4$ para todo el territorio, usaremos el $\lambda$ calculado específicamente para cada celda en función de la distancia al punto de agua:
+
+```{r Nlambda, fig.height = 5.8, fig.width = 6, fig.align = "center"}
+# Creamos un raster de 10x10 celdas vacías
+sarea <- raster(nrows = 10, ncols = 10, xmn = 0, xmx = 10, ymn = 0, ymx = 10)  # study area
+
+# Usamos un bucle para rellenar cada celda con el número de ciervos correspondiente según
+# el lambda de cada celda
+for (i in 1:ncell(sarea)){
+  sarea[i] <- rpois(1, lambda[i])
+}
+
+# Graficamos la distribución de nuestros ciervos virtuales
+plot(sarea)
+```
 
 
+Ya tenemos nuestros ciervos distribuidos. Recapitulando, esta población también se distribuye siguiendo una distribución de Poisson. La diferencia con respecto al ejemplo anterior es que ahora el parámentro $\lambda$ de esa distribución no es homogéneo para todo el área de estudio, sino que varía con respecto a una covariable o variable predictora, la distancia a un punto de agua en nuestro caso. Esta situación es mucho más realista que la anterior.
+
+Para comprobar la relación entre la abundancia de ciervos y la distancia al agua, podemos graficar la correlación entre número de individuos en cada celda y la distancia de estas al punto de agua:
+
+``` {r corr, fig.height = 5.8, fig.width = 6, fig.align = "center"}
+plot(dwat[],sarea[], xlab = "distancia al punto de agua", ylab = "nº de ciervos")
+
+```
+
+Vayamos ahora a simular el muestreo. Como en el ejemplo anterior, éste consistirá en 15 cuadrículas aleatorias de nuestro área de estudio a las cuales realizaremos 4 visitas en cada una (ocasiones). Sin embargo ahora, nuestra probabilidad de detección de los animales también va a venir definido por la distancia al agua. Como vimos en la foto aérea de nuestro paisaje, cerca del agua encontramos una mayor vegetación, lo cual dificulta la detección de nuestros ciervos, ya que se pueden ocultar mejor. Por lo tanto puestra capacidad de detección disminuirá conforme nos acerquemos al agua. Como ya habíamos visto anteriormentem el proceso de observación venía definido por la fórmula
+
+$$y_{i,k} \sim binomial(N_{i}, p)$$
+siendo la probabilidad de detectar un ciervo $p$ un parámetro constante en todo nuestro área de estudio ($p = 0.4$). Sin embargo ahora, ese parámetro $p$ va a variar con respecto a nuestra covariable predictora de la siguiente manera:
+
+$$logit(p)= \gamma_{0} + \gamma_{1} * dwat$$
+donde de forma similar al modelo de $\lambda$, ahora $\gamma_{0}$ y $\gamma_{1}$ son respectivamente el intercepto y la fuerza con la que la distancia al agua afecta a la probabilidad de detección de los ciervos. Pongamos que los valores son los siguientes:
+
+*   $\gamma_{0} = 0.2$
+*   $\gamma_{1} = 0.8$
+
+Fijémnos que $gamma_{1}$es positivo. Esto querrá decir que "a mayor distancia del punto de agua, mayor probabilidad de detectar un ciervo". Vamos a calcular ahora ese parámetro $p$ para todo nuestro área de estudio al igual que hicimos con $\lambda$.
 
 
+```{r sample_cov, fig.height = 5.8, fig.width = 6, fig.align = "center"}
+
+# logit(p) = gamma_0 + gamma_1 * (dwat)
+gamma_0 <- 0.2
+gamma_1 <- 0.8
+
+# Para despejar logit() de la izquierda, pasamos a la derecha todo este cociente
+p <- exp(gamma_0 + gamma_1 * dwat) / (1 + exp(gamma_0 + gamma_1 * dwat))
+
+# Graficamos la probabilidad de detección/observación
+plot(p)
+```
+
+
+Como vemos, la probabilidad de detección lejos del punto de agua llega casi al 100%. Sin embargo, cerca del punto de agua esta detectabilidad desciente hasta el 50% aproximadamente.
