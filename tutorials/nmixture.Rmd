@@ -271,10 +271,13 @@ for (i in 1:ncell(sarea)){
 plot(sarea)
 ```
 
+Ya tenemos nuestros ciervos distribuidos. Recapitulando, esta población también se distribuye siguiendo una distribución de Poisson. La diferencia con respecto al ejemplo anterior es que ahora el parámentro $\lambda$ de esa distribución no es homogéneo para todo el área de estudio, sino que varía con respecto a una covariable o variable predictora, la distancia a un punto de agua en nuestro caso. Esta situación es mucho más realista que la anterior. Podemos ver cual es el número total de individuos de nuestra población, $N$.
 
-Ya tenemos nuestros ciervos distribuidos. Recapitulando, esta población también se distribuye siguiendo una distribución de Poisson. La diferencia con respecto al ejemplo anterior es que ahora el parámentro $\lambda$ de esa distribución no es homogéneo para todo el área de estudio, sino que varía con respecto a una covariable o variable predictora, la distancia a un punto de agua en nuestro caso. Esta situación es mucho más realista que la anterior.
+``` {r ntotal}
+sum(sarea[])
+```
 
-Para comprobar la relación entre la abundancia de ciervos y la distancia al agua, podemos graficar la correlación entre número de individuos en cada celda y la distancia de estas al punto de agua:
+Hemos simulado un total de 352 ciervos repartidos por nuestro área de estudio. Este número es el que intentaremos obtener posteriormente cuando ajustemos nuestro modelo. Para comprobar la relación entre la abundancia de ciervos y la distancia al agua, podemos graficar la correlación entre número de individuos en cada celda y la distancia de estas al punto de agua:
 
 ``` {r corr, fig.height = 5.8, fig.width = 6, fig.align = "center"}
 plot(dwat[],sarea[], xlab = "distancia al punto de agua", ylab = "nº de ciervos")
@@ -350,20 +353,38 @@ dataset$dwat <- extract(dwat, site_ID)
 
 ```
 
-Finalmente, debemos agrupar todos estos datos en un objeto entendible por el paquete _unmarked_ como ya hicimos en el ejemplo anterior utilizando la función _unmarkedFramePCount()_
+# Modelo N-mixture con una covariable
+
+Ya tenemos todos los elementos necesarios para ajustar un modelo N-mixture con ayuda de la función `pcount` con  _unmarked_. Tenemos los conteos de ciervos en cada uno de nuestros 15 sitios durante las 4 ocasiones (visitas). Además, tenemos las medidas de una covariable que pensamos que puede ser una buena predictora de la abundancia de ciervos y a la vez de la detectabilidad de los mismos. Ahora debemos agrupar todos estos datos en un objeto entendible por el paquete _unmarked_ como ya hicimos en el ejemplo anterior utilizando la función _unmarkedFramePCount()_
 
 ``` {r unmarkeddataframe}
 dataUM <- unmarkedFramePCount(y = dataset[,3:6], siteCovs=data.frame(dwat=dataset$dwat))
 
 ```
 
-Ahora estamos listos para ajustar un segundo modelo en el que tengamos en cuenta nuestra covariable predictora. En este caso, tanto el modelo de abundancia como el de detectabilidad van a estar determinados por la misma covariable, la distancia al punto de agua $dwat$, así que utilizaremos la función _pcount_ de este modo:
+Finalmente estamos listos para ajustar un modelo en el que tengamos en cuenta nuestra covariable predictora. En este caso, tanto el modelo de abundancia como el de detectabilidad van a estar determinados por la misma covariable, la distancia al punto de agua $dwat$, así que utilizaremos la función `pcount` de este modo:
 
 ``` {r pcount_covariable}
 
-
 # Tanto el proceso de detección como el de abundancia dependen de dwat, por tanto
-# utilizaremos ~dwat ~dwat en la fórmula. 
+# utilizaremos ~dwat ~dwat en la fórmula. Para más información sobre la función help(pcount)
 m2 <- pcount(~dwat ~dwat, data=dataUM, K=150)
 
+# Vemos los resultados del modelo
+summary(m2)
 ```
+
+Algo importante en lo que fijarnos con respecto al modelo anterior, es que ahora no estamos estimando los parámetros $\lambda$ y $p$
+
+
+
+
+
+
+
+
+
+
+
+
+
