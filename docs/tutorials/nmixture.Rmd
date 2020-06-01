@@ -24,29 +24,29 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introducción
 
-La abundancia de una especie es un parámetro clave para conocer el estado de cualquier población y poder realizar una correcta gestión de la misma. Sin embargo, conocer el número total de individuos que componenen una población, $N$, no es tarea sencilla. Para aproximarnos a ese número se pueden diseñar muestreos que nos permitan obtener un índice de abundancia de la población, $I$. De forma general, se podría considerar que
-$$N = k * I$$
-donde $N$ sería el número total de individuos de una población, $I$ el índice de abundancia (el conteo de individuos que hayamos obtenido durante unos muestreos, por ejemplo) y la $k$ sería la detectabilidad o capturabilidad, la eficiencia que tenemos para detectar individuos durante los muestreos. Conocer esta $k$ nos permitiría estimar la abundancia total de individuos $N$, pero a menudo es complicada de obtener. Algunas aproximaciones como la captura-marcaje-recaptura se basan en la identificación individual de los individuos para realizar estimas de esta detectabilidad y poder así estimar abundancias absolutas (XXXX), pero esta metodología suele ser costosa de implementar. 
-
-Los N-mixture models, modelos de mezclas o modelo de conteos [@Royle2004] nos permiten estimar la abundancia de una especie a partir de muestreos repetidos. Estos modelos estiman a la vez la abundancia y la probabilidad de detección/capturabilidad de la especie estudiada a partir de conteos repetidos $t$ ocasiones en $n$ sitios diferentes.
-
-En el siguiente tutorial se pretende comprender las generalidades de los N-mixture models a partir de una serie de simulaciones utilizando el lenguaje R y el paquete _unmarked_ (XXXXX)
+Conocer la abundancia o el número de individuos de una población es un parámetro clave para conocer el estado de la misma y poder realizar una correcta gestión (XXX). Sin embargo, estimar el número total de individuos que componenen una población, $N$, no es tarea sencilla. Para aproximarnos a ese número se pueden diseñar muestreos que nos permitan obtener un índice de abundancia $I$, que son "cantidades que reflejan variaciones temporales o espaciales del tamaño de las poblaciones sin conocer realmente su verdadero tamaño" [@tellelibro], $I$. De forma general, se podría considerar que
+$$I = p * N$$
+donde $N$ sería el número total de individuos de una población, $I$ el índice de abundancia (un conteo de individuos que hayamos obtenido durante unos muestreos, por ejemplo) y $p$ sería la detectabilidad o capturabilidad, la eficacia que tenemos para detectar individuos durante los muestreos. Si logramos mantener constante esa $p$, el índice puede ser útil para realizar comparaciones de abundancia en el espacio-tiempo. Sin embargo, muchas veces la detectabilidad está condicionada por covariables que impiden mantenerla constante (muestreos realizados en diferentes épocas del año, lugares con más o menos visibilidad, etc.). Además, conocer esta $p$ nos permitiría estimar el número total de individuos $N$, lo cual puede ser útil para especies en áltamente amenazadas, por ejemplo. Algunas aproximaciones como la captura-marcaje-recaptura se basan en la identificación individual de los individuos para estimar esta detectabilidad $p$ y poder así obtener abundancias absolutas (XXXX), pero esta metodología suele ser costosa de implementar, ya que requiere una caprura y un manejo de los individuos de estudio. 
+<br/><br/>
+Los N-mixture models, modelos de mezclas o modelo de conteos [@Royle2004] nos permiten estimar la abundancia de una especie a partir de muestreos repetidos. Estos modelos tienen una estructura jerárquica (XXX) y estiman a la vez la abundancia y la detectabilidad/capturabilidad $p$ de la especie estudiada a partir de conteos repetidos $t$ ocasiones en $n$ sitios diferentes.
+<br/><br/>
+En el siguiente tutorial se pretende comprender las generalidades de los N-mixture models a partir de la simulación de diferentes escenarios utilizando el lenguaje R y el paquete _unmarked_ (XXX)
 
 # N-mixture models: Generalidades
 
-Pongamos que salimos al campo a buscar individuos de ciervo _(Cervus elaphus)_. De forma general podemos afirmar que si detectamos un individuo significa que la especie está presente en ese lugar. Sin embargo, el hecho de no detectarla puede estar indicándonos dos cosas:
+Pongamos que salimos al campo a buscar ciervos _(Cervus elaphus)_. De forma general, se podría afirmar que si detectamos un individuo de ciervo durante el muestreo, la especie está presente en ese lugar y en ese momento (asumimos que conocemos bien la especie y que no hay posibilidad de obtener falsos positivos, esto es, confundir otras especies con individuos de ciervo). Sin embargo, el hecho de no detectarla puede estar indicándonos dos cosas:
 
-1.   Que la especie no esté presente en ese lugar porque el hábitat no es el adecuado.
-2.   Que la especie esté presente pero no hayamos sido capaces de detectarla.
+1.   Que la especie no esté presente en ese lugar porque el hábitat no es el adecuado. Verdadero negativo.
+2.   Que la especie esté presente pero no hayamos sido capaces de detectarla (solo tiene actividad crepuscular, etc). Falso negativo
 
-Para tener en cuenta estas dos opciones, los N-mixture models constan de dos procesos:
+Los N-mixture models son capaces de tener en cuenta la posibilidad de cometer falsos negativos cuando muestreamos varias ocasiones los mismos sitios. Tienen en cuenta dos procesos
 
-* Un proceso (o modelo) que determina la abundancia real de la especie.
-* Un proceso (o modelo) que determina la probabilidad de detección de la especie.
+* Un proceso (o submodelo) que determina la abundancia de la especie. En inglés suele denominarse _state process_.
+* Un proceso (o submodelo) que determina la probabilidad de detección/observación de la especie. En inglés _observational process_
 
-A continuación simularemos una serie de situaciones a modo de ejemplo para entender un poco mejor ambos procesos.
+Estos modelos suelen denominarse modelos jerárquicos ya que el proceso de detección depende en parte del proceso de abundancia. A continuación simularemos una serie de escenarios a modo de ejemplo para entender un poco mejor los N-mixture models.
 
-# Simulación del área de estudio y del muestreo SIN covariables
+# Simulación de una población y un muestreo SIN covariables
 
 Con ayuda de R, vamos a simular una población de ciervos que se distribuye en un área de 100 km<sup>2</sup> (100 cuadrados de 1 km de lado)
 
@@ -57,17 +57,15 @@ sarea <- raster(nrows = 10, ncols = 10, xmn = 0, xmx = 10, ymn = 0, ymx = 10)
 
 ```
 
-Este área de momento está vacía, por lo que tendremos que llenarla de ciervos virtuales. Podemos utilizar una [distribución de Poisson](https://www.youtube.com/watch?v=BbLfV0wOeyc) para "esparcir" nuestros ciervos simulados en el área de estudio. Esta distrubución es una de las más comunmente utilizadas en el estudio de abundancias. Esta distribución maneja la frecuencia con la que un evento ocurre en un intervalo específico. Consta de un único parámetro llamado lambda $\lambda$ que determina el número de eventos que ocurren normalmente en ese intervalo. 
+Este área de momento está vacía, por lo que tendremos que "llenarla"" de ciervos virtuales (proceso de abundancia, o _state process_). Podemos utilizar una [distribución de Poisson](https://www.youtube.com/watch?v=BbLfV0wOeyc) para "esparcir" nuestros ciervos simulados en el área de estudio. Esta distrubución es una de las más comunmente utilizadas en el estudio de abundancias. La distribución de Poisson maneja la frecuencia con la que un evento ocurre en un intervalo específico. Consta de un único parámetro llamado lambda $\lambda$ que determina el número de eventos que ocurren normalmente en ese intervalo. 
   
-    
 ```{r poisson, echo = FALSE, fig.height = 4, fig.width = 9, fig.align = "center"}
 par(mfrow=c(1,2))
 hist(rpois(10000,4), main = "Poisson lambda = 4", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 10, xlim = c(0,20), ylim = c(0,2000))
 hist(rpois(10000,8), main = "Poisson lambda = 8", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 20, xlim = c(0,20), ylim = c(0,2000))
 ```
-  
-  
-En nuestro caso, el número de ciervos virtuales que colocaremos en cada cuadrícula de 1x1 km vendrá determinado por una distribución de Poisson con $\lambda = 4$:
+<br/><br/>
+En nuestro caso, el intervalo una unidad espacial, una cuadrícula, mientras que el evento será la presencia de un ciervo. El parámetro $\lambda$ será la "abundancia esperada", esto es, la abundancia media por cuadrícula. El número y la distribución de los ciervos virtuales que colocaremos en nuestro área de estudio vendrá determinado por una distribución de Poisson con $\lambda = 4$:
 
 $$N_{i} \sim Poisson(\lambda)$$
 siendo $N_{i}$ el número total de individuos en la celda $i$.
@@ -85,19 +83,22 @@ sarea[] <- rpois(100, lambda)
 # Graficamos nuestro área de estudio
 plot(sarea)
 ```
-
+<br/><br/>
 Si hacemos la suma de todas las celdas de nuestro área de estudio, podremos saber el número total de individuos que hemos simulado ($N$):
-
 ```{r Ntotal}
 # Calculamos el número total de ciervos virtuales creados (N)
 sum(sarea[])
 ```
-
-A continuación tenemos que simular nuestro muestreo. Éste consistirá en 15 cuadrículas aleatorias de nuestro área de estudio a las cuales realizaremos 4 visitas en cada una (ocasiones). Durante los muestreos intentaremos detectar el máximo número posible de ciervos, pero desgraciadamente sabemos que tenemos una probabilidad de detección del 40% de media para todo nuestro área de estudio. Esto significa que, en general, seremos capaces de detectar menos de la mitad de ciervos en cada muestreo. Para modelizar esta detectabilidad podemos utilizar una [distribución binomial](https://www.youtube.com/watch?v=_FbZI9mtSSM). La distribución binomial maneja la probabilidad de éxito para un número de sucesos con dos resultados posibles: éxito o fracaso (cara o cruz, par o impar, etc.). Pongamos que una celda tiene 10 ciervos. La detección de cada uno de esos 10 ciervos puede verse como 10 sucesos en los que puedo tener éxito (detecto al ciervo) o fracasar (el ciervo está, pero no lo detecto). De esta forma, tendríamos que
+Podemos también hacer la media de individuos en cada celda, que debería aproximarse a $\lambda = 4$:
+```{r Nmean}
+mean(sarea[])
+```
+<br/><br/>
+A continuación tenemos que simular nuestro muestreo (proceso de detectabilidad o _observational process_). Éste consistirá en 15 cuadrículas aleatorias de nuestro área de estudio a las cuales realizaremos 4 visitas (ocasiones). Durante los muestreos intentaremos detectar el máximo número posible de ciervos, pero desgraciadamente sabemos que tenemos una eficacia o probabilidad de detección del 40% para todo nuestro área de estudio. Esto significa que, en general, seremos capaces de detectar menos de la mitad de ciervos en cada muestreo. Para simular esta detectabilidad podemos utilizar una [distribución binomial](https://www.youtube.com/watch?v=_FbZI9mtSSM). La distribución binomial maneja la probabilidad de éxito para un número de sucesos con dos resultados posibles: éxito o fracaso (cara o cruz, par o impar, etc.). Pongamos que una celda tiene 10 ciervos. La detección de cada uno de esos 10 ciervos puede verse como 10 sucesos en los que puedo tener éxito (detecto al ciervo) o fracasar (el ciervo está, pero no lo detecto). De esta forma, tendríamos que
 
 $$y_{i,k} \sim binomial(N_{i}, p)$$
 
-dónde $y_{i,k}$ es el número de individuos detectados en la celda $i$ en la visita/ocasión $k$, $N_{i}$ es el número de individuos en la celda $i$ y $p$ es la probabilidad de detectar cada ciervo, siendo en nuestro caso $p = 0.4$. Recapitulando, muestrearemos 15 cuadrículas aleatorias durante 4 visitas diferentes. En cada visita tendremos una probabilidad media de ver el 40% de los ciervos que se encuentren en la cuadrícula. El siguiente código simula este proceso:
+dónde $y_{i,k}$ es el número de individuos detectados en la celda $i$ en la visita/ocasión $k$, $N_{i}$ es el número de individuos en la celda $i$ y $p$ es la probabilidad de detectar cada ciervo, siendo en nuestro caso $p = 0.4$. Recapitulando, muestrearemos 15 cuadrículas aleatorias durante 4 visitas diferentes. En cada visita tendremos una probabilidad del 40% de ver cada uno de los ciervos que se encuentren en la cuadrícula. El siguiente código simula este proceso:
 
 ```{r muestreo}
 # Seleccionamos 15 celdas aleatorias de nuestro area de estudio
@@ -139,7 +140,7 @@ dataset
 ```
 
 La primera columna (site_ID) es un identificador de la cuadrícula. La segunda (trueN) indica el número real de individuos que se encuentran en cada cuadrícula de nuestro muestreo. Las 4 columnas siguientes (O1,O2... O4) indican el número de ciervos detectados en cada una de nuestras visitas/ocasiones. Como habíamos predicho, al tener un 40% de detectabilidad, casi siempre detectamos menos de la mitad de ciervos de los que realmente hay.
-
+<br/><br/>
 En el mundo real, el problema surge al no conocer esa detectabilidad. Al realizar los distintos muestreos no sabemos realmente cuál es el procentaje de individios que somos capaces de detectar. Una primera estima sería quedarnos con el valor máximo de cada una de nuestras visitas para cada uno de los 15 muestreos. Asumiendo que la población en cada celda es cerrada (sin migración, nacimientos o muerte de individuos) el numero máximo de individuos detectados en cada una de las 4 visitas podría ser un buen punto de partida para aproximar una abundancia total. Lo calculamos y lo comparamos con el número real del siguiente modo:
 
 ```{r nmax,fig.height = 5.8, fig.width = 6, fig.align = "center"}
@@ -164,9 +165,9 @@ sum(dataset$meanN) / sum(dataset$trueN)
 
 Efectivamente, de media estamos viendo un 39% de los individuos que realmente hay. Para poder ajustar un modelo que fuese capaz de calcular el número total de individuos, deberíamos primero ser capaces de calcular esa detectabilidad, esto es, el parámetro $p$ de la distribución binomial.
 
-# Modelo N-mixture sencillo en _unmarked_
+# El modelo N-mixture más sencillo con _unmarked_
 
-Como ya hemos dicho, los N-mixture models nos permiten modelizar a la vez la probabilidad de detección y la abundancia de nuestra especie a partir de muestreos repetidos. Para ajustar este tipo de modelos utilizadremos la función `pcount` del paquete _unmarked_ (XXXX). En primer lugar, debemos preparar los datos para que _unmarked_ pueda leerlos. Utilizaremos la función `unmarkedFramePCount` para indicar cuales son los 15 muestreos repetidos en 4 ocasiones
+Como ya hemos dicho, los N-mixture models nos permiten modelizar a la vez la probabilidad de detección y la abundancia de nuestra especie a partir de muestreos repetidos. Para ajustar este tipo de modelos utilizadremos la función `pcount` del paquete _unmarked_. En primer lugar, debemos preparar los datos para que _unmarked_ pueda leerlos. Utilizaremos la función `unmarkedFramePCount` para indicar cuales son los 15 muestreos repetidos en 4 ocasiones
 
 ```{r unmarkedFramePCount, message=FALSE}
 library(unmarked)
