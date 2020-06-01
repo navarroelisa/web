@@ -62,8 +62,8 @@ Este área de momento está vacía, por lo que tendremos que llenarla de ciervos
     
 ```{r poisson, echo = FALSE, fig.height = 4, fig.width = 9, fig.align = "center"}
 par(mfrow=c(1,2))
-hist(rpois(10000,4), main = "Poisson lambda = 4", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 10)
-hist(rpois(10000,8), main = "Poisson lambda = 8", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 20)
+hist(rpois(10000,4), main = "Poisson lambda = 4", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 10, xlim = c(0,20), ylim = c(0,2000))
+hist(rpois(10000,8), main = "Poisson lambda = 8", xlab = "nº de veces que ocurre el evento", ylab = "frecuencia", breaks = 20, xlim = c(0,20), ylim = c(0,2000))
 ```
   
   
@@ -378,13 +378,42 @@ Una diferencia importante comparado con el ejemplo previo es que anteriormente e
 <br/><br/> 
 En los resultados podemos ver los dos submodelos, el de abundancia y el de detectabilidad. En el de abundancia observamos una estima del intercepto $\beta_{0} = 2.861$, mientras que la estima del efecto de la covariable predictora es $\beta_{1} = -0.872$. Si recordamos, estos dos parámetros los habíamos simulado en $\beta_{0} = 3$ y $\beta_{1} = -0.9$, por lo que estamos obteniendo unas buenas estimas con nuestro modelo.
 <br/><br/>
-Por otro lado, en el submodelo de la detectabilidad u observación, estamos obteniendo unas estimas de $\gamma_{0} = 0.697$ y $\gamma_{1} = 0.349$ para el intercepto y el efecto de la covariable sobre la probabilidad de detección respectivamente. 
+Por otro lado, en el submodelo de la detectabilidad u observación, estamos obteniendo unas estimas de $\gamma_{0} = 0.697$ y $\gamma_{1} = 0.349$ para el intercepto y el efecto de la covariable sobre la probabilidad de detección respectivamente. Estos parámetros fueron simulados en $\gamma_{0} = 0.2$ y $\gamma_{1} = 0.8$, por lo que estas estimas no estarían siendo del todo precisas. En cualquier caso, si estamos siendo capaces de detectar correctamente el efecto de la covariable $dwat$ en ambos submodelos, negativo para el caso de la abundancia y positivo en el caso de la detectabilidad.
+<br/><br/>
+Una vez ajustado el modelo, podemos graficar sus predicciones teniendo en cuenta la covariable predictora $dwat$. Utilizaremos la función `predict` de la siguiente forma:
 
+``` {r predict_covar, fig.height = 4, fig.width = 9, fig.align = "center"}
 
+# Primero debemos juntar todas las covariables en formato raster en un objeto tipo stack
+# En nuestro caso solo hay una, dwat. La incluimos y le damos el nombre correspondiente
+sdwat <- stack(dwat)
+names(sdwat) <- "dwat"
 
+# Ahora podemos utilizar la función predict con este stack recien creado.
+# Como nuestro modelo en realidad se compone de dos submodelos, podemos realizar las 
+# predicciones tanto de la abundancia como de la detectabilidad.
 
+# type = "state" para la abundancia
+pred_state <- predict(m2, newdata=sdwat, type = "state")
+# type = "det" para la detectabilidad
+pred_det <- predict(m2, newdata=sdwat, type = "det")
 
+plot(pred_state)
+```
 
+Podemos ver la abundancia total $N$ predicha por nuestro modelo si hacemos el sumatorio de todas las celdas de la predicción:
+
+```{r Npreducha}
+
+# Recordamos el N total simulado para nuestro área de estudio
+sum(sarea[])
+
+# Calculamos ahora el sumatorio de las predicciones
+sum(pred_state$Predicted[])
+
+```
+
+Vemos que la $N$ simulada era de 352, mientras que nuestro modelo calcula una $N$ de 340, bastante acertada.
 
 
 
