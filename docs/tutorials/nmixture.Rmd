@@ -26,28 +26,33 @@ Este tutorial está basado principalmente en el capítulo 6 del libro _Applied H
  
 # Introducción
 
-Conocer la abundancia o el número de individuos de una población es un parámetro clave para conocer el estado de la misma y poder realizar una correcta gestión [@Krebs2009]. Sin embargo, estimar el número total de individuos que componenen una población, $N$, no es tarea sencilla. Para aproximarnos a ese número se pueden diseñar muestreos que nos permitan obtener un índice de abundancia $I$, que son "cantidades que reflejan variaciones temporales o espaciales del tamaño de las poblaciones sin conocer realmente su verdadero tamaño" [@tellelibro], $I$. De forma general, se podría considerar que
+La abundancia o el número de individuos de una población es un parámetro clave para conocer el estado de la misma y poder realizar una correcta gestión [@Krebs2009]. Sin embargo, estimar el número total de individuos que componenen una población, $N$, no es tarea sencilla. Para aproximarse a ese número se pueden diseñar muestreos que nos permitan obtener un índice de abundancia $I$, que puede definirse como "cantidades que reflejan variaciones temporales o espaciales del tamaño de las poblaciones sin conocer realmente su verdadero tamaño" [@tellelibro]. De forma general, se considera que
 \begin{equation}
 \tag{Eq 1}\label{eq1}
 I = p * N
 \end{equation}
-donde $N$ sería el número total de individuos de una población, $I$ el índice de abundancia (un conteo de individuos que hayamos obtenido durante unos muestreos, por ejemplo) y $p$ sería la detectabilidad o capturabilidad, la eficacia que tenemos para detectar individuos durante los muestreos. Si logramos mantener constante esa $p$, el índice puede ser útil para realizar comparaciones de abundancia en el espacio-tiempo. Sin embargo, muchas veces la detectabilidad está condicionada por covariables que impiden mantenerla constante (muestreos realizados en diferentes épocas del año, lugares con más o menos visibilidad, etc.). Además, conocer esta $p$ nos permitiría estimar el número total de individuos $N$, lo cual puede ser útil para especies en áltamente amenazadas, por ejemplo. Algunas aproximaciones como la captura-marcaje-recaptura se basan en la identificación individual de los individuos para estimar esta detectabilidad $p$ y poder así obtener abundancias absolutas [@Efford2004], pero esta metodología suele ser costosa de implementar, ya que requiere una caprura y un manejo de los individuos de estudio. 
+donde $N$ es el número total de individuos de una población, $I$ el índice de abundancia (un conteo de individuos que hayamos obtenido durante el muestreo, por ejemplo) y $p$ sería la detectabilidad o capturabilidad, la eficacia que tenemos para detectar individuos durante los muestreos. Si logramos mantener constante esa $p$, el índice puede ser útil para realizar comparaciones de abundancia en el espacio-tiempo. Sin embargo, muchas veces la detectabilidad está condicionada por covariables que impiden mantenerla constante (muestreos realizados en diferentes épocas del año, lugares con más o menos visibilidad, etc.). Conocer esta $p$ y sus variaciones nos permitiría estimar el número absoluto de individuos $N$, lo cual puede ser esencial en especies en críticamente amenazadas. Algunas aproximaciones como la captura-marcaje-recaptura se basan en la identificación individual de los individuos para estimar esta detectabilidad $p$ y poder así obtener abundancias absolutas [@Efford2004], pero esta metodología suele ser costosa de implementar, ya que requiere una caprura y un manejo de los individuos de estudio que no es siempre posible. 
 <br/><br/>
-Los N-mixture models, modelos de mezclas o modelo de conteos [@Royle2004] nos permiten estimar la abundancia de una especie a partir de muestreos repetidos. Estos modelos tienen una estructura jerárquica [@KeryRoyle2016] y estiman a la vez la abundancia y la detectabilidad/capturabilidad $p$ de la especie estudiada a partir de conteos repetidos $t$ ocasiones en $n$ sitios diferentes.
+Los N-mixture models, modelos de mezclas o modelo de conteos [@Royle2004] nos permiten estimar la abundancia de una especie a partir de muestreos repetidos. Estos modelos tienen una estructura jerárquica [@KeryRoyle2016] y estiman a la vez la abundancia y la detectabilidad/capturabilidad de la especie de estudio a partir de conteos repetidos $t$ ocasiones en $n$ sitios diferentes.
 <br/><br/>
-En el siguiente tutorial se pretende comprender las generalidades de los N-mixture models a partir de la simulación de diferentes escenarios utilizando el lenguaje R y el paquete _unmarked_ [@unmarked2011].
+En el siguiente tutorial se pretende comprender las generalidades de los N-mixture models a partir de la simulación de dos sencillos escenarios utilizando el lenguaje R y el paquete _unmarked_ [@unmarked2011].
 
 # N-mixture models: Generalidades
 
-Pongamos que salimos al campo a buscar ciervos _(Cervus elaphus)_. De forma general, se podría afirmar que si detectamos un individuo de ciervo durante el muestreo, la especie está presente en ese lugar y en ese momento (asumimos que conocemos bien la especie y que no hay posibilidad de obtener falsos positivos, esto es, confundir otras especies con individuos de ciervo). Sin embargo, el hecho de no detectarla puede estar indicándonos dos cosas:
+Pongamos que salimos al campo a buscar ciervos _(Cervus elaphus)_. 
+<br/><br/> 
+![](nmixture_files/images/ciervas.JPG)
+Foto: [Patricia Barroso](https://www.researchgate.net/profile/Patricia_Barroso_Seano)
+<br/><br/>
+De forma general, se podría afirmar que si detectamos un individuo de ciervo durante el muestreo, la especie está presente en ese lugar y en ese momento (asumimos que conocemos bien la especie y que no hay posibilidad de obtener falsos positivos, esto es, confundir otras especies con individuos de ciervo, por ejemplo). Sin embargo, el hecho de _no detectarla_ puede estar indicándonos dos cosas:
 
-1.   Que la especie no esté presente en ese lugar porque el hábitat no es el adecuado. Verdadero negativo.
-2.   Que la especie esté presente pero no hayamos sido capaces de detectarla (solo tiene actividad crepuscular, etc). Falso negativo
+1.   Que la especie **no esté presente** en ese lugar porque el hábitat no es el adecuado, o la especie se haya extinguido, etc. Esto sería un verdadero negativo.
+2.   Que la especie **si esté presente pero no hayamos sido capaces de detectarla** (hemos ido a muestrear al medio día y solo tiene actividad crepuscular, por ejemplo). Esto sería un falso negativo.
 
-Los N-mixture models son capaces de tener en cuenta la posibilidad de cometer falsos negativos cuando muestreamos varias ocasiones los mismos sitios. Tienen en cuenta dos procesos
+Los N-mixture models son capaces de tener en cuenta la posibilidad de cometer _falsos negativos_ cuando muestreamos varias ocasiones los mismos sitios. Tienen en cuenta dos procesos:
 
 * Un proceso (o submodelo) que determina la abundancia de la especie. En inglés suele denominarse _state process_.
-* Un proceso (o submodelo) que determina la probabilidad de detección/observación de la especie. En inglés _observational process_
+* Un proceso (o submodelo) que determina la probabilidad de detección/observación de la especie. En inglés _observational process_.
 
 Estos modelos suelen denominarse modelos jerárquicos ya que el proceso de detección depende en parte del proceso de abundancia. A continuación simularemos una serie de escenarios a modo de ejemplo para entender un poco mejor los N-mixture models.
 
@@ -57,12 +62,13 @@ Con ayuda de R, vamos a simular una población de ciervos que se distribuye en u
 
 ```{r studyarea, message=FALSE}
 set.seed(1) # ajustamos una "semilla"" para controlar la repetibilidad 
+# Con el paquete "raster" creamos una cuadrícula de 10x10
 library(raster)
 sarea <- raster(nrows = 10, ncols = 10, xmn = 0, xmx = 10, ymn = 0, ymx = 10)
 
 ```
 
-Este área de momento está vacía, por lo que tendremos que "llenarla"" de ciervos virtuales (proceso de abundancia, o _state process_). Podemos utilizar una [distribución de Poisson](https://www.youtube.com/watch?v=BbLfV0wOeyc) para "esparcir" nuestros ciervos simulados en el área de estudio. Esta distrubución es una de las más comunmente utilizadas en el estudio de abundancias. La distribución de Poisson maneja la frecuencia con la que un evento ocurre en un intervalo específico. Consta de un único parámetro llamado lambda $\lambda$ que determina el número de eventos que ocurren normalmente en ese intervalo. 
+Este área de momento está vacía, por lo que tendremos que "llenarla" de ciervos virtuales (proceso de abundancia, o _state process_). Podemos utilizar una [distribución de Poisson](https://www.youtube.com/watch?v=BbLfV0wOeyc) para "esparcir" nuestros ciervos simulados en el área de estudio. Esta distrubución es una de las más comunmente utilizadas en el estudio de abundancias. La distribución de Poisson maneja la frecuencia con la que un evento ocurre en un intervalo específico. Consta de un único parámetro llamado lambda $\lambda$ que determina el número de eventos que ocurren normalmente en ese intervalo. 
   
 ```{r poisson, echo = FALSE, fig.height = 4, fig.width = 9, fig.align = "center"}
 par(mfrow=c(1,2))
@@ -175,7 +181,7 @@ Efectivamente, de media estamos viendo un 39% de los individuos que realmente ha
 
 # El modelo N-mixture más sencillo con _unmarked_
 
-Como ya hemos dicho, los N-mixture models nos permiten modelizar a la vez la probabilidad de detección y la abundancia de nuestra especie a partir de muestreos repetidos. Para ajustar este tipo de modelos utilizadremos la función `pcount` del paquete _unmarked_. En primer lugar, debemos preparar los datos para que _unmarked_ pueda leerlos. Utilizaremos la función `unmarkedFramePCount` para indicar cuales son los 15 muestreos repetidos en 4 ocasiones
+Como ya hemos dicho, los N-mixture models nos permiten estimar a la vez la probabilidad de detección y la abundancia de nuestra especie a partir de muestreos repetidos. Para ajustar este tipo de modelos utilizaremos la función `pcount` del paquete _unmarked_. En primer lugar, debemos preparar los datos para que _unmarked_ pueda leerlos. Utilizaremos la función `unmarkedFramePCount` para indicar cuales son los 15 muestreos repetidos en 4 ocasiones
 
 ```{r unmarkedFramePCount, message=FALSE}
 library(unmarked)
@@ -185,11 +191,14 @@ dataUM <- unmarkedFramePCount(y = dataset[,3:6])
 head(dataUM)
 ```
 
-Ahora podremos ajustar nuestro modelo con la función `pcount`. Vamos a ajustar el modelo más sencillo. En este ejemplo, ni la abundancia ni la propabilidad de detección vienen determinados por ninguna variable, simplemente responden a un proceso de Poisson con $\lambda = 4$ y a una distribución binomial con $p = 4$ respectivamente. Lo que intentaremos averiguar con este modelo son esos dos parámetros.
+Ahora podremos ajustar nuestro modelo con la función `pcount`. Vamos a ajustar el modelo más sencillo posible. En este ejemplo, ni la abundancia ni la propabilidad de detección vienen determinados por ninguna covariable, simplemente responden a un proceso de Poisson con $\lambda = 4$ y a una distribución binomial con $p = 0.4$ respectivamente. Lo que intentaremos averiguar con este modelo será esos dos parámetros.
 
 ```{r m1}
 # Como en este modelo no hay variables predictoras, las fórmulas de detectabilidad
-# y de abundancia las dejamos como ~1. Más información en help(pcount)
+# y de abundancia las dejamos como ~1 respectivamente. 
+# La sintaxis de pcount sería:
+# pcount(fórmula_detectabilidad fórmula_abundancia, datos, número_suficientemente_alto)
+# Para más información consultar help(pcount)
 m1 <- pcount(~1 ~1, data=dataUM, K=50)
 summary(m1)
 ```
@@ -213,12 +222,12 @@ Como vemos, la estima de $\lambda$ es de 4.64 frente a la real, que era de 4. Po
 N_m1<- bup(ranef(m1)) 
 
 # graficamos la relación entre las abundancias reales y las predichas
-plot(dataset$trueN,N_m1, xlab="True density", ylab="Predicted density")
+plot(dataset$trueN,N_m1, xlab="Abundancia simulada", ylab="Abundancia predicha")
 abline(0,1)# a 1:1 line
 
 ```
 
-Vemos ahora que hemos solventado el problema de la infraestima. Este modelo tan sencillo sirve para explicar de forma clara el funcionamiento del modelo N-mixture binomial. Sin embargo, la abundancia normalmente suele venir determinada por alguna covariable predictora que afecta a la distribución de las especies, como disponibilidad de recursos, refugio, etc. Por eso, a continuación simularemos otro set de datos y ajustatemos un modelo algo más complejo.
+Vemos ahora que hemos solventado el problema de la infraestima. Este sencillo ejemplo nos sirve para explicar de forma clara el funcionamiento del modelo N-mixture. Sin embargo, la abundancia normalmente suele venir determinada por alguna covariable predictora que afecta a la distribución de las especies, como disponibilidad de recursos, refugio, etc. Por eso, a continuación simularemos otro set de datos y ajustatemos un modelo un poco más complejo.
 
 
 # Simulación del área de estudio y del muestreo CON covariables
@@ -228,7 +237,7 @@ Supongamos ahora que nuestra población de ciervos virtuales se distribuye en un
 ![](nmixture_files/images/dwat.png)
 <br/><br/>    
    
-Como vemos, hay un punto de agua en la parte inferior izquierda. Vamos a crear una capa raster que indique la distancia al punto de agua, la cual usaremos posteriormente como variable predictora para distribuir nuestros ciervos.
+Como vemos, hay un punto de agua en la parte inferior izquierda. Vamos a crear una capa raster que indique la distancia al punto de agua, la cual usaremos posteriormente como covariable predictora para distribuir nuestros ciervos.
 
 ```{r dwat_create, fig.height = 5.8, fig.width = 6, fig.align = "center"}
 # Nótese que estamos estandarizando las distancias con scale(). 
@@ -243,22 +252,22 @@ En el ejemplo anterior, habíamos distribuido los ciervos aleatoriamente siguien
 \tag{Eq 2}
 N \sim Poisson(\lambda)
 \end{equation}
-Sin embargo, ahora queremos que nuestros ciervos se distribuyan conforme a la distancia al punto de agua, de tal forma que haya más ciervos cerca del agua, y su abundancia disminuya conforme nos vamos alejando de ella. Eso quiere decir que $\lambda$ debe ser mayor en valores bajos de distancia al agua $dwat$, e irá disminuyendo con forme aumente $dwat$. Este comportamiento se puede expresar como
+Sin embargo, ahora queremos que nuestros ciervos se distribuyan conforme a la distancia al punto de agua, de tal forma que haya más ciervos cerca del agua, y su abundancia disminuya conforme nos vamos alejando de ella (estamos en una zona árida y durante la época estival el agua escasea, actuando como un atractor de ciervos). Eso quiere decir que $\lambda$ (abundancia promedio) debe ser alta en aquellas celdas con valores bajos de distancia al agua $dwat$, e irá disminuyendo con forme aumente $dwat$. Este comportamiento se puede expresar como
 \begin{equation}
 \tag{Eq 4}\label{eq4}
 log(\lambda_{i}) = \beta_{0} + \beta_{1} * dwat_{i}
 \end{equation}
-donde $\lambda_{i}$ es la abundancia promedio en la celda $i$, $\beta_{0}$ es el intercepto del modelo lineal que predice la abundancia, $\beta_{1}$ es la fuerza del efecto de la distancia al agua sobre la abundancia de ciervos, y $dwat_{i}$ es la distancia al punto de agua desde la celda $i$. Así, podemos intuir que la $\lambda$de cada celda dependerá de la variable "distancia al agua". Por lo tanto, la ecuación general que gobernará la distribución de nuestros ciervos ahora sera:
+donde $\lambda_{i}$ es la abundancia promedio en la celda $i$, $\beta_{0}$ es el intercepto del modelo lineal que predice la abundancia, $\beta_{1}$ es la "fuerza" del efecto de la distancia al agua sobre la abundancia de ciervos (la fuerza con la que el agua atrae o repele a los ciervos), y $dwat_{i}$ es la distancia al punto de agua desde la celda $i$. Así, podemos intuir que la $\lambda$ de cada celda dependerá de la variable "distancia al agua". Por lo tanto, la ecuación general que gobernará la distribución de nuestros ciervos ahora sera:
 \begin{equation}
 \tag{Eq 5}\label{eq5}
 N \sim Poisson(exp(\beta_{0} + \beta_{1} * dwat))
 \end{equation}
-Para que se cumpla nuestra premisa de que haya menos ciervos cuanto más nos alejemos del punto de agua, al coeficiente $\beta_{1}$ deberemos darle un valor negativo. Estos serán nuestros valores:
+Para que se cumpla nuestra premisa de que haya menos ciervos cuanto más nos alejemos del punto de agua, al coeficiente $\beta_{1}$ deberemos darle un valor negativo (el agua atrae a los ciervos). Estos serán nuestros valores:
 
 *   $\beta_{0} = 3$
 *   $\beta_{1} = -0.9$
 
-Calculamos la $\lambda$ para cada celda siguiendo nuestra fórmula y los valores elegidos para los coeficientes
+Calculamos la $\lambda$ para cada celda siguiendo nuestra fórmula y los valores elegidos para los coeficientes:
 
 ```{r lambda, fig.height = 5.8, fig.width = 6, fig.align = "center"}
 beta_0 <- 3
@@ -268,7 +277,7 @@ lambda <- exp(beta_0 + beta_1*(dwat))
 plot(lambda)
 ```
 
-Una vez tenemos el $\lambda$ de cada celda, solo nos queda "rellenar" nuestro área de estudio siguiendo, como en el ejemplo anterior, una distribución de Poisson. Sin embargo esta vez, en vez de utilizar $\lambda = 4$ para todo el territorio, usaremos el $\lambda$ calculado específicamente para cada celda en función de la distancia al punto de agua:
+Una vez tenemos el $\lambda$ de cada celda, solo nos queda "rellenar" nuestro área de estudio siguiendo, como en el ejemplo anterior, una distribución de Poisson. Sin embargo esta vez, en vez de utilizar $\lambda = 4$ para todo el territorio, usaremos el $\lambda$ calculado específicamente para cada una de las celdas en función de la distancia al punto de agua:
 
 ```{r Nlambda, fig.height = 5.8, fig.width = 6, fig.align = "center"}
 # Creamos un raster de 10x10 celdas vacías
@@ -297,12 +306,12 @@ plot(dwat[],sarea[], xlab = "distancia al punto de agua", ylab = "nº de ciervos
 
 ```
 
-Vayamos ahora a simular el muestreo. Como en el ejemplo anterior, éste consistirá en 15 cuadrículas aleatorias de nuestro área de estudio a las cuales realizaremos 4 visitas en cada una (ocasiones). Sin embargo ahora, nuestra probabilidad de detección de los animales también va a venir definido por la distancia al agua. Como vimos en la foto aérea de nuestro paisaje, cerca del agua encontramos una mayor vegetación, lo cual dificulta la detección de nuestros ciervos, ya que se pueden ocultar mejor. Por lo tanto puestra capacidad de detección disminuirá conforme nos acerquemos al agua. Como ya habíamos visto anteriormente el proceso de observación venía definido por la fórmula (\\ref{eq3})
+Vayamos ahora a simular nuestro muestreo. Como en el ejemplo anterior, éste consistirá en 15 cuadrículas aleatorias de nuestro área de estudio a las cuales realizaremos 4 visitas en cada una (ocasiones). Sin embargo, ahora nuestra probabilidad de detección de los animales también va a venir definido por la distancia al agua. Como vimos en la foto aérea de nuestro área de estudio, cerca del agua encontramos una mayor vegetación, lo cual dificulta la detección de nuestros ciervos, ya que se pueden ocultar mejor. Por lo tanto puestra capacidad de detección disminuirá conforme nos acerquemos al agua. Como ya habíamos visto anteriormente el proceso de observación venía definido por la fórmula (\\ref{eq3})
 \begin{equation}
 \tag{Eq 3}
 y_{i,k} \sim binomial(N_{i}, p)
 \end{equation}
-siendo la probabilidad de detectar un ciervo $p$ un parámetro constante en todo nuestro área de estudio ($p = 0.4$). Sin embargo ahora, ese parámetro $p$ va a variar con respecto a nuestra covariable predictora de la siguiente manera:
+siendo la probabilidad de detectar un ciervo $p$ un parámetro constante en todo nuestro área de estudio ($p = 0.4$) en el ejemplo anterior. Sin embargo ahora, ese parámetro $p$ va a variar con respecto a nuestra covariable predictora de la siguiente manera:
 \begin{equation}
 \tag{Eq 6}\label{eq6}
 logit(p)= \gamma_{0} + \gamma_{1} * dwat
@@ -362,7 +371,7 @@ dataset
 
 ```
 
-Una vez obtenido nuestro conteo de ciervos, necesitamos obtener los valores de nuestra variable predictora para cada uno de los puntos de muestreo:
+Una vez obtenido nuestro conteo de ciervos, necesitamos también obtener esta vez los valores de nuestra covariable predictora para cada uno de los puntos de muestreo:
 
 ``` {r sample_dwat}
 
@@ -372,7 +381,7 @@ dataset$dwat <- extract(dwat, site_ID)
 
 # Modelo N-mixture con una covariable
 
-Ya tenemos todos los elementos necesarios para ajustar un modelo N-mixture con ayuda de la función `pcount` con  _unmarked_. Tenemos los conteos de ciervos en cada uno de nuestros 15 sitios durante las 4 ocasiones (visitas). Además, tenemos las medidas de una covariable que pensamos que puede ser una buena predictora de la abundancia de ciervos y a la vez de la detectabilidad de los mismos. Ahora debemos agrupar todos estos datos en un objeto entendible por el paquete _unmarked_ como ya hicimos en el ejemplo anterior utilizando la función _unmarkedFramePCount()_
+Ya tenemos todos los elementos necesarios para ajustar un modelo N-mixture con ayuda de la función `pcount` de  _unmarked_. Tenemos los conteos de ciervos en cada uno de nuestros 15 sitios durante las 4 ocasiones (visitas). Además, tenemos las medidas de una covariable que pensamos que puede ser una buena predictora de la abundancia de ciervos y, a la vez, de la detectabilidad de los mismos. Ahora debemos agrupar todos estos datos en un objeto entendible por el paquete _unmarked_ como ya hicimos en el ejemplo anterior utilizando la función _unmarkedFramePCount()_
 
 ``` {r unmarkeddataframe}
 dataUM <- unmarkedFramePCount(y = dataset[,3:6], siteCovs=data.frame(dwat=dataset$dwat))
@@ -384,18 +393,19 @@ Finalmente estamos listos para ajustar un modelo en el que tengamos en cuenta nu
 ``` {r pcount_covariable}
 
 # Tanto el proceso de detección como el de abundancia dependen de dwat, por tanto
-# utilizaremos ~dwat ~dwat en la fórmula. Para más información sobre la función help(pcount)
+# utilizaremos ~dwat ~dwat en la fórmula. Para más información sobre la 
+# sintaxis de la función consultar help(pcount)
 m2 <- pcount(~dwat ~dwat, data=dataUM, K=150)
 
 # Vemos los resultados del modelo
 summary(m2)
 ```
 
-Una diferencia importante comparado con el ejemplo previo es que anteriormente estábamos estimando directamente los parámetros $\lambda$ y $p$ de los procesos de abundancia y detectabilidad (\\ref{eq2} y \\ref{eq3}). Como nuestro objetivo eran esos dos parámetros, debíamos "backtransformar" esas estimas, ya que el modelo los ajustaba en función de $log(\lambda)$ y $logit(p)$. Sin embargo, en este nuevo modelos sabemos que esos parámetros varían en función de una covariable, $dwat$ en nuestro caso, y por tanto nuestro objetivo ya no es conocer esos dos parámetros en sí mismos, sino conocer cómo se relacionan con la covariable predictora, esto es, buscamos los coeficientes $\beta_{1}$ y $\gamma_{1}$ de los modelos que gobiernan $\lambda$ y $p$ respectivamente (\\ref{eq4} y \\ref{eq6}). Por esa razón, ahora no es necesario que "backtransformemos" las estimas de esos coeficientes, sino que debemos realizar las comparaciones directamente.
+Una diferencia importante comparado con el ejemplo previo es que anteriormente estábamos estimando los parámetros $\lambda$ y $p$ de los procesos de abundancia y detectabilidad (\\ref{eq2} y \\ref{eq3}). Como nuestro objetivo eran esos dos parámetros, debíamos "backtransformar" esas estimas, ya que el modelo los ajustaba en función de $log(\lambda)$ y $logit(p)$. Sin embargo, en este nuevo modelo sabemos que esos parámetros varían en función de una covariable, $dwat$ en nuestro caso, y por tanto nuestro objetivo ya no es conocer esos dos parámetros en sí mismos, sino conocer cómo varían con respecto a la covariable predictora, esto es, buscamos los coeficientes $\beta_{1}$ y $\gamma_{1}$ de los modelos que gobiernan $\lambda$ y $p$ respectivamente (\\ref{eq4} y \\ref{eq6}). Por esa razón, ahora no es necesario que "backtransformemos" las estimas de esos coeficientes, sino que debemos realizar las comparaciones directamente.
 <br/><br/> 
-En los resultados podemos ver los dos submodelos, el de abundancia y el de detectabilidad. En el de abundancia observamos una estima del intercepto $\beta_{0} = 2.861$, mientras que la estima del efecto de la covariable predictora es $\beta_{1} = -0.872$. Si recordamos, estos dos parámetros los habíamos simulado en $\beta_{0} = 3$ y $\beta_{1} = -0.9$, por lo que estamos obteniendo unas buenas estimas con nuestro modelo.
+En los resultados podemos ver los dos submodelos, el de abundancia y el de detectabilidad. En el de abundancia observamos una estima del intercepto $\beta_{0} = 2.861$, mientras que la estima del efecto de la covariable predictora es $\beta_{1} = -0.872$. Si recordamos, estos dos parámetros los habíamos simulado en $\beta_{0} = 3$ y $\beta_{1} = -0.9$, por lo que estamos obteniendo unas estimas bastante precisas.
 <br/><br/>
-Por otro lado, en el submodelo de la detectabilidad u observación, estamos obteniendo unas estimas de $\gamma_{0} = 0.697$ y $\gamma_{1} = 0.349$ para el intercepto y el efecto de la covariable sobre la probabilidad de detección respectivamente. Estos parámetros fueron simulados en $\gamma_{0} = 0.2$ y $\gamma_{1} = 0.8$, por lo que estas estimas no estarían siendo del todo precisas. En cualquier caso, si estamos siendo capaces de detectar correctamente el efecto de la covariable $dwat$ en ambos submodelos, negativo para el caso de la abundancia y positivo en el caso de la detectabilidad.
+Por otro lado, en el submodelo de la detectabilidad u observación, estamos obteniendo unas estimas de $\gamma_{0} = 0.697$ y $\gamma_{1} = 0.349$ para el intercepto y el efecto de la covariable sobre la probabilidad de detección respectivamente. Estos parámetros fueron simulados en $\gamma_{0} = 0.2$ y $\gamma_{1} = 0.8$, por lo que estas estimas no estarían siendo del todo acertadas En cualquier caso, sí estamos siendo capaces de detectar correctamente el efecto de la covariable $dwat$ en ambos submodelos, negativo para el caso de la abundancia y positivo en el caso de la detectabilidad.
 <br/><br/>
 Una vez ajustado el modelo, podemos graficar sus predicciones teniendo en cuenta la covariable predictora $dwat$. Utilizaremos la función `predict` de la siguiente forma:
 
