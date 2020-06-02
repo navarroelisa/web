@@ -27,7 +27,10 @@ Este tutorial está basado principalmente en el capítulo 6 del libro _Applied H
 # Introducción
 
 Conocer la abundancia o el número de individuos de una población es un parámetro clave para conocer el estado de la misma y poder realizar una correcta gestión [@Krebs2009]. Sin embargo, estimar el número total de individuos que componenen una población, $N$, no es tarea sencilla. Para aproximarnos a ese número se pueden diseñar muestreos que nos permitan obtener un índice de abundancia $I$, que son "cantidades que reflejan variaciones temporales o espaciales del tamaño de las poblaciones sin conocer realmente su verdadero tamaño" [@tellelibro], $I$. De forma general, se podría considerar que
-$$I = p * N$$
+\begin{equation}
+\tag{Eq 1}\label{eq1}
+I = p * N
+\end{equation}
 donde $N$ sería el número total de individuos de una población, $I$ el índice de abundancia (un conteo de individuos que hayamos obtenido durante unos muestreos, por ejemplo) y $p$ sería la detectabilidad o capturabilidad, la eficacia que tenemos para detectar individuos durante los muestreos. Si logramos mantener constante esa $p$, el índice puede ser útil para realizar comparaciones de abundancia en el espacio-tiempo. Sin embargo, muchas veces la detectabilidad está condicionada por covariables que impiden mantenerla constante (muestreos realizados en diferentes épocas del año, lugares con más o menos visibilidad, etc.). Además, conocer esta $p$ nos permitiría estimar el número total de individuos $N$, lo cual puede ser útil para especies en áltamente amenazadas, por ejemplo. Algunas aproximaciones como la captura-marcaje-recaptura se basan en la identificación individual de los individuos para estimar esta detectabilidad $p$ y poder así obtener abundancias absolutas [@Efford2004], pero esta metodología suele ser costosa de implementar, ya que requiere una caprura y un manejo de los individuos de estudio. 
 <br/><br/>
 Los N-mixture models, modelos de mezclas o modelo de conteos [@Royle2004] nos permiten estimar la abundancia de una especie a partir de muestreos repetidos. Estos modelos tienen una estructura jerárquica [@KeryRoyle2016] y estiman a la vez la abundancia y la detectabilidad/capturabilidad $p$ de la especie estudiada a partir de conteos repetidos $t$ ocasiones en $n$ sitios diferentes.
@@ -68,8 +71,10 @@ hist(rpois(10000,8), main = "Poisson lambda = 8", xlab = "nº de veces que ocurr
 ```
 <br/><br/>
 En nuestro caso, el intervalo una unidad espacial, una cuadrícula, mientras que el evento será la presencia de un ciervo. El parámetro $\lambda$ será la "abundancia esperada", esto es, la abundancia media por cuadrícula. El número y la distribución de los ciervos virtuales que colocaremos en nuestro área de estudio vendrá determinado por una distribución de Poisson con $\lambda = 4$:
-
-$$N_{i} \sim Poisson(\lambda)$$
+\begin{equation}
+\tag{Eq 2}\label{eq2}
+N_{i} \sim Poisson(\lambda)
+\end{equation}
 siendo $N_{i}$ el número total de individuos en la celda $i$.
 
 Como podemos ver en el histograma de la izquierda, los valores más probables serán 3 o 4 ciervos, aunque variarán entre cero y 14 aproximadamente (aunque este útimo valor será muy poco probable).
@@ -97,9 +102,10 @@ mean(sarea[])
 ```
 <br/><br/>
 A continuación tenemos que simular nuestro muestreo (proceso de detectabilidad o _observational process_). Éste consistirá en 15 cuadrículas aleatorias de nuestro área de estudio a las cuales realizaremos 4 visitas (ocasiones). Durante los muestreos intentaremos detectar el máximo número posible de ciervos, pero desgraciadamente sabemos que tenemos una eficacia o probabilidad de detección del 40% para todo nuestro área de estudio. Esto significa que, en general, seremos capaces de detectar menos de la mitad de ciervos en cada muestreo. Para simular esta detectabilidad podemos utilizar una [distribución binomial](https://www.youtube.com/watch?v=_FbZI9mtSSM). La distribución binomial maneja la probabilidad de éxito para un número de sucesos con dos resultados posibles: éxito o fracaso (cara o cruz, par o impar, etc.). Pongamos que una celda tiene 10 ciervos. La detección de cada uno de esos 10 ciervos puede verse como 10 sucesos en los que puedo tener éxito (detecto al ciervo) o fracasar (el ciervo está, pero no lo detecto). De esta forma, tendríamos que
-
-$$y_{i,k} \sim binomial(N_{i}, p)$$
-
+\begin{equation}
+\tag{Eq 3}\label{eq3}
+y_{i,k} \sim binomial(N_{i}, p)
+\end{equation}
 dónde $y_{i,k}$ es el número de individuos detectados en la celda $i$ en la visita/ocasión $k$, $N_{i}$ es el número de individuos en la celda $i$ y $p$ es la probabilidad de detectar cada ciervo, siendo en nuestro caso $p = 0.4$. Recapitulando, muestrearemos 15 cuadrículas aleatorias durante 4 visitas diferentes. En cada visita tendremos una probabilidad del 40% de ver cada uno de los ciervos que se encuentren en la cuadrícula. El siguiente código simula este proceso:
 
 ```{r muestreo}
@@ -232,17 +238,21 @@ dwat <- scale(distanceFromPoints(sarea, c(3.5,3.5))) + 2.28668
 plot(dwat)
 ```
 
-En el ejemplo anterior, habíamos distribuido los ciervos aleatoriamente siguiendo una distribución de Poisson con $\lambda = 4$ para todo el territorio. 
-
-$$N \sim Poisson(\lambda)$$
-
+En el ejemplo anterior, habíamos distribuido los ciervos aleatoriamente siguiendo una distribución de Poisson con $\lambda = 4$ para todo el territorio (\\ref{eq2}). 
+\begin{equation}
+\tag{Eq 2}
+N \sim Poisson(\lambda)
+\end{equation}
 Sin embargo, ahora queremos que nuestros ciervos se distribuyan conforme a la distancia al punto de agua, de tal forma que haya más ciervos cerca del agua, y su abundancia disminuya conforme nos vamos alejando de ella. Eso quiere decir que $\lambda$ debe ser mayor en valores bajos de distancia al agua $dwat$, e irá disminuyendo con forme aumente $dwat$. Este comportamiento se puede expresar como
-
-$$ log(\lambda_{i}) = \beta_{0} + \beta_{1} * dwat_{i} $$
+\begin{equation}
+\tag{Eq 4}\label{eq4}
+log(\lambda_{i}) = \beta_{0} + \beta_{1} * dwat_{i}
+\end{equation}
 donde $\lambda_{i}$ es la abundancia promedio en la celda $i$, $\beta_{0}$ es el intercepto del modelo lineal que predice la abundancia, $\beta_{1}$ es la fuerza del efecto de la distancia al agua sobre la abundancia de ciervos, y $dwat_{i}$ es la distancia al punto de agua desde la celda $i$. Así, podemos intuir que la $\lambda$de cada celda dependerá de la variable "distancia al agua". Por lo tanto, la ecuación general que gobernará la distribución de nuestros ciervos ahora sera:
-
-$$N \sim Poisson(exp(\beta_{0} + \beta_{1} * dwat))$$
-
+\begin{equation}
+\tag{Eq 5}\label{eq5}
+N \sim Poisson(exp(\beta_{0} + \beta_{1} * dwat))
+\end{equation}
 Para que se cumpla nuestra premisa de que haya menos ciervos cuanto más nos alejemos del punto de agua, al coeficiente $\beta_{1}$ deberemos darle un valor negativo. Estos serán nuestros valores:
 
 *   $\beta_{0} = 3$
@@ -287,13 +297,17 @@ plot(dwat[],sarea[], xlab = "distancia al punto de agua", ylab = "nº de ciervos
 
 ```
 
-Vayamos ahora a simular el muestreo. Como en el ejemplo anterior, éste consistirá en 15 cuadrículas aleatorias de nuestro área de estudio a las cuales realizaremos 4 visitas en cada una (ocasiones). Sin embargo ahora, nuestra probabilidad de detección de los animales también va a venir definido por la distancia al agua. Como vimos en la foto aérea de nuestro paisaje, cerca del agua encontramos una mayor vegetación, lo cual dificulta la detección de nuestros ciervos, ya que se pueden ocultar mejor. Por lo tanto puestra capacidad de detección disminuirá conforme nos acerquemos al agua. Como ya habíamos visto anteriormentem el proceso de observación venía definido por la fórmula
-
-$$y_{i,k} \sim binomial(N_{i}, p)$$
+Vayamos ahora a simular el muestreo. Como en el ejemplo anterior, éste consistirá en 15 cuadrículas aleatorias de nuestro área de estudio a las cuales realizaremos 4 visitas en cada una (ocasiones). Sin embargo ahora, nuestra probabilidad de detección de los animales también va a venir definido por la distancia al agua. Como vimos en la foto aérea de nuestro paisaje, cerca del agua encontramos una mayor vegetación, lo cual dificulta la detección de nuestros ciervos, ya que se pueden ocultar mejor. Por lo tanto puestra capacidad de detección disminuirá conforme nos acerquemos al agua. Como ya habíamos visto anteriormente el proceso de observación venía definido por la fórmula (\\ref{eq3})
+\begin{equation}
+\tag{Eq 3}
+y_{i,k} \sim binomial(N_{i}, p)
+\end{equation}
 siendo la probabilidad de detectar un ciervo $p$ un parámetro constante en todo nuestro área de estudio ($p = 0.4$). Sin embargo ahora, ese parámetro $p$ va a variar con respecto a nuestra covariable predictora de la siguiente manera:
-
-$$logit(p)= \gamma_{0} + \gamma_{1} * dwat$$
-donde de forma similar al modelo de $\lambda$, ahora $\gamma_{0}$ y $\gamma_{1}$ son respectivamente el intercepto y la fuerza con la que la distancia al agua afecta a la probabilidad de detección de los ciervos. Pongamos que los valores son los siguientes:
+\begin{equation}
+\tag{Eq 6}\label{eq6}
+logit(p)= \gamma_{0} + \gamma_{1} * dwat
+\end{equation}
+donde, de forma similar al modelo de $\lambda$, ahora $\gamma_{0}$ y $\gamma_{1}$ son respectivamente el intercepto y la fuerza con la que la distancia al agua afecta a la probabilidad de detección de los ciervos. Pongamos que los valores son los siguientes:
 
 *   $\gamma_{0} = 0.2$
 *   $\gamma_{1} = 0.8$
@@ -377,7 +391,7 @@ m2 <- pcount(~dwat ~dwat, data=dataUM, K=150)
 summary(m2)
 ```
 
-Una diferencia importante comparado con el ejemplo previo es que anteriormente estábamos estimando directamente los parámetros $\lambda$ y $p$ de los procesos de abundancia y detectabilidad Como nuestro objetivo eran esos dos parámetros, debíamos "backtransformar" esas estimas, ya que el modelo los ajustaba en función de $log(\lambda)$ y $logit(p)$. Sin embargo, en este nuevo modelos sabemos que esos parámetros varían en función de una covariable, $dwat$ en nuestro caso, y por tanto nuestro objetivo ya no es conocer esos dos parámetros en si mismos, sino conocer cómo se relacionan con la covariable predictora, esto es, buscamos los coeficientes $\beta_{1}$ y $\gamma_{1}$ de los modelos que gobiernan $\lambda$ y $\p$ respectivamente (ver fórmulas X y X). Por esa razón, ahora no es necesario que "backtransformemos" las estimas de esos coeficientes, sino que podemos realizar las comparaciones directamente.
+Una diferencia importante comparado con el ejemplo previo es que anteriormente estábamos estimando directamente los parámetros $\lambda$ y $p$ de los procesos de abundancia y detectabilidad (\\ref{eq2} y \\ref{eq3}). Como nuestro objetivo eran esos dos parámetros, debíamos "backtransformar" esas estimas, ya que el modelo los ajustaba en función de $log(\lambda)$ y $logit(p)$. Sin embargo, en este nuevo modelos sabemos que esos parámetros varían en función de una covariable, $dwat$ en nuestro caso, y por tanto nuestro objetivo ya no es conocer esos dos parámetros en sí mismos, sino conocer cómo se relacionan con la covariable predictora, esto es, buscamos los coeficientes $\beta_{1}$ y $\gamma_{1}$ de los modelos que gobiernan $\lambda$ y $p$ respectivamente (\\ref{eq4} y \\ref{eq6}). Por esa razón, ahora no es necesario que "backtransformemos" las estimas de esos coeficientes, sino que debemos realizar las comparaciones directamente.
 <br/><br/> 
 En los resultados podemos ver los dos submodelos, el de abundancia y el de detectabilidad. En el de abundancia observamos una estima del intercepto $\beta_{0} = 2.861$, mientras que la estima del efecto de la covariable predictora es $\beta_{1} = -0.872$. Si recordamos, estos dos parámetros los habíamos simulado en $\beta_{0} = 3$ y $\beta_{1} = -0.9$, por lo que estamos obteniendo unas buenas estimas con nuestro modelo.
 <br/><br/>
