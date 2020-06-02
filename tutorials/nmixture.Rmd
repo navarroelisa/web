@@ -21,7 +21,9 @@ text-align: justify}
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+ 
+Este tutorial está basado principalmente en el capítulo 6 del libro _Applied Hierarchical Modeling in Ecology Analysis of distribution, abundance and species richness in R and BUGS_ de Marc Kéry y J. Andrew Royle [@KeryRoyle2016]. Existen otros buenos tutoriales como [este](https://mcolvin.github.io/WFA8433/Class-18.html) de M.E. Colvin o [estos](https://cornelllabofornithology.github.io/ebird-best-practices/index.html) del Cornell Lab of Ornitology que también han sido consultados.
+ 
 # Introducción
 
 Conocer la abundancia o el número de individuos de una población es un parámetro clave para conocer el estado de la misma y poder realizar una correcta gestión (XXX). Sin embargo, estimar el número total de individuos que componenen una población, $N$, no es tarea sencilla. Para aproximarnos a ese número se pueden diseñar muestreos que nos permitan obtener un índice de abundancia $I$, que son "cantidades que reflejan variaciones temporales o espaciales del tamaño de las poblaciones sin conocer realmente su verdadero tamaño" [@tellelibro], $I$. De forma general, se podría considerar que
