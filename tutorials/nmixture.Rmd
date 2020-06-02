@@ -385,7 +385,7 @@ Por otro lado, en el submodelo de la detectabilidad u observación, estamos obte
 <br/><br/>
 Una vez ajustado el modelo, podemos graficar sus predicciones teniendo en cuenta la covariable predictora $dwat$. Utilizaremos la función `predict` de la siguiente forma:
 
-``` {r predict_covar, fig.height = 4, fig.width = 9, fig.align = "center"}
+``` {r predict_covar, fig.height = 8, fig.width = 9, fig.align = "center"}
 
 # Primero debemos juntar todas las covariables en formato raster en un objeto tipo stack
 # En nuestro caso solo hay una, dwat. La incluimos y le damos el nombre correspondiente
@@ -404,7 +404,18 @@ pred_det <- predict(m2, newdata=sdwat, type = "det")
 plot(pred_state)
 ```
 
-Podemos ver la abundancia total $N$ predicha por nuestro modelo si hacemos el sumatorio de todas las celdas de la predicción:
+En el gráfico superior izquierdo _(Predicted)_ podemos ver la distribución de la abundancia predicha, mientras que en el resto se muestran el error estándar y los límites superior e inferior de las predicciones. Podemos comparar gráficamente la abundancia predicha con la abundancia simulada:
+
+``` {r abun_compar, fig.height = 5, fig.width = 9, fig.align = "center"}
+par(mfrow=c(1,2))
+plot(sarea, main = "Abundancia simulada")
+plot(pred_state$Predicted, main = "Abundancia predicha")
+
+```
+
+Como vemos, la distribución predicha es mucho más homogénea que la simulada, puesto que nos hemos basado en una única covariable predictora, $dwat$. Sin embargo, el patrón general de ambas es bastante similar, por lo que podríamos considerar que nuestro modelo nos ofrece una buena predicción.
+<br/><br/>
+Finalmente, podemos calcular la abundancia total $N$ predicha por nuestro modelo si hacemos el sumatorio de todas las celdas de la predicción, y compararla con la abundancia simulada:
 
 ```{r Npreducha}
 
@@ -416,8 +427,10 @@ sum(pred_state$Predicted[])
 
 ```
 
-Vemos que la $N$ simulada era de 352, mientras que nuestro modelo calcula una $N$ de 340, bastante acertada.
+Vemos que la $N$ simulada era de 352, mientras que nuestro modelo calcula una $N$ de 340, por lo que podríamos decir que nuestras estimas están siendo bastante precisas.
+<br/><br/>
+Todos los parámetros estimados por nuestro modelo podrían mejorar si se aumentara el tamaño de muestreo. ¿Qué efecto tendría aumentar el número de sitios muestreados? ¿Y aumentar el número de visitas en cada sitio? ¿Afectan por igual a las estimas de los parámetros del proceso de abundancia y de observación? Como vemos, las simulaciones son una herramienta muy útil para comprender el funcionamiento de los modelos matemáticos.
 
-
+## Referencias
 
 
