@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -22,8 +22,19 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -85,7 +96,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -234,6 +244,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -245,18 +256,6 @@ $(document).ready(function () {
   display: none;
 }
 </style>
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
 
 <!-- code folding -->
 
@@ -328,10 +327,10 @@ $(document).ready(function () {
 <li>Google is great, Google your problem</li>
 <li><a href="https://stackoverflow.com">Stackoverflow</a> is great, google will often take you there because someone has already asked your question, and someone else has answered, usually many people have answered your question many ways.</li>
 <li>Danielle Navarro wrote a <a href="https://compcogscisydney.org/learning-statistics-with-r/">free Psych Stats textbook using R</a>, it’s worth checking out (some of our textbook are based on Danielle’s)</li>
-<li>I am currently writing another stats textbook (incorporating some of the above). You can read it while it’s being made right here <a href="https://crumplab.github.io/statistics/" class="uri">https://crumplab.github.io/statistics/</a>, also check out the lab manual for more specific things about doing various stats in R (also in draft right now) <a href="https://crumplab.github.io/statisticsLab/" class="uri">https://crumplab.github.io/statisticsLab/</a></li>
-<li>Daniell Navarro recently made this website for introducing R, it’s great, check it out (also made using this R markdown process): <a href="http://compcogscisydney.org/psyr/" class="uri">http://compcogscisydney.org/psyr/</a></li>
-<li>Check out my slightly older programming book that also introduces R <a href="https://crumplab.github.io/programmingforpsych/" class="uri">https://crumplab.github.io/programmingforpsych/</a></li>
-<li>This is the definitive guide for all things R Markdown (you will find this very useful as you get better at this skill): <a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a></li>
+<li>I am currently writing another stats textbook (incorporating some of the above). You can read it while it’s being made right here <a href="https://crumplab.github.io/statistics/">https://crumplab.github.io/statistics/</a>, also check out the lab manual for more specific things about doing various stats in R (also in draft right now) <a href="https://crumplab.github.io/statisticsLab/">https://crumplab.github.io/statisticsLab/</a></li>
+<li>Daniell Navarro recently made this website for introducing R, it’s great, check it out (also made using this R markdown process): <a href="http://compcogscisydney.org/psyr/">http://compcogscisydney.org/psyr/</a></li>
+<li>Check out my slightly older programming book that also introduces R <a href="https://crumplab.github.io/programmingforpsych/">https://crumplab.github.io/programmingforpsych/</a></li>
+<li>This is the definitive guide for all things R Markdown (you will find this very useful as you get better at this skill): <a href="https://bookdown.org/yihui/rmarkdown/">https://bookdown.org/yihui/rmarkdown/</a></li>
 </ol>
 </div>
 
@@ -344,7 +343,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -352,6 +351,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

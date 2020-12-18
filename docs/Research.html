@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -22,8 +22,19 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -85,7 +96,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -234,6 +244,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -245,18 +256,6 @@ $(document).ready(function () {
   display: none;
 }
 </style>
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
 
 <!-- code folding -->
 
@@ -325,13 +324,13 @@ text-align: justify}
 <p>Here you have some selected publications. Find more in my <a href="https://scholar.google.es/citations?hl=es&amp;user=v3biyuIAAAAJ">Google Schoolar</a> profile or in my <a href="https://www.researchgate.net/profile/Javier_Fernandez-Lopez">Researchgate</a></p>
 <div id="refs" class="references">
 <div id="ref-rwind2019">
-<p>Fernández-López, J., and K. Schliep. 2019. “RWind: Download, Edit and Include Wind Data in Ecological and Evolutionary Analysis.” <em>Ecography</em> 42 (4): 804–10. doi:<a href="https://doi.org/10.1111/ecog.03730">10.1111/ecog.03730</a>.</p>
+<p>Fernández-López, J., and K. Schliep. 2019. “RWind: Download, Edit and Include Wind Data in Ecological and Evolutionary Analysis.” <em>Ecography</em> 42 (4): 804–10. <a href="https://doi.org/10.1111/ecog.03730">https://doi.org/10.1111/ecog.03730</a>.</p>
 </div>
 <div id="ref-IMA2019">
-<p>Fernández-López, J., M. T. Telleria, M. Dueñas, A. W. Wilson, M. Padamsee, P. K. Buchanan, G. M. Mueller, and M. P. Martín. 2019. “Addressing the Diversity of Xylodon Raduloides Complex Through Integrative Taxonomy.” <em>IMA Fungus</em> 10 (9): 1–19. doi:<a href="https://doi.org/10.1186/s43008-019-0010-x">10.1186/s43008-019-0010-x</a>.</p>
+<p>Fernández-López, J., M. T. Telleria, M. Dueñas, A. W. Wilson, M. Padamsee, P. K. Buchanan, G. M. Mueller, and M. P. Martín. 2019. “Addressing the Diversity of Xylodon Raduloides Complex Through Integrative Taxonomy.” <em>IMA Fungus</em> 10 (9): 1–19. <a href="https://doi.org/10.1186/s43008-019-0010-x">https://doi.org/10.1186/s43008-019-0010-x</a>.</p>
 </div>
 <div id="ref-Royle2004">
-<p>Royle. 2004. “N-Mixture models for estimating population size from spatially replicated counts.” <em>Biometrics</em> 60: 108–15. doi:<a href="https://doi.org/10.1111/j.0006-341X.2004.00142.x">10.1111/j.0006-341X.2004.00142.x</a>.</p>
+<p>Royle. 2004. “N-Mixture models for estimating population size from spatially replicated counts.” <em>Biometrics</em> 60: 108–15. <a href="https://doi.org/10.1111/j.0006-341X.2004.00142.x">https://doi.org/10.1111/j.0006-341X.2004.00142.x</a>.</p>
 </div>
 </div>
 
@@ -344,7 +343,7 @@ text-align: justify}
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -352,6 +351,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
