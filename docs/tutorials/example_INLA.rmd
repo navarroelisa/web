@@ -1,5 +1,5 @@
 ---
-title: 'Appendix 1: Accounting for spatial autocorrelation in wild boar abundance models'
+title: 'Accounting for spatial autocorrelation in wild boar abundance models'
 author: 'Javier Fernández-López'
 date: '17/12/2020'
 output:
@@ -22,10 +22,13 @@ text-align: justify}
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning=FALSE)
 ```
+<br/><br/>
+This tutorial was partially developed for a boarder [study](https://efsa.onlinelibrary.wiley.com/doi/abs/10.2903/sp.efsa.2020.EN-1980) about wild boar abundance modeling ([ENETWILD EFSA project](https://enetwild.com/))
+<br/><br/>
 
 # Study area and population simulation
 
-We will simulate a wild boar population over an hypothetical study area. We will use a Poisson distribution to scatter wild boar individuals across a study area ([like this](https://jabiologo.github.io/web/tutorials/nmixture.html#simulaci%C3%B3n_del_%C3%A1rea_de_estudio_y_del_muestreo_con_covariables)):
+We will simulate a wild boar population over an hypothetical study area. We will use a Poisson distribution to scatter wild boar individuals across a study area:
 
 \begin{equation}
 \tag{Eq 1}\label{eq1}
@@ -33,6 +36,11 @@ N_{i} \sim Poisson(\lambda)
 \end{equation}
 
 where $\lambda$ is the expected numbers of wild boar at each quadrant (cell) of our study area. As animals are not usually random distributed, we will use an environmental covariate (distance to the water point) to drive the variation of $\lambda$. 
+
+<br/><br/> 
+![](nmixture_files/images/dwat.png)
+Hypothetical simulated study area
+<br/><br/>
 
 In addition, we will add a random autocorrelated predictor to reproduce some kind of autocorrelation of the wild boar distribution, which can be seen as biological processes such as migration, etc.
 
