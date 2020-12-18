@@ -1,0 +1,437 @@
+---
+title: 'Appendix 1: Accounting for spatial autocorrelation in wild boar abundance models'
+author: 'Javier Fernández-López'
+date: '17/12/2020'
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+  word_document: default
+  pdf_document: default
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning=FALSE)
+```
+
+# Study area and population simulation
+
+We will simulate a wild boar population over an hypothetical study area. We will use a Poisson distribution to scatter wild boar individuals across a study area ([like this](https://jabiologo.github.io/web/tutorials/nmixture.html#simulaci%C3%B3n_del_%C3%A1rea_de_estudio_y_del_muestreo_con_covariables)):
+
+\begin{equation}
+\tag{Eq 1}\label{eq1}
+N_{i} \sim Poisson(\lambda)
+\end{equation}
+
+where $\lambda$ is the expected numbers of wild boar at each quadrant (cell) of our study area. As animals are not usually random distributed, we will use an environmental covariate (distance to the water point) to drive the variation of $\lambda$. 
+
+In addition, we will add a random autocorrelated predictor to reproduce some kind of autocorrelation of the wild boar distribution, which can be seen as biological processes such as migration, etc.
+
+\begin{equation}
+\tag{Eq 2}\label{eq2}
+log(\lambda_{i}) = \beta_{0} + \beta_{1} * dwat_{i} + \beta_{2} * autocorr_{i}
+\end{equation}
+
+where $\lambda_{i}$ is the expected (average) abundance of wild boar at each cell $i$, $\beta_{0}$ is the coefficient for the intercept, $dwat_{i}$ is the environmental covariate at cell $i$ and $\beta_{1}$ its coefficient, and $autocorr_{i}$ is the environmental covariate at cell $i$ and $\beta_{2}$ its coefficient. Therefore, the general process that describes the number of wild boar at each cell will be:
+
+\begin{equation}
+\tag{Eq 3}\label{eq3}
+N \sim Poisson(exp(\beta_{0} + \beta_{1} * dwat + \beta_{2} * autocorr))
+\end{equation}
+
+We will set our coefficients as follows:
+
+*   $\beta_{0} = 3$
+*   $\beta_{1} = -0.9$
+*   $\beta_{2} = 0.15$
+
+<br/><br/>
+```{r ch1, message=FALSE, fig.height = 9, fig.width = 8.5, fig.align = "center"}
+set.seed(123)
+library(dismo)
+library(raster)
+library(sf)
+
+# Create a study area
+sarea <- raster(nrows = 100, ncols = 100, xmn = 0, xmx = 100, ymn = 0, ymx = 100)
+# Create the "distance from water point" layer
+dwat <- scale(distanceFromPoints(sarea, c(25,25))) + 2.26
+# Create a random autocorrelated variable
+autoc <- raster(nrows = 10, ncols = 10, xmn = 0, xmx = 100, ymn = 0, ymx = 100)
+autoc[] <- runif(100, 1,10)
+autoc <- disaggregate(autoc,10, "bilinear")
+
+# Lambda parameter for the Poisson distribution of the abundance distribution 
+# will be a function from the distance of water point and the autocorrelated,
+# with a 3, -0.9 and 0.15 as coefficients
+beta_0 <- 3
+beta_1 <- -0.9
+beta_2 <- 0.15
+lambda <- exp(beta_0 + beta_1*(dwat) + beta_2*(autoc))
+
+# Now we can fill each cell of our study area with a random number from a Poisson 
+# distribution with a different lambda at each site/cell
+for (i in 1:ncell(sarea)){
+  sarea[i] <- rpois(1, lambda[i])
+}
+
+# Plot the different variables and the study area
+par(mfrow = c(2,2))
+plot(dwat, main = "Distance to the water point")
+plot(autoc, main = "Autocorrelated random covariate")
+plot(lambda, main = "Lambda parameter of the Poisson distribution")
+plot(sarea, main = "Abundance of wild boar per cell")
+```
+<br/><br/>
+
+# Hunting ground simulation and data colecting
+
+Once we have the wild boar population distributed, we will divide the sudy area in 300 different hunting grounds and we will obtain the number of wild boar and a set of possible predictor variables for each hunting ground: area and distance to the water. point.
+<br/><br/>
+
+```{r ch2, message=FALSE, fig.height = 5, fig.width = 9.15, fig.align = "center"}
+
+# Let's create a layer fill with 1 to indicate the area of each cell
+uni <- sarea
+uni[] <- 1
+
+# Now we'll create hunting grounds from which we'll obtain the counts of our 
+# population. They'll be irregular polygons for which we will obtain the actual 
+# number of individuals. Here we'll ignore detectability, and we simulate a 
+# perfect sampling, being able to obtain the actual number of individuals at 
+# each hunting ground.
+
+pp <- randomPoints(sarea, 300)
+cotos <- crop(voronoi(pp),sarea)
+
+# Now, we'll obtain the number of individuals in each hunting ground, as well as
+# the measures of the other two predictor variables: the average of the distance 
+# to the water point and the area of each hunting ground. We'll also obtain the 
+# wild boar density by dividing the wild boar number by the area at each
+# hunting ground.
+
+cotosr <- (rasterize(cotos, sarea, 'id'))
+df <- cbind(zonal(sarea,cotosr, fun = sum), zonal(dwat,cotosr), 
+            zonal(uni, cotosr, fun = sum))
+df <- data.frame(df[,c(-3,-5)])
+colnames(df) <- c("id", "wb", "dwat", "area")
+df$dens <- df$wb / df$area
+df$dens_poiss <- round((df$dens * 100),0)
+
+# Take a look to our data. Each hunting ground has an ID, the number of 
+# individuals, the distance to the water point, the area and the wild boar
+# density
+head(df)
+
+# Let's include this variables in the spatial object too
+cotos$wb <- df$wb
+cotos$dwat <- df$dwat
+cotos$area <- df$area
+cotos$dens <- df$dens
+cotos$dens_poiss <- round((df$dens * 100),0)
+
+#PLOT
+par(mfrow = c(1,2))
+plot(sarea, legend = FALSE, main = "Simulated wild boar abundance")
+lines(cotos)
+plot(sarea,axes=FALSE, legend = FALSE, 
+     main = "Wild boar counts by hunting ground")
+plot(st_as_sf(cotos)["wb"], add = TRUE, pal = rev(terrain.colors(10)))
+```
+<br/><br/>
+
+# Obtaining the spatial structure of our data
+
+In order to account for the spatial dependency in our data, we should obtain the spatial structure of our hunting grounds, that is, the neighborhood of each hunting ground. 
+<br/><br/>
+
+```{r ch3, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# First, we'll prepare neighborhood matrix of territorial units
+library(spdep)
+nb <- poly2nb(cotos, row.names = cotos$id)
+n.neighbors <- sapply(nb, FUN =length)
+neighbors <- unlist(nb, recursive = FALSE)
+
+plot(cotos, col = "grey", main = "Hunting grounds neighborhood structure")
+plot(nb, coordinates(cotos), col='red', lwd=1.2, add=TRUE, pch = 16)
+
+# Now we should assign each cell to a hunting ground for model projections
+sites.pred <- data.frame(rasterToPoints(dwat))
+sites.pred$area <- 1
+dup <- raster::extract(cotos, sites.pred[,1:2])
+cells.pred <- dup[!duplicated(dup$point.ID),2]
+sites.pred$cell <- cells.pred
+names(sites.pred)[3] <- "dwat"
+
+```
+<br/><br/>
+
+# Setting INLA data input
+
+To project our model into another data set (downscaling, spatial projection, etc) we should include the predictor variables in the input data set for INLA, adding `NA` as response variable
+
+```{r ch3bis, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Data set for INLA models
+dff <- as.data.frame(cbind(df$dens_poiss, df$dwat, df$area, df$id))
+dff <- as.data.frame(rbind(dff, cbind(rep(NA,10000),sites.pred$dwat, sites.pred$area, sites.pred$cell)))
+names(dff) <- c("dens_poiss", "dwat", "area", "id")
+
+head(dff)
+tail(dff)
+
+```
+
+# Model fitting and evaluation
+
+Now we will follow three different strategies to model wild boar abundance from hunting ground data and to project our predictions in a finer scale (1x1 grid).
+
+1. Using the density of wild boar as response variable and the distance to water point as predictor
+2. Using the density of wild boar as response variable and the distance to water point as predictor and including iCAR to control for spatial autocorrelation in our data.
+3. Using the density of wild boar as response variable and the distance to water point as predictor, controling for the spatial autocorrelation by means of stochastic partial differential equations (SPDE)
+
+We will use two different methodologies to compare the results. First, we will use the R package `hSDM` and a Poisson distribution to fit all models. A good explanation about hSDM R package can be found [here](https://cran.r-project.org/web/packages/hSDM/vignettes/hSDM.html). It uses a Bayesian framework (through MCMC) to fit model parameters. Second, we will use the R package `INLA` to fit the models. It uses also a Bayesian framework, but it uses numerical computations to approximate the marginal distributions of parameters (it doesn't use MCMC). A great book about INLA can be found [here](https://becarioprecario.bitbucket.io/inla-gitbook/index.html) and [here](https://becarioprecario.bitbucket.io/spde-gitbook/)
+
+<br/><br/>
+```{r ch4, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+library(hSDM)
+library(INLA)
+
+# Here we use the density as response variable and the distance to the water 
+# point as the only predictor using hSDM
+
+m1_hSDM <- hSDM.poisson(
+  counts = df$dens_poiss,
+  suitability=~ dwat,
+  data=df,
+  suitability.pred=sites.pred,  # For model projection into a finer resolution
+  burnin = 1000,
+  mcmc = 10000,
+  thin = 10,
+  beta.start=0,
+  mubeta =0,
+  Vbeta = 1e+06,
+  seed = 1234,
+  verbose = 1,
+  save.p = 0)
+
+# Here, we'll use the iCAR approach to have into account the spatial 
+# autocorrelation throught hSDM
+
+m2_hSDM <- hSDM.poisson.iCAR(
+  counts = df$dens_poiss,
+  suitability=~ dwat,
+  spatial.entity = df$id,
+  data=df,
+  n.neighbors = n.neighbors, # Spatial structure
+  neighbors = neighbors, # Spatial structure
+  suitability.pred=sites.pred,  # For model projection into a finer resolution
+  spatial.entity.pred=sites.pred$cell, # Spatial structure of projections
+  burnin = 1000,
+  mcmc = 10000,
+  thin = 10,
+  beta.start=0,
+  Vrho.start=1,
+  mubeta =0,
+  Vbeta = 1e+06,
+  priorVrho = "1/Gamma",
+  shape = 0.5,
+  rate = 0.0005,
+  Vrho.max=1000,
+  seed = 1234,
+  verbose = 1,
+  save.rho = 0,
+  save.p = 0)
+
+# Now we will use INLA to fit the same models plus the additional one (SPDE)
+
+# The simplest one. 
+# compute = TRUE: compute marginals for the linear predictor
+m1_INLA <- inla(dens_poiss ~ dwat, data = dff, family = "poisson", 
+               control.predictor = list(compute =TRUE, link = 1), 
+               control.compute = list(dic = TRUE, waic =TRUE))
+
+# Now controling by the spatial autocorrelation using iCAR
+# First transform the neighborhood object to a matrix
+inla.nb <- as(nb2mat(nb, style = "B"), "Matrix") # B for binomial
+# Fit the model
+m2_INLA <- inla(dens_poiss ~ dwat + f(id, model = "besag", graph = inla.nb), 
+               data = dff, family = "poisson", 
+               control.predictor = list(compute =TRUE, link = 1), 
+               control.compute = list(dic = TRUE, waic =TRUE))
+
+# Take care with default priors for the besag (iCAR) model in INLA. Check if the
+# precision estimate is too high. In this case, change the priors using:
+#prec.prior <- list(prior = "loggamma", param = c(0.01, 0.01),
+#                   initial = 0, fixed = FALSE)
+
+# Finally, we will use the SPDE to model the spatial autocorrelation as a
+# continuous process in space. To do that, we should first fit a mesh
+# For a comprehensive mesh build check meshbuilder()
+
+# Transform sites.pred in a grid
+sites.pred2 <- sites.pred
+coordinates(sites.pred2) = ~x+y
+gridded(sites.pred2) = TRUE
+
+# Define a mesh
+cotos.bdy <- aggregate(cotos, dissolve = TRUE)
+
+pts <- cotos.bdy@polygons[[1]]@Polygons[[1]]@coords
+mesh <- inla.mesh.2d(loc.domain = pts, max.edge = c(7, 15), ##############
+                     offset = c(10, 20) )
+
+plot(mesh, main = "")
+lines(pts, col = 3, lwd = 2)
+
+# Once we have the mesh, we should create several objects to use SPDE in INLA
+
+#Create SPDE
+cotos.spde <- inla.spde2.matern(mesh = mesh, alpha = 2)
+#Create projector matrix A
+A.cotos <- inla.spde.make.A(mesh = mesh, loc = coordinates(cotos))
+# Create a list of named index vectors for the SPDE model
+s.index <- inla.spde.make.index(name = "spatial.field",
+                                n.spde = cotos.spde$n.spde)
+
+#Create data structure
+cotos.stack <- inla.stack(data  = list(dens_poiss = df$dens_poiss),
+                        A = list(A.cotos, 1),
+                        effects = list(c(s.index, list(Intercept = 1)),
+                                       list(dwat = df$dwat)),
+                        tag = "cotos.data")
+
+#Create data structure for prediction
+A.pred <- inla.spde.make.A(mesh = mesh, loc = coordinates(sites.pred2))
+cotos.stack.pred <- inla.stack(data = list(dens_poiss = NA),
+                             A = list(A.pred, 1),
+                             effects = list(c(s.index, list (Intercept = 1)),
+                                            list(dwat = sites.pred2$dwat)),
+                             tag = "sites.pred2.pred")
+
+# Join all the data in a single object
+join.stack <- inla.stack(cotos.stack, cotos.stack.pred)
+
+# Now we can define the formula of our model
+form <- dens_poiss ~ -1 + dwat + f(spatial.field, model = spde)
+
+# And finally fit the model
+m3_INLA <- inla(form, data = inla.stack.data(join.stack, spde = cotos.spde),
+           family = "poisson",
+           control.predictor = list(A = inla.stack.A(join.stack), compute = TRUE, link = 1),
+           control.compute = list(cpo = TRUE, dic = TRUE))
+
+```
+<br/><br/>
+
+Now we can predict wild boar numbers obtained for each hunting ground following the three strategies and compare them with the actual data. Take into account that `m2` and `m3` are fitted using densities, and therefore model predictions should be backtransformed to obtain wild boar numbers.
+<br/><br/>
+```{r ch5, message=FALSE, fig.height = 6.5, fig.width = 9.15, fig.align = "center"}
+
+df$predm1_hSDM <- ((m1_hSDM$lambda.latent/100) * df$area)
+df$predm2_hSDM <- ((m2_hSDM$lambda.latent/100) * df$area)
+df$predm1_INLA <- (m1_INLA$summary.fitted.values$mean[1:300] / 100) * df$area
+df$predm2_INLA <- (m2_INLA$summary.fitted.values$mean[1:300] / 100) * df$area
+df$predm3_INLA <- (m3_INLA$summary.fitted.values$mean[1:300] / 100) * df$area
+
+par(mfrow= c(2,3)) 
+plot(df$predm1_hSDM, df$wb, xlab= "wild boar predicted", ylab= "wild boar observed", main = "m1 hSDM")
+abline(a=0,b=1,col="red", lwd = 3)
+plot(df$predm2_hSDM, df$wb, xlab= "wild boar predicted", ylab= "wild boar observed", main = "m2 hSDM")
+abline(a=0,b=1,col="red", lwd = 3)
+plot.new()
+
+plot(df$predm1_INLA, df$wb, xlab= "wild boar predicted", ylab= "wild boar observed", main = "m1 INLA")
+abline(a=0,b=1,col="red", lwd = 3)
+plot(df$predm2_INLA, df$wb, xlab= "wild boar predicted", ylab= "wild boar observed", main = "m2 INLA")
+abline(a=0,b=1,col="red", lwd = 3)
+plot(df$predm3_INLA, df$wb, xlab= "wild boar predicted", ylab= "wild boar observed", main = "m3 INLA")
+abline(a=0,b=1,col="red", lwd = 3)
+
+```
+<br/><br/>
+We can see that **iCAR** approach is obtaining the more accurate predictions at hunting ground level. In addition, we can check if we were able to remove spatial autocorrelation of model residuals by computing autocorrelograms (using Moran's I at different distance lags)
+
+```{r ch6, message=FALSE, fig.height = 6.5, fig.width = 9.15, fig.align = "center"}
+library(spatialEco)
+
+# Obtain model residuals (observed - predicted)
+df$m1_hSDMres <- df$wb - df$predm1_hSDM
+df$m2_hSDMres <- df$wb - df$predm2_hSDM
+
+df$m1_INLAres <- df$wb - df$predm1_INLA
+df$m2_INLAres <- df$wb - df$predm2_INLA
+df$m3_INLAres <- df$wb - df$predm3_INLA
+
+dataI <- SpatialPointsDataFrame(coordinates(cotos), 
+                                data.frame(cbind(df$m1_hSDMres,df$m2_hSDMres,df$m1_INLAres,df$m2_INLAres,df$m3_INLAres)))
+par(mfrow = c(2,3))
+c1 <- correlogram(dataI, dataI@data$X1, dist = 10, ns = 50, latlong=FALSE)
+c2 <- correlogram(dataI, dataI@data$X2, dist = 10, ns = 50, latlong=FALSE)
+plot.new()
+
+c3 <- correlogram(dataI, dataI@data$X3, dist = 10, ns = 50, latlong=FALSE)
+c4 <- correlogram(dataI, dataI@data$X4, dist = 10, ns = 50, latlong=FALSE)
+c5 <- correlogram(dataI, dataI@data$X5, dist = 10, ns = 50, latlong=FALSE)
+
+```
+<br/><br/>
+We can see that spatial autocorrelation is significatively reduced in the firsts lags by using the **iCAR** approach.
+<br/><br/>
+
+# Model projection to a finer resolution (downscaling)
+
+Finally, a further step would be to project our model to a higher resolution: that is, to use our models to obtain a prediction of number of wild boar at finer scale. We could then compare between actual data at cell sclae and model predictions under each strategy.
+<br/><br/>
+
+```{r ch7, message=FALSE, fig.height = 10, fig.width = 9.15, fig.align = "center"}
+
+projm1_hSDM <- sarea
+projm1_hSDM[] <- m1_hSDM$lambda.pred/100
+projm2_hSDM <- sarea
+projm2_hSDM[] <- m2_hSDM$lambda.pred/100
+
+projm1_INLA <- sarea
+projm1_INLA[] <- m1_INLA$summary.fitted.values$mean[301:10300]/100
+projm2_INLA <- sarea
+projm2_INLA[] <- m2_INLA$summary.fitted.values$mean[301:10300]/100
+
+index.pred <- inla.stack.index(join.stack, "sites.pred2.pred")$data
+projm3_INLA <- sarea
+projm3_INLA[] <- m3_INLA$summary.fitted.values[index.pred, "mean"]/100
+
+par(mfrow = c(3,3))
+plot(dwat, main = "Predictor dwat beta = -0.8")
+plot(autoc, main = "Predictor autocorrelated beta = 0.15")
+plot(sarea, main = paste("Actual abundance distribution\r N =",sum(sarea[])))
+plot(projm1_hSDM, main = paste("m1 hSDM\r N =",round(sum(projm1_hSDM[]),0)))
+plot(projm2_hSDM, main = paste("m2 hSDM\r N =",round(sum(projm2_hSDM[]),0)))
+plot.new()
+plot(projm1_INLA, main = paste("m1 INLA\r N =",round(sum(projm1_INLA[]),0)))
+plot(projm2_INLA, main = paste("m2 INLA\r N =",round(sum(projm2_INLA[]),0)))
+plot(projm3_INLA, main = paste("m3 INLA\r N =",round(sum(projm3_INLA[]),0)))
+```
+
+As we see, the wild boar abundance distribution obtained in `m1` and `m2` show a uniform pattern, since the only environmental predictor included in the model is the distance to the water point. However, total numbers of wild boar for the whole study area shows an overprediction when we use the total wild boar counts as the response variable. This overprediction is not controlled by including the hunting ground area as predictor variable, so caution should be taken when downscaling this model predictions. The wild boar abundance distribution obtained from `m3` shows a much more realistic pattern, since spatial structure of the data is accounted  by the **iCAR** approach and total number of wild boar predicted is in accordance with actual data.
+
+# Model summaries
+
+```{r ch8, message=FALSE}
+
+summary(m1_hSDM$mcmc)
+summary(m2_hSDM$mcmc)
+summary(m1_INLA)
+summary(m2_INLA)
+summary(m3_INLA)
+
+
+```
+

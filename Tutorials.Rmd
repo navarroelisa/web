@@ -19,12 +19,11 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 # N-mixture models (Spanish)
 
-Este texto debería aparecer
-test link for [n-mixture models](https://jabiologo.github.io/web/tutorials/nmixture.html)
+[Fit N-mixture models using unmarked](https://jabiologo.github.io/web/tutorials/nmixture.html)
 
-# Second tutorial
+# Spatial autocorrelation
 
-Here should be the link for the second tutorial
+[Control of spatial autocorrelation using hSDM and INLA](https://jabiologo.github.io/web/tutorials/example_INLA.html)
 
 # Prueba para referencias
 
