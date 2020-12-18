@@ -27,5 +27,5 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 # Prueba para referencias
 
-Incluir cita aquí [@Royle2004]
+Incluir cita aquí  [@Royle2004]
 
