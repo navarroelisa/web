@@ -36,7 +36,7 @@ library("rgbif")
 ```
 <br/><br/>
 
-# Searching and downloading data
+# Simple queries
 There are some helpful  
 
 ```{r rgbif2}
@@ -45,3 +45,7 @@ nameBackbone
 key <- nameBackbone$usageKey
 occ_count(key)
 ```
+
+# Advanced queries and filtering
+
+# Submitting heavy queries

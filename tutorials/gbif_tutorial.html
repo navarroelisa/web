@@ -259,8 +259,8 @@ text-align: justify}
 library(&quot;rgbif&quot;)</code></pre>
 <p><br /><br /></p>
 </div>
-<div id="searching-and-downloading-data" class="section level1">
-<h1>Searching and downloading data</h1>
+<div id="simple-queries" class="section level1">
+<h1>Simple queries</h1>
 <p>There are some helpful</p>
 <pre class="r"><code>nameBackbone &lt;- name_backbone(name=&quot;Neovison vison&quot;, rank=&quot;species&quot;)
 nameBackbone</code></pre>
@@ -273,7 +273,15 @@ nameBackbone</code></pre>
 ## #   phylumKey &lt;int&gt;, classKey &lt;int&gt;, orderKey &lt;int&gt;, familyKey &lt;int&gt;,
 ## #   genusKey &lt;int&gt;, speciesKey &lt;int&gt;, synonym &lt;lgl&gt;, class &lt;chr&gt;,
 ## #   verbatim_name &lt;chr&gt;, verbatim_rank &lt;chr&gt;</code></pre>
-<pre class="r"><code>key &lt;- nameBackbone$usageKey</code></pre>
+<pre class="r"><code>key &lt;- nameBackbone$usageKey
+occ_count(key)</code></pre>
+<pre><code>## [1] 40828</code></pre>
+</div>
+<div id="advanced-queries-and-filtering" class="section level1">
+<h1>Advanced queries and filtering</h1>
+</div>
+<div id="submitting-heavy-queries" class="section level1">
+<h1>Submitting heavy queries</h1>
 </div>
 
 
