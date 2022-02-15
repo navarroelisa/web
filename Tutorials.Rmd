@@ -25,7 +25,8 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 [Control of spatial autocorrelation using hSDM and INLA](https://jabiologo.github.io/web/tutorials/example_INLA.html)
 
-# Prueba para referencias
+# GBIF
 
-Incluir cita aquí  [@Royle2004]
+[Download presence records from GBIF using `rgbif`](https://jabiologo.github.io/web/tutorials/gbif_tutorial.html)
+
 
