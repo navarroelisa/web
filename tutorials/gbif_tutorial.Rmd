@@ -183,7 +183,36 @@ occDlNeo
 occ_download_meta(occDlNeo)
 ```
 
-It is important to highlight that `occ_download` provides us a DOI assigned to our query. As we already know, It will be useful for data citation and tracking.
+It is important to highlight that `occ_download` provides us a DOI assigned to our query. As we already know, it will be useful for data citation and tracking.
+<br/><br/>
+To visualize and clean the data it is necessary to download a ZIP file to our local machine.
 
+```{r rgbif13, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center", eval=FALSE}
+# "path" should contain the path to our local machine
+zip <- occ_download_get(key = occ_download_meta(occDlNeo)$key, 
+                        path="/home/myPath", overwrite = TRUE)
+```
+```{r rgbif14, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center", echo=FALSE}
+zip <- occ_download_get(key = occ_download_meta(occDlNeo)$key, 
+                        path="/home/javifl/IREC/gbif", overwrite = TRUE)
+```
+Now, we can check for data citation, clean the occurrences, etc.
+```{r rgbif15, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Check number of data sets in our downloaded data
+length(gbif_citation(zip)$datasets)
 
+# Check for the three first data sets and how to cite them
+gbif_citation(zip)$datasets[1:3]
 
+# Import the data in the R session
+occNeoImp <- occ_download_import(zip)
+
+# Since we didn't select any field, the downloaded data contain all the Darwin
+# Core fields, so we can clean the data and select only those fields we are 
+# interested in.
+# colnames(occNeoImp)
+
+occNeoCoords <- occNeoImp[ ,c("scientificName", "decimalLongitude", 
+                              "decimalLatitude", "issue")]
+head(occNeoCoords)
+```
