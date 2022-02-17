@@ -35,7 +35,6 @@ This is a test web site. Just a test
 
 4. more research in my [Google Schoolar](https://scholar.google.es/citations?hl=es&user=v3biyuIAAAAJ)
 
-
 </div>
 <div class="col-sm-6">
 

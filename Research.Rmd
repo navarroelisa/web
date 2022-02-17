@@ -8,7 +8,6 @@ nocite: |
   @IMA2019
   
 ---
-
 <style>
 body {
 text-align: justify}
