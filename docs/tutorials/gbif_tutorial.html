@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Javier Fernández López" />
+<meta name="author" content="Javier Fernández-López" />
 
 
 <title>GBIF Tutorial</title>
@@ -241,7 +241,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">GBIF Tutorial</h1>
-<h4 class="author">Javier Fernández López</h4>
+<h4 class="author">Javier Fernández-López</h4>
 <h4 class="date">15/2/2022</h4>
 
 </div>
@@ -251,19 +251,26 @@ div.tocify {
 body {
 text-align: justify}
 </style>
-<p><br /><br /> This is a simple tutorial to learn how to use the <code>rgbif</code> R package to download, clean and visualize biodiversity occurrences from the GBIF data portal.</p>
+<p><br /><br /> R is a language and environment for statistical computing and graphics, that allows for automation of repetitive task as well as improves the reproducibility of science. R is available as Free Software under the terms of the Free Software Foundation’s GNU General Public License in source code form. <br /><br /> This is a simple tutorial to learn how to use the <code>rgbif</code> R package to download, clean and visualize biodiversity occurrences from the <a href="https://www.gbif.org/">GBIF data portal</a>.</p>
 <div id="starting-session" class="section level1">
 <h1>Starting session</h1>
 <p>First, we install and load the R packages we will use.</p>
-<pre class="r"><code>install.packages(&quot;rgbif&quot;)
-library(&quot;rgbif&quot;)</code></pre>
+<pre class="r"><code># Install packages (if needed)
+#install.packages(&quot;rgbif&quot;)
+#install.packages(&quot;ggplot2&quot;)
+#install.packages(&quot;ggplot2&quot;)
+
+# Load packages in R environment
+library(rgbif)
+library(ggplot2)
+library(ggplot2)</code></pre>
 <p><br /><br /></p>
 </div>
-<div id="simple-queries" class="section level1">
-<h1>Simple queries</h1>
-<p>There are some helpful</p>
-<pre class="r"><code>nameBackbone &lt;- name_backbone(name=&quot;Neovison vison&quot;, rank=&quot;species&quot;)
-nameBackbone</code></pre>
+<div id="selecting-taxa-name" class="section level1">
+<h1>Selecting taxa name</h1>
+<p>There are some functions in the <code>rgbif</code> R package that are useful to look for scientific species names or other taxa that are included in the <a href="https://www.gbif.org/dataset/d7dddbf4-2cf0-4f39-9b2a-bb099caae36c">GBIF Backbone Taxonomy</a>. This is important when we don’t know exactly the scientific name of a species, or when we don’t know if the taxonomy of the species has changed in the last years. It is also important to check what is the <em>accepted</em> name in the GBIF backbone taxonomy. To do that we can use the <code>name_backbone</code> function. <br /><br /> Let’s take the American mink, <em>Neovison vison</em> as an example:</p>
+<pre class="r"><code>nBb &lt;- name_backbone(name=&quot;Neovison vison&quot;, rank=&quot;species&quot;)
+nBb</code></pre>
 <pre><code>## # A tibble: 1 × 25
 ##   usageKey acceptedUsageKey scientificName canonicalName rank  status confidence
 ## *    &lt;int&gt;            &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;       &lt;int&gt;
@@ -273,12 +280,70 @@ nameBackbone</code></pre>
 ## #   phylumKey &lt;int&gt;, classKey &lt;int&gt;, orderKey &lt;int&gt;, familyKey &lt;int&gt;,
 ## #   genusKey &lt;int&gt;, speciesKey &lt;int&gt;, synonym &lt;lgl&gt;, class &lt;chr&gt;,
 ## #   verbatim_name &lt;chr&gt;, verbatim_rank &lt;chr&gt;</code></pre>
-<pre class="r"><code>key &lt;- nameBackbone$usageKey
-occ_count(key)</code></pre>
+<p>This table say that, even when <em>Neovison vison</em> is the currently accepted species name by the scientific community, it is not the accepted name in the GBIF Backbone Taxonomy (see <code>SYNON...</code> in the <code>status</code> field). Thus, we should look for the list of synonyms of the accepted name in the GBIF Backbone Taxonomy. To do that, we take the <code>acceptedUsageKey</code> number and use the function <code>name_usage</code>.</p>
+<pre class="r"><code># Accepted name in the GBIF Backbone Taxonomy
+nBb$species</code></pre>
+<pre><code>## [1] &quot;Mustela vison&quot;</code></pre>
+<pre class="r"><code>nBb$acceptedUsageKey</code></pre>
+<pre><code>## [1] 5218823</code></pre>
+<pre class="r"><code># Here we use the acceptedUsageKey to look for their synonyms
+syn &lt;- name_usage(key = 5218823, data = &quot;synonyms&quot;)
+syn</code></pre>
+<pre><code>## Records returned [3] 
+## Args [offset=0, limit=100] 
+## # A tibble: 3 × 41
+##       key  nameKey taxonID      sourceTaxonKey kingdom phylum order family genus
+##     &lt;int&gt;    &lt;int&gt; &lt;chr&gt;                 &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;
+## 1 9309757 16715214 gbif:9309757      137374031 Animal… Chord… Carn… Muste… Must…
+## 2 2433652  7480942 gbif:2433652      172723039 Animal… Chord… Carn… Muste… Must…
+## 3 9458324 16715212 gbif:9458324      121517542 Animal… Chord… Carn… Muste… Must…
+## # … with 32 more variables: species &lt;chr&gt;, kingdomKey &lt;int&gt;, phylumKey &lt;int&gt;,
+## #   classKey &lt;int&gt;, orderKey &lt;int&gt;, familyKey &lt;int&gt;, genusKey &lt;int&gt;,
+## #   speciesKey &lt;int&gt;, datasetKey &lt;chr&gt;, constituentKey &lt;chr&gt;, parentKey &lt;int&gt;,
+## #   parent &lt;chr&gt;, acceptedKey &lt;int&gt;, accepted &lt;chr&gt;, basionymKey &lt;int&gt;,
+## #   basionym &lt;chr&gt;, scientificName &lt;chr&gt;, canonicalName &lt;chr&gt;,
+## #   authorship &lt;chr&gt;, nameType &lt;chr&gt;, rank &lt;chr&gt;, origin &lt;chr&gt;,
+## #   taxonomicStatus &lt;chr&gt;, nomenclaturalStatus &lt;lgl&gt;, remarks &lt;chr&gt;, …</code></pre>
+<pre class="r"><code>syn$data$scientificName</code></pre>
+<pre><code>## [1] &quot;Lutreola vison (Schreber, 1777)&quot; &quot;Neovison vison (Schreber, 1777)&quot;
+## [3] &quot;Putorius vison (Schreber, 1777)&quot;</code></pre>
+<p>We see that there are three synonyms of <em>Mustela vison</em> in the GBIF Backbone Taxonomy database: <em>Lutreola vison</em>, <em>Neovison vison</em> and <em>Putorius vison</em>. We can check now the number of occurrences assigned at each name.</p>
+<pre class="r"><code># Mustela vison
+occ_count(5218823)</code></pre>
+<pre><code>## [1] 52772</code></pre>
+<pre class="r"><code># Neovison vison
+occ_count(2433652)</code></pre>
 <pre><code>## [1] 40828</code></pre>
+<pre class="r"><code># Lutreola vison
+occ_count(9309757)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code># Putorius vison
+occ_count(9458324)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>In any case, we should use the accepted name in the GBIF Backbone Taxonomy database, since it contains all the occurrences from all synonyms. As we see, the name with the most number of occurrences is <em>Mustela vison</em>, so we will use its key number (5218823) for occurrence searches. <br /><br /></p>
+</div>
+<div id="simple-queries" class="section level1">
+<h1>Simple queries</h1>
+<p>As we already know, GBIF uses Darwin Core as the standard for biodiversity data storage. It means that if we don’t specify the fields in which we are interested in, we will obtain a table with 84 fields (headers). Click <a href="https://dwc.tdwg.org/terms/">here</a> for the list with all available fields in Darwin Core databases, and <a href="https://www.gbif.org/es/data-quality-requirements-occurrences">here</a> for the required or strongly recommended fields in GBIF.</p>
+<pre class="r"><code># Search with all Darwin Core fields
+# We use limit to get only 10 records
+occNeo &lt;- occ_search(taxonKey = 5218823, limit = 10)
+# Check the dimensions
+dim(occNeo$data)</code></pre>
+<pre><code>## [1] 10 84</code></pre>
+<pre class="r"><code># Here we select only the fields we are interested in
+selFields &lt;- c(&quot;scientificName&quot;, &quot;decimalLatitude&quot;,&quot;decimalLongitude&quot;,
+               &quot;issues&quot;, &quot;datasetKey&quot;, &quot;basisOfRecord&quot;,&quot;year&quot;)
+# We use limit to get only 10 records
+occNeo &lt;- occ_search(taxonKey = 5218823, fields = selFields, limit = 10)
+# Check the dimensions
+dim(occNeo$data)</code></pre>
+<pre><code>## [1] 10  7</code></pre>
+<p>We will use just those fields for the rest of this tutorial <br /><br /></p>
 </div>
 <div id="advanced-queries-and-filtering" class="section level1">
 <h1>Advanced queries and filtering</h1>
+<p>We can add different filter to our searches to refine our searches. For a complete list of available filters you can use <code>help(occ_search)</code>. Now we’ll apply some of them that can be very useful to reduce the number of registers.<br /><br /> Actually, we have already applied a first filter, called <code>limit</code> to reduce the maximum number of occurrence. The function <code>occ_search</code> allows a maximum of 100,000 occurrences, so if our taxa has more records we’ll use a different approach (we’ll come back about this later).</p>
 </div>
 <div id="submitting-heavy-queries" class="section level1">
 <h1>Submitting heavy queries</h1>

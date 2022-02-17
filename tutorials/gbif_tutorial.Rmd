@@ -92,8 +92,8 @@ occNeo <- occ_search(taxonKey = 5218823, limit = 10)
 dim(occNeo$data)
 
 # Here we select only the fields we are interested in
-selFields <- c("scientificName", "decimalLatitude","decimalLongitude",
-               "issues", "datasetKey", "basisOfRecord","year")
+selFields <- c("key","scientificName", "decimalLatitude","decimalLongitude",
+               "issues", "country", "basisOfRecord","year")
 # We use limit to get only 10 records
 occNeo <- occ_search(taxonKey = 5218823, fields = selFields, limit = 10)
 # Check the dimensions
@@ -105,7 +105,22 @@ We will use just those fields for the rest of this tutorial
 
 # Advanced queries and filtering
 
-We can add different filter to our searches to refine our searches. For a complete list of available filters you can use `help(occ_search)`. Now we'll apply some of them that can be very usefull to reduce the number of registers
+We can add different filter to our searches to refine our searches. For a complete list of available filters you can use `help(occ_search)`. Now we'll apply some of them that can be very useful to reduce the number of registers.<br/><br/>
+Actually, we have already applied a first filter, called `limit` to reduce the maximum number of occurrence. The function `occ_search` allows a maximum of 100,000 occurrences, so if our taxa has more records we'll use a different approach (we'll come back about this later).<br/><br/>
+Other useful filter can be the country. We can introduce the [country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) to filter for one or more countries.
 
+
+```{r rgbif6, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Look for occurrences in Spain and Italy
+occNeo <- occ_search(taxonKey = 5218823, fields = selFields, country = c("ES","IT"))
+summary(occNeo)
+```
+
+
+```{r rgbif7, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Look for occurrences in a specific geographic window
+occNeo <- occ_search(taxonKey = 5218823, fields = selFields, country = c("ES","IT"))
+summary(occNeo)
+```
 
 # Submitting heavy queries

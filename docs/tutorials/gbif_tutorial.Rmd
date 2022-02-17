@@ -1,6 +1,6 @@
 ---
 title: "GBIF Tutorial"
-author: "Javier Fernández López"
+author: "Javier Fernández-López"
 date: "15/2/2022"
 output:
   html_document:
@@ -23,29 +23,104 @@ text-align: justify}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning=FALSE)
 ```
 <br/><br/>
-This is a simple tutorial to learn how to use the `rgbif` R package to download, 
-clean and visualize biodiversity occurrences from the GBIF data portal.
+R is a language and environment for statistical computing and graphics, that allows for automation of repetitive task as well as improves the reproducibility of science. R is available as Free Software under the terms of the Free Software Foundation’s GNU General Public License in source code form.
+<br/><br/>
+This is a simple tutorial to learn how to use the `rgbif` R package to download, clean and visualize biodiversity occurrences from the [GBIF data portal](https://www.gbif.org/).
 
 # Starting session
 
 First, we install and load the R packages we will use. 
 
 ```{r rgbif1}
-install.packages("rgbif")
-library("rgbif")
+# Install packages (if needed)
+#install.packages("rgbif")
+#install.packages("ggplot2")
+#install.packages("ggplot2")
+
+# Load packages in R environment
+library(rgbif)
+library(ggplot2)
+library(ggplot2)
 ```
 <br/><br/>
 
-# Simple queries
-There are some helpful  
+# Selecting taxa name
+There are some functions in the `rgbif` R package that are useful to look for scientific species names or other taxa that are included in the [GBIF Backbone Taxonomy](https://www.gbif.org/dataset/d7dddbf4-2cf0-4f39-9b2a-bb099caae36c). This is important when we don't know exactly the scientific name of a species, or when we don't know if the taxonomy of the species has changed in the last years. It is also important to check what is the *accepted* name in the GBIF backbone taxonomy. To do that we can use the `name_backbone` function.
+<br/><br/>
+Let's take the American mink, _Neovison vison_ as an example:
 
-```{r rgbif2}
-nameBackbone <- name_backbone(name="Neovison vison", rank="species")
-nameBackbone
-key <- nameBackbone$usageKey
-occ_count(key)
+```{r rgbif2, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+nBb <- name_backbone(name="Neovison vison", rank="species")
+nBb
+```
+This table say that, even when _Neovison vison_ is the currently accepted species name by the scientific community, it is not the accepted name in the GBIF Backbone Taxonomy (see `SYNON...` in the `status` field). Thus, we should look for the list of synonyms of the accepted name in the GBIF Backbone Taxonomy. To do that, we take the `acceptedUsageKey` number and use the function `name_usage`.
+
+```{r rgbif3, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Accepted name in the GBIF Backbone Taxonomy
+nBb$species
+nBb$acceptedUsageKey
+# Here we use the acceptedUsageKey to look for their synonyms
+syn <- name_usage(key = 5218823, data = "synonyms")
+syn
+syn$data$scientificName
+```
+We see that there are three synonyms of _Mustela vison_ in the GBIF Backbone Taxonomy database: _Lutreola vison_, _Neovison vison_ and _Putorius vison_. We can check now the number of occurrences assigned at each name.
+
+```{r rgbif4, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Mustela vison
+occ_count(5218823)
+# Neovison vison
+occ_count(2433652)
+# Lutreola vison
+occ_count(9309757)
+# Putorius vison
+occ_count(9458324)
 ```
 
+In any case, we should use the accepted name in the GBIF Backbone Taxonomy database, since it contains all the occurrences from all synonyms. As we see, the name with the most number of occurrences is _Mustela vison_, so we will use its key number (5218823) for occurrence searches.
+<br/><br/>
+
+# Simple queries
+As we already know, GBIF uses Darwin Core as the standard for biodiversity data storage. It means that if we don't specify the fields in which we are interested in, we will obtain a table with 84 fields (headers). Click [here](https://dwc.tdwg.org/terms/) for the list with all available fields in Darwin Core databases, and [here](https://www.gbif.org/es/data-quality-requirements-occurrences) for the required or strongly recommended fields in GBIF.
+
+
+```{r rgbif5, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Search with all Darwin Core fields
+# We use limit to get only 10 records
+occNeo <- occ_search(taxonKey = 5218823, limit = 10)
+# Check the dimensions
+dim(occNeo$data)
+
+# Here we select only the fields we are interested in
+selFields <- c("key","scientificName", "decimalLatitude","decimalLongitude",
+               "issues", "country", "basisOfRecord","year")
+# We use limit to get only 10 records
+occNeo <- occ_search(taxonKey = 5218823, fields = selFields, limit = 10)
+# Check the dimensions
+dim(occNeo$data)
+```
+
+We will use just those fields for the rest of this tutorial
+<br/><br/>
+
 # Advanced queries and filtering
+
+We can add different filter to our searches to refine our searches. For a complete list of available filters you can use `help(occ_search)`. Now we'll apply some of them that can be very useful to reduce the number of registers.<br/><br/>
+Actually, we have already applied a first filter, called `limit` to reduce the maximum number of occurrence. The function `occ_search` allows a maximum of 100,000 occurrences, so if our taxa has more records we'll use a different approach (we'll come back about this later).<br/><br/>
+Other useful filter can be the country. We can introduce the [country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) to filter for one or more countries.
+
+
+```{r rgbif6, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Look for occurrences in Spain and Italy
+occNeo <- occ_search(taxonKey = 5218823, fields = selFields, country = c("ES","IT"))
+summary(occNeo)
+```
+
+
+```{r rgbif7, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Look for occurrences in a specific geographic window
+occNeo <- occ_search(taxonKey = 5218823, fields = selFields, country = c("ES","IT"))
+summary(occNeo)
+```
 
 # Submitting heavy queries
