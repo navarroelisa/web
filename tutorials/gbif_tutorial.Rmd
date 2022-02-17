@@ -1,7 +1,7 @@
 ---
-title: "GBIF Tutorial"
+title: "Searching and downloading species occurrences using `rgbif` R package"
 author: "Javier Fernández-López"
-date: "15/2/2022"
+date: "15/02/2022"
 output:
   html_document:
     toc: true
@@ -40,9 +40,21 @@ First, we install and load the R packages we will use.
 # Load packages in R environment
 library(rgbif)
 library(ggplot2)
-library(ggplot2)
+library(maps)
 ```
+```{r rgbif0, echo=FALSE}
+user <- "irec"
+pwd <- "irecTest"
+email <- "irec.aplicaciones@gmail.com"
+
+occDlNeo <- occ_download(pred("taxonKey", 5218823), 
+                         pred("hasCoordinate", TRUE),
+                         pred("continent", "europe"), 
+                         user = user, email = email, pwd = pwd)
+```
+
 <br/><br/>
+
 
 # Selecting taxa name
 There are some functions in the `rgbif` R package that are useful to look for scientific species names or other taxa that are included in the [GBIF Backbone Taxonomy](https://www.gbif.org/dataset/d7dddbf4-2cf0-4f39-9b2a-bb099caae36c). This is important when we don't know exactly the scientific name of a species, or when we don't know if the taxonomy of the species has changed in the last years. It is also important to check what is the *accepted* name in the GBIF backbone taxonomy. To do that we can use the `name_backbone` function.
@@ -100,7 +112,7 @@ occNeo <- occ_search(taxonKey = 5218823, fields = selFields, limit = 10)
 dim(occNeo$data)
 ```
 
-We will use just those fields for the rest of this tutorial
+We will use just those fields for the rest of this tutorial. It is important to mention that `occ_search` function does not provide a DOI of our search. We'll see later how to obtain a DOI for our searches using `rgbif` package.
 <br/><br/>
 
 # Advanced queries and filtering
@@ -116,11 +128,62 @@ occNeo <- occ_search(taxonKey = 5218823, fields = selFields, country = c("ES","I
 summary(occNeo)
 ```
 
+We can also delimit a geographical window for occurrence filtering. 
 
 ```{r rgbif7, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
 # Look for occurrences in a specific geographic window
-occNeo <- occ_search(taxonKey = 5218823, fields = selFields, country = c("ES","IT"))
-summary(occNeo)
+occNeo <- occ_search(taxonKey = 5218823, fields = selFields, 
+                     decimalLongitude = "1, 8", decimalLatitude = "48, 57")
+
+# We can now map the region with the obtained occurrences
+map("world", xlim = range(occNeo$data$decimalLongitude), ylim = range(occNeo$data$decimalLatitude))  
+points(occNeo$data[ , c("decimalLongitude", "decimalLatitude")], pch = 19, col = "darkred", cex=0.5)
+
 ```
 
+Many other filter such as the continent or collection year can be applied. For a complete list, please check `help(occ_search)`. We can then store the data in our computer in a CSV file.
+
+```{r rgbif8, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center", eval=FALSE}
+write.csv(occNeo$data, "Neovison_vison.csv")
+```
+
+<br/><br/>
+
 # Submitting heavy queries
+
+As we said, the function `occ_search` only allows to download 100,000 records from the GBIF data base. If our species of interest has more records, we should use `occ_download`. This function works in a similar way to queries in the GBIF web portal. It is necessary to [login](https://www.gbif.org/user/profile) with your account: user name, password and e-mail.
+
+```{r rgbif9, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center", echo=FALSE}
+user <- "irec"
+pwd <- "irecTest"
+email <- "irec.aplicaciones@gmail.com"
+```
+
+```{r rgbif10, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center", eval=FALSE}
+user <- "irec"
+pwd <- "******"
+email <- "irec.aplicaciones@gmail.com"
+```
+
+The function `occ_download` submit a query to the GBIF portal. Once it has been processed, data will be ready for downloading and cleaning. Filters in `occ_download` can be applied by using the function `pred`. Check `help(pred)` for more information about the usage of filters in `occ_download`.
+
+```{r rgbif11, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center", eval=FALSE}
+# Submit a query
+occDlNeo <- occ_download(pred("taxonKey", 5218823), 
+                         pred("hasCoordinate", TRUE),
+                         pred("continent", "europe"), 
+                         user = user, email = email, pwd = pwd)
+```
+
+```{r rgbif12, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
+# Check the query data
+occDlNeo
+
+# Check the query status
+occ_download_meta(occDlNeo)
+```
+
+It is important to highlight that `occ_download` provides us a DOI assigned to our query. As we already know, It will be useful for data citation and tracking.
+
+
+
