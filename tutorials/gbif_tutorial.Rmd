@@ -196,6 +196,7 @@ zip <- occ_download_get(key = occ_download_meta(occDlNeo)$key,
 zip <- occ_download_get(key = occ_download_meta(occDlNeo)$key, 
                         path="/home/javifl/IREC/gbif", overwrite = TRUE)
 ```
+<br/><br/>
 Now, we can check for data citation, clean the occurrences, etc.
 ```{r rgbif15, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
 # Check number of data sets in our downloaded data
