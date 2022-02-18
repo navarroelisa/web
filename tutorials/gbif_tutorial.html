@@ -251,14 +251,14 @@ div.tocify {
 body {
 text-align: justify}
 </style>
-<p><br /><br /> R is a language and environment for statistical computing and graphics, that allows for automation of repetitive task as well as improves the reproducibility of science. R is available as Free Software under the terms of the Free Software Foundation’s GNU General Public License in source code form. <br /><br /> This is a simple tutorial to learn how to use the <code>rgbif</code> R package to download, clean and visualize biodiversity occurrences from the <a href="https://www.gbif.org/">GBIF data portal</a>.</p>
+<p><br /><br /> R is a language and environment for statistical computing and graphics, that allows for automation of repetitive task as well as improves the reproducibility of science. R is available as Free Software under the terms of the Free Software Foundation’s GNU General Public License in source code form. <br /><br /> This is a simple tutorial to learn how to use the <code>rgbif</code> R package to download, clean and visualize biodiversity occurrences from the <a href="https://www.gbif.org/">GBIF data portal</a>. Workshop slides about GBIF can be found <a href="https://jabiologo.github.io/web/tutorials/gbif_tutorial_files/gbif_slides.pdf">here</a></p>
 <div id="starting-session" class="section level1">
 <h1>Starting session</h1>
 <p>First, we install and load the R packages we will use.</p>
 <pre class="r"><code># Install packages (if needed)
 #install.packages(&quot;rgbif&quot;)
 #install.packages(&quot;ggplot2&quot;)
-#install.packages(&quot;ggplot2&quot;)
+#install.packages(&quot;maps&quot;)
 
 # Load packages in R environment
 library(rgbif)
@@ -379,36 +379,36 @@ occDlNeo &lt;- occ_download(pred(&quot;taxonKey&quot;, 5218823),
 occDlNeo</code></pre>
 <pre><code>## &lt;&lt;gbif download&gt;&gt;
 ##   Your download is being processed by GBIF:
-##   https://www.gbif.org/occurrence/download/0145952-210914110416597
+##   https://www.gbif.org/occurrence/download/0146254-210914110416597
 ##   Most downloads finish within 15 min.
 ##   Check status with
-##   occ_download_wait(&#39;0145952-210914110416597&#39;)
+##   occ_download_wait(&#39;0146254-210914110416597&#39;)
 ##   After it finishes, use
-##   d &lt;- occ_download_get(&#39;0145952-210914110416597&#39;) %&gt;%
+##   d &lt;- occ_download_get(&#39;0146254-210914110416597&#39;) %&gt;%
 ##     occ_download_import()
 ##   to retrieve your download.
 ## Download Info:
 ##   Username: irec
 ##   E-mail: irec.aplicaciones@gmail.com
 ##   Format: DWCA
-##   Download key: 0145952-210914110416597
-##   Created: 2022-02-17T17:06:45.658+00:00
+##   Download key: 0146254-210914110416597
+##   Created: 2022-02-17T22:45:34.188+00:00
 ## Citation Info:  
 ##   Please always cite the download DOI when using this data.
 ##   https://www.gbif.org/citation-guidelines
-##   DOI: 10.15468/dl.dt3ux8
+##   DOI: 10.15468/dl.upx7kz
 ##   Citation:
-##   GBIF Occurrence Download https://doi.org/10.15468/dl.dt3ux8 Accessed from R via rgbif (https://github.com/ropensci/rgbif) on 2022-02-17</code></pre>
+##   GBIF Occurrence Download https://doi.org/10.15468/dl.upx7kz Accessed from R via rgbif (https://github.com/ropensci/rgbif) on 2022-02-17</code></pre>
 <pre class="r"><code># Check the query status
 occ_download_meta(occDlNeo)</code></pre>
 <pre><code>## &lt;&lt;gbif download metadata&gt;&gt;
 ##   Status: SUCCEEDED
-##   DOI: 10.15468/dl.dt3ux8
+##   DOI: 10.15468/dl.upx7kz
 ##   Format: DWCA
-##   Download key: 0145952-210914110416597
-##   Created: 2022-02-17T17:06:45.658+00:00
-##   Modified: 2022-02-17T17:07:34.110+00:00
-##   Download link: https://api.gbif.org/v1/occurrence/download/request/0145952-210914110416597.zip
+##   Download key: 0146254-210914110416597
+##   Created: 2022-02-17T22:45:34.188+00:00
+##   Modified: 2022-02-17T22:46:32.785+00:00
+##   Download link: https://api.gbif.org/v1/occurrence/download/request/0146254-210914110416597.zip
 ##   Total records: 11448</code></pre>
 <p>It is important to highlight that <code>occ_download</code> provides us a DOI assigned to our query. As we already know, it will be useful for data citation and tracking. <br /><br /> To visualize and clean the data it is necessary to download a ZIP file to our local machine.</p>
 <pre class="r"><code># &quot;path&quot; should contain the path to our local machine
@@ -427,12 +427,12 @@ gbif_citation(zip)$datasets[1:3]</code></pre>
 ##         Version 1.3. Department of Biology, Lund University. Sampling event
 ##         dataset https://doi.org/10.15468/sg5spw accessed via GBIF.org on
 ##         2022-02-17.. Accessed from R via rgbif
-##         (https://github.com/ropensci/rgbif) on 2022-02-17 Citation: HELCOM
+##         (https://github.com/ropensci/rgbif) on 2022-02-18 Citation: HELCOM
 ##         (2018). Abundance of waterbirds in the breeding season. HELCOM core
 ##         indicator report. See
 ##         https://helcom.fi/media/core%20indicators/Abundance-of-waterbirds-in-the-breeding-season-HELCOM-core-indicator-2018.pdf.
 ##         Accessed from R via rgbif (https://github.com/ropensci/rgbif) on
-##         2022-02-17
+##         2022-02-18
 ##    Rights: To the extent possible under law, the publisher has waived all
 ##         rights to these data and has dedicated them to the Public Domain (CC0
 ##         1.0). Users may copy, modify, distribute and use the work, including
@@ -444,7 +444,7 @@ gbif_citation(zip)$datasets[1:3]</code></pre>
 ##         Biodiversity Data Centre. Occurrence dataset
 ##         https://doi.org/10.15468/jl6rlf accessed via GBIF.org on 2022-02-17..
 ##         Accessed from R via rgbif (https://github.com/ropensci/rgbif) on
-##         2022-02-17
+##         2022-02-18
 ##    Rights: This work is licensed under a Creative Commons Attribution (CC-BY)
 ##         4.0 License.
 ## 
@@ -454,7 +454,7 @@ gbif_citation(zip)$datasets[1:3]</code></pre>
 ##         Biodiversity4all Research-Grade Observations. BioDiversity4All.
 ##         Occurrence dataset https://doi.org/10.15468/njmmp7 accessed via
 ##         GBIF.org on 2022-02-17.. Accessed from R via rgbif
-##         (https://github.com/ropensci/rgbif) on 2022-02-17
+##         (https://github.com/ropensci/rgbif) on 2022-02-18
 ##    Rights: This work is licensed under a Creative Commons Attribution Non
 ##         Commercial (CC-BY-NC) 4.0 License.</code></pre>
 <pre class="r"><code># Import the data in the R session

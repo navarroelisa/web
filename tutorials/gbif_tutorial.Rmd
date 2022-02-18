@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning=FALSE)
 <br/><br/>
 R is a language and environment for statistical computing and graphics, that allows for automation of repetitive task as well as improves the reproducibility of science. R is available as Free Software under the terms of the Free Software Foundation’s GNU General Public License in source code form.
 <br/><br/>
-This is a simple tutorial to learn how to use the `rgbif` R package to download, clean and visualize biodiversity occurrences from the [GBIF data portal](https://www.gbif.org/).
+This is a simple tutorial to learn how to use the `rgbif` R package to download, clean and visualize biodiversity occurrences from the [GBIF data portal](https://www.gbif.org/). Workshop slides about GBIF can be found [here](https://jabiologo.github.io/web/tutorials/gbif_tutorial_files/gbif_slides.pdf)
 
 # Starting session
 
