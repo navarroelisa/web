@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning=FALSE)
 <br/><br/>
 R is a language and environment for statistical computing and graphics, that allows for automation of repetitive task as well as improves the reproducibility of science. R is available as Free Software under the terms of the Free Software Foundation’s GNU General Public License in source code form.
 <br/><br/>
-This is a simple tutorial to learn how to use the `rgbif` R package to download, clean and visualize biodiversity occurrences from the [GBIF data portal](https://www.gbif.org/).
+This is a simple tutorial to learn how to use the `rgbif` R package to download, clean and visualize biodiversity occurrences from the [GBIF data portal](https://www.gbif.org/). Workshop slides about GBIF can be found [here](https://jabiologo.github.io/web/tutorials/gbif_slides.pdf)
 
 # Starting session
 
@@ -35,7 +35,7 @@ First, we install and load the R packages we will use.
 # Install packages (if needed)
 #install.packages("rgbif")
 #install.packages("ggplot2")
-#install.packages("ggplot2")
+#install.packages("maps")
 
 # Load packages in R environment
 library(rgbif)
@@ -196,6 +196,7 @@ zip <- occ_download_get(key = occ_download_meta(occDlNeo)$key,
 zip <- occ_download_get(key = occ_download_meta(occDlNeo)$key, 
                         path="/home/javifl/IREC/gbif", overwrite = TRUE)
 ```
+<br/><br/>
 Now, we can check for data citation, clean the occurrences, etc.
 ```{r rgbif15, message=FALSE, fig.height = 8, fig.width = 9.15, fig.align = "center"}
 # Check number of data sets in our downloaded data
