@@ -35,7 +35,7 @@ First, we install and load the R packages we will use.
 # Install packages (if needed)
 #install.packages("rgbif")
 #install.packages("ggplot2")
-#install.packages("ggplot2")
+#install.packages("maps")
 
 # Load packages in R environment
 library(rgbif)
