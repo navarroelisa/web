@@ -15,7 +15,6 @@ output:
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
-
 # N-mixture models (Spanish)
 
 [Fit N-mixture models using unmarked](https://jabiologo.github.io/web/tutorials/nmixture.html)
