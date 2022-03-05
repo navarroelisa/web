@@ -18,5 +18,5 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 Universidad de Castilla – La Mancha
 Curso 2021/2022 
 
-# Lab. 1)
+# Lab 1
 [Modelos de Ocupación](https://jabiologo.github.io/web/tutorials/lab1modelosOcupacion.html)
