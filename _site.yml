@@ -11,5 +11,7 @@ navbar:
       href: Research.html
     - text: "Links"
       href: Links.html
+    - text: "Máster UCLM"
+      href: masterUCLM.html
 output_dir: "docs"
 

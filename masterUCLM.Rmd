@@ -1,0 +1,23 @@
+---
+title: "Máster UCLM"
+bibliography: references.bib
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
+```
+
+Máster oficial Sostenibilidad ambiental en el desarrollo local y territorial\n
+Universidad de Castilla – La Mancha\n
+Curso 2021/2022 
+
+# Lab. 1) Modelos de ocupación
+
