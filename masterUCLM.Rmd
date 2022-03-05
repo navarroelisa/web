@@ -1,5 +1,5 @@
 ---
-title: "Máster UCLM"
+title: "Máster oficial en Sostenibilidad ambiental en el desarrollo local y territorial"
 bibliography: references.bib
 output:
   html_document:
@@ -15,8 +15,7 @@ output:
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
-Máster oficial Sostenibilidad ambiental en el desarrollo local y territorial\n
-Universidad de Castilla – La Mancha\n
+Universidad de Castilla – La Mancha
 Curso 2021/2022 
 
 # Lab. 1) Modelos de ocupación
