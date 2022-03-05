@@ -3,7 +3,6 @@ title: "Research"
 output: html_document
 bibliography: references.bib
 nocite: | 
-  @Royle2004
   @rwind2019
   @IMA2019
   
