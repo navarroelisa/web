@@ -1,9 +1,21 @@
 ---
-title: "lab0distribucionesProbabilidad"
+title: "Lab 0: Distribuciones de probabilidad"
 author: "Javier Fernández López"
 date: "7/3/2022"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
 ---
+
+<style>
+body {
+text-align: justify}
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
