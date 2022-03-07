@@ -1,0 +1,12 @@
+---
+title: "lab0distribucionesProbabilidad"
+author: "Javier Fernández López"
+date: "7/3/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
