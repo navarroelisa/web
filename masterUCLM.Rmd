@@ -16,7 +16,10 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
 Universidad de Castilla – La Mancha
-Curso 2021/2022 
+Curso 2021/2022
 
-# Lab 1
-[Modelos de Ocupación](https://jabiologo.github.io/web/tutorials/lab1modelosOcupacion.html)
+# Lab 0: Distribuciones de probabilidad
+[Distribuciones de probabilidad](https://jabiologo.github.io/web/tutorials/lab0distribucionesProbabilidad.html)
+
+# Lab 1: Simulaciones y modelos con detectabilidad perfecta
+[Simulaciones y modelos con detectabilidad perfecta](https://jabiologo.github.io/web/tutorials/lab1modelosOcupacion.html)
