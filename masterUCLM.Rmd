@@ -19,7 +19,7 @@ Universidad de Castilla – La Mancha
 Curso 2021/2022
 
 # Lab 0: Distribuciones de probabilidad
-[Distribuciones de probabilidad](https://jabiologo.github.io/web/tutorials/lab0distribucionesProbabilidad.html)
+[Distribuciones de probabilidad](https://jabiologo.github.io/web/tutorials/lab0distribucionesProbabilidad.html) 
 
 # Lab 1: Simulaciones y modelos con detectabilidad perfecta
 [Simulaciones y modelos con detectabilidad perfecta](https://jabiologo.github.io/web/tutorials/lab1modelosOcupacion.html)
