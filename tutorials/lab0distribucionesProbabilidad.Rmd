@@ -139,6 +139,13 @@ polygon(c(x[x>=175], max(x), 175), c(y[x>=175], 0, 0), col="red")
 mtext("P(X > = 175) = 0.196", adj = 0.90, line = -10, font = 4)
 ```
 
+Por último, al igual que en el ejemplo anterior, podemos utilizar la función `rnorm()` para generar números aleatorios a partir de de nuestra distribución normal.
+
+```{r ch11}
+hist(rnorm(1000000,169,7), breaks = 130:210, freq = TRUE, 
+           main = "X ~ N(169, 7)", xlab = "X (variable aleatoria)",
+           ylab = "Frecuencia (cantidad de números)")
+```
 
 # Lab 0: Ejercicios
 
