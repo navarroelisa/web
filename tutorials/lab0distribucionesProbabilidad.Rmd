@@ -21,4 +21,63 @@ text-align: justify}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+R es un entorno y lenguaje de programación con un enfoque al análisis estadístico. Es muy útil en nuestro ámbito de estudio porque nos permite combinar potentes herramientas de análisis estadístico con la generación de gráficos y el trabajo con cartografía como si fuera un sistemas de información geográfica (GIS).
+Las diferentes utilidades o herramientas de R (functions) se organizan en bibliotecas o paquetes (libraries o packages). Algunos de ellos vienen preinstalados con R. Otros deben descargarse e instalarse, y las deberemos cargar en la sesión de R cada vez que las queramos usar. Una de las mayores ventajas de R es que, al ser un lenguaje de código abierto, cualquiera puede contribuir al elenco de herramientas disponibles para el lenguaje a través del desarrollo de paquetes o bibliotecas.
+<br/>
+En esta primera práctica nos familiarizaremos con las funciones relacionadas con las diferentes distribuciones de probabilidad que hemos estudiado en clase.
+
+# Introducción
+
+Empezaremos por consultar la ayuda `help()` que R nos ofrece sobre las distribuciones de probabilidad incluidas en el paquete `stats`.
+```{r ch1, eval = FALSE}
+help(Distributions)
+```
+```{r ch1.1, echo = FALSE, message=FALSE}
+library(printr)
+help(Distributions)
+detach('package:printr', unload = TRUE)
+```
+<br/><br/>
+Como podemos observar, R nos permite trabajar con todas las distribuciones que hemos comentado
+previamente: binomial, de Poisson, normal, uniforme, beta y gamma. A lo largo de la práctica exploraremos dos distribuciones, una para variables aleatorias discretas y otra para continuas y a continuación propondremos una serie de ejercicios.
+
+# Variable aleatoria discreta: distribución binomial
+Para refrescar, comentaremos que la distribución binomial sirve para contar el número de éxitos dado un número de ensayos _n_ y una probabilidad de éxito _p_.
+\begin{equation}
+\tag{Eq 1}\label{eq1}
+X \sim bin(n, p)
+\end{equation}
+<br/><br/>
+Empezaremos por echar un vistazo al manual (ayuda) de esta distribución. Para ello escribiremos `help(dbinom)`. Como vemos, podemos trabajar con 4 funciones relacionadas con la distribución binomial:
+
+1.   `dbinom()` nos indica la densidad de probabilidad de una distribución binomial dada y nos sirve para calcular la probabilidad de que nuestra variable aleatoria X alcance cierto valor P(X = x).
+2.   `pbinom()` nos indica la función de distribución y nos sirve para calcular la probabilidad de que nuestra variable aleatoria X sea menor o igual que cierto valor P(X $\leq$ x).
+3.   `qbinom()` nos indica la función de cuantiles.
+4.   `rbinom()` sirve para generar números aleatorios obtenidos a partir de una distribución binomial dada.
+
+Trabajaremos con el ejemplo que hemos comentado en clase. Nuestro ensayo será tirar una moneda al aire. Repetiremos este ensayo 100 veces. Asumimos que la moneda no está trucada, por lo que la probabilidad de obtener una cara (probabilidad de éxito) es del 50% (_p_=0.5).
+<br/><br/>
+Para calcular la probabilidad de que en 100 tiradas, obtengamos exáctamente 50 caras, podemos usar:
+```{r ch2}
+dbinom(50,100,0.5)
+```
+Esto nos indica que tendríamos una probabilidad de casi el 8% de que al tirar 100 veces una moneda, obtuviésemos 50 caras. Podemos comprobar si en la [aplicación web de Mat Bognar](https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html) obtenemos el mismo resultado. Veamos ahora brevemente un poco de la sintaxis de la función `dbinom`:
+
+*   `50` es el número de éxitos del cual queremos saber su probabilidad (número de caras).
+*   `100` es el número de ensayos de nuestro experimento (número de lanzamientos de la moneda).
+*   `0.5` es la probabilidad de obtener un éxito (probabilidad de obtener una cara).
+<br/><br/>
+
+Ahora estamos interesados en saber la probabilidad de que, al tirar 100 veces una moneda, obtengamos 50 caras o menos:
+
+```{r ch3}
+pbinom(50,100,0.5)
+```
+Vemos que tendríamos aproximadamente un 54% de probabilidades de obtener 50 caras o menos en nuestro experimento. Igualmente, podemos combrobar este experimiento en la [aplicación web](https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html).
+<br/><br/>
+
+Por último, podemos utilizar R para generar números aleatorios obtenidos a partir de una distribución binomial $X \sim bin(100, 0.5)$
+
+# Variable aleatoria continua: distribución normal
+
 
