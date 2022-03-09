@@ -76,7 +76,26 @@ pbinom(50,100,0.5)
 Vemos que tendríamos aproximadamente un 54% de probabilidades de obtener 50 caras o menos en nuestro experimento. Igualmente, podemos combrobar este experimiento en la [aplicación web](https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html).
 <br/><br/>
 
-Por último, podemos utilizar R para generar números aleatorios obtenidos a partir de una distribución binomial $X \sim bin(100, 0.5)$
+Por último, podemos utilizar R para generar números aleatorios obtenidos a partir de una distribución binomial $X \sim bin(100, 0.5)$. Esto sería a repetir muchas veces el experimento "lanzar 100 veces una moneda" y contar el número de caras. Como sabemos que la moneda no está trucada y que por tanto $p = 0.5$, en la mayoría de los experimentos, obtendremos un número de caras cercano a 50 (un poco mayor o un poco menor). Veámoslo con un ejemplo usando `rbinom`:
+
+```{r ch4}
+rbinom(1,100,0.5)
+```
+Como vemos, obtenemos un número de caras (éxitos) cercano a 50. Para repetir 10 veces este experimento (lanzar 100 veces una moneda al aire y apuntar el número de caras), podemos indicarlo en el primer argumento de la función:
+
+```{r ch5}
+rbinom(10,100,0.5)
+```
+Si repetimos muchas veces más el mismo experimento (>10000) podremos organizar los resultados en un histograma y observar con qué frecuencia obtenemos cada uno de los resultados.
+
+```{r ch6}
+hist(rbinom(1000000,100,0.5), breaks = 20:80, freq = FALSE, 
+           main = "X ~ bin(100, 0.5)", xlab = "X (variable aleatoria)",
+           ylab = "P(X = x) (densidad de probabilidad)")
+
+abline(h=dbinom(50,100,0.5), lty = 3)
+mtext("P(X = 50) = 0.0796", adj = 1, line = -0.5, font = 4)
+```
 
 # Variable aleatoria continua: distribución normal
 
