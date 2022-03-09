@@ -149,4 +149,6 @@ hist(rnorm(1000000,169,7), breaks = 130:210, freq = TRUE,
 
 # Lab 0: Ejercicios
 
-
+1.   En un parque nacional se pueden encontrar de media 4 individuos de ciervo rojo (_Cervus elaphus_) en cada celda de una cuadrícula de 1 km de lado. ¿Cuál será la probabilidad de encontrar 7 ciervos en una celda?
+<br/><br/>
+2.   La probabilidad de detectar un gallipato (_Pleurodeles waltl_) en su hábitat natural es del 30%. Si en una charca hay 50 gallipatos, ¿qué probabilidad habrá de detectar al menos 10 gallipatos?
