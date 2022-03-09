@@ -42,12 +42,12 @@ Como podemos observar, R nos permite trabajar con todas las distribuciones que h
 previamente: binomial, de Poisson, normal, uniforme, beta y gamma. A lo largo de la práctica exploraremos dos distribuciones, una para variables aleatorias discretas y otra para continuas y a continuación propondremos una serie de ejercicios.
 
 # Variable aleatoria discreta: distribución binomial
-Para refrescar, comentaremos que la distribución binomial sirve para contar el número de éxitos dado un número de ensayos _n_ y una probabilidad de éxito _p_.
+Para refrescar conceptos, comentaremos que la distribución binomial sirve para contar el número de éxitos dado un número de ensayos _n_ y una probabilidad de éxito _p_.
 \begin{equation}
 \tag{Eq 1}\label{eq1}
 X \sim bin(n, p)
 \end{equation}
-<br/><br/>
+<br/>
 Empezaremos por echar un vistazo al manual (ayuda) de esta distribución. Para ello escribiremos `help(dbinom)`. Como vemos, podemos trabajar con 4 funciones relacionadas con la distribución binomial:
 
 1.   `dbinom()` nos indica la densidad de probabilidad de una distribución binomial dada y nos sirve para calcular la probabilidad de que nuestra variable aleatoria X alcance cierto valor P(X = x).
@@ -98,5 +98,57 @@ mtext("P(X = 50) = 0.0796", adj = 1, line = -0.5, font = 4)
 ```
 
 # Variable aleatoria continua: distribución normal
+Como ya sabemos, la distribución normal o Gausiana consta de dos parámetros, la media $\mu$ que en este caso coincide con la moda y la mediana y corresponde al centro de la "campana" que dibuja esta distribución, y la desviación típica $\sigma$ que es una medida de la dispersión de los datos y correspondería a la "anchura" de la la "campana.
+\begin{equation}
+\tag{Eq 2}\label{eq2}
+X \sim N(\mu, \sigma)
+\end{equation}
+<br/>
 
+Una variable aleatoria continua que típicamente sigue una distribución normal es la estatura del ser humano. Asumimos que la estatura de la población española sigue una distribución normal $X \sim N(169, 7)$ (169 centímetros de media, con una desviación típica de 7 centímetros). Utilizando la función `dnorm()` de forma similar a como lo hemos hecho en el ejemplo de la distribución binomial, podemos calcular la probabilidad de que al seleccionar una persona al azar su estatura sea de 150 centímetros.
 
+```{r ch7}
+dnorm(150,169,7)
+```
+Como vemos, hay una probabilidad muy baja (0.001) de que al seleccionar una persona al azar mida 150 centímetros. Veamos ahora que probabilidad hay de que la persona seleccionada mida 169 centímetros, que es la media de nuestra distribución.
+
+```{r ch8}
+dnorm(169,169,7)
+```
+Vemos ahora que esta probabilidad es bastante mayor, llegando hasta el 5%. Podemos ahora preguntarnos que probabilidad hay de que al seleccionar un individuo de esta población, este mida menos de 169 centímetros.
+
+```{r ch9}
+pnorm(169,169,7)
+```
+Como ya habríamos imaginado, al tratarse de la media, la propabilidad de obtener un individuo por debajo de 169 centímetros es del 50%. Realizaremos ahora un gráfico para representar la probabilidad de que una persona al azar mida más de 175 centímetros.
+
+```{r ch10}
+1 - pnorm(175, 169,7)
+
+x <- 130:210
+y <- dnorm(x,169,7)
+plot(x,y, type = "l", lwd = 3, main = "X ~ N(169, 7)", axes = F,
+     xlab = "X (variable aleatoria)",
+     ylab = "f(x) (densidad de probabilidad)")
+axis(side=1); axis(side=2)
+abline(h=dnorm(169,169,7), lty = 3)
+mtext("f(169) = 0.057", adj = 1, line = -0.5, font = 4)
+
+polygon(c(x[x>=175], max(x), 175), c(y[x>=175], 0, 0), col="red")
+
+mtext("P(X > = 175) = 0.196", adj = 0.90, line = -10, font = 4)
+```
+
+Por último, al igual que en el ejemplo anterior, podemos utilizar la función `rnorm()` para generar números aleatorios a partir de de nuestra distribución normal.
+
+```{r ch11}
+hist(rnorm(1000000,169,7), breaks = 130:210, freq = TRUE, 
+           main = "X ~ N(169, 7)", xlab = "X (variable aleatoria)",
+           ylab = "Frecuencia (cantidad de números)")
+```
+
+# Lab 0: Ejercicios
+
+1.   En un parque nacional se pueden encontrar de media 4 individuos de ciervo rojo (_Cervus elaphus_) en cada celda de una cuadrícula de 1 km de lado. ¿Cuál será la probabilidad de encontrar 7 ciervos en una celda?
+<br/><br/>
+2.   La probabilidad de detectar un gallipato (_Pleurodeles waltl_) en su hábitat natural es del 30%. Si en una charca hay 50 gallipatos, ¿qué probabilidad habrá de detectar al menos 10 gallipatos?
