@@ -20,6 +20,7 @@ text-align: justify}
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+<br/><br/>
 
 R es un entorno y lenguaje de programación con un enfoque al análisis estadístico. Es muy útil en nuestro ámbito de estudio porque nos permite combinar potentes herramientas de análisis estadístico con la generación de gráficos y el trabajo con cartografía como si fuera un sistemas de información geográfica (GIS).
 Las diferentes utilidades o herramientas de R (functions) se organizan en bibliotecas o paquetes (libraries o packages). Algunos de ellos vienen preinstalados con R. Otros deben descargarse e instalarse, y las deberemos cargar en la sesión de R cada vez que las queramos usar. Una de las mayores ventajas de R es que, al ser un lenguaje de código abierto, cualquiera puede contribuir al elenco de herramientas disponibles para el lenguaje a través del desarrollo de paquetes o bibliotecas.
