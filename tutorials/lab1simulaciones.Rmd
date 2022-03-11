@@ -132,4 +132,3 @@ persp(dpinzones, theta = 1, phi = 30, main = "Densidad de pinzones")
 
 
 
-
