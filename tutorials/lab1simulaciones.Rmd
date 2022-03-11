@@ -92,9 +92,9 @@ Como vemos, hemos hecho que la distancia al punto de agua afecte negativamente a
 \tag{Eq 3}\label{eq3}
 \lambda_i = exp(0.2 - (0.9 * dwat) + (0.15 * forest))
 \end{equation}
+<br/><br/> 
 
-
-```{r ch3,fig.height = 6, fig.width = 11.2, fig.align = "center"}
+```{r ch3,fig.height = 6, fig.width = 6, fig.align = "center"}
 # Definimos las betas que vamos a utilizar
 beta0 <- 0.2
 beta1 <- -0.9
@@ -108,6 +108,28 @@ ff <- function(dwat,forest){exp(beta0 + (beta1*(dwat)) + (beta2*(forest)))}
 rotate <- function(x) t(apply(x, 2, rev))
 lambda <- as.im(rotate(matrix(ff(dwat[],forest[]),100,100, byrow=TRUE)))
 plot(lambda)
-
-
 ```
+
+Ya disponemos del parámetro $\lambda$ para cada una de las celdas de nuestro área de estudio. Para simular nuestra población tan solo tenemos que ejecutar la función `rpoispp` del paquete `spatstat`, la cual genera un patrón de puntos siguiento un proceso de Poisson dad0 un valor de $\lambda$.
+
+```{r ch4,fig.height = 6, fig.width = 6, fig.align = "center"}
+pinzones <- rpoispp(lambda)
+plot(pinzones, cex = 0.3, pch=19, main = "Localización de pinzones en nuestro área de estudio")
+pinzones
+```
+
+Podemos ahora realizar diferentes visualizaciones de nuestros datos, como dividir nuestro área de estudio en 100 cuadrículas de 10x10 kilómetros y contar el número de pinzones. O crear una función de densidad en 3 dimensiones que represente la abundancia de pinzones en nuestro área de estudio.
+
+```{r ch5,fig.height = 12, fig.width = 11.4, fig.align = "center"}
+Q10 <- quadratcount(pinzones, nx = 10, ny = 10)
+dpinzones <- density(pinzones, sigma = 7)
+par(mfrow = c(2,2))
+plot(dwat, main = "Distancia al punto de agua")
+plot(forest, main = "Cobertura forestal")
+plot(Q10, main = "Nº de pinzones en cada cuadrícula de 10 x 10 km")
+persp(dpinzones, theta = 1, phi = 30, main = "Densidad de pinzones")
+```
+
+
+
+
