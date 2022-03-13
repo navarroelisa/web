@@ -82,7 +82,7 @@ log(\lambda_i) = \beta_0 + \beta_1 * X_{1i} + \beta_2 * X_{2i}
 siendo $\beta_0$, $\beta_1$ y $\beta_2$ el intercepto y los "estimates" que modifican el efecto de nuestras covariables ambientales en la celda _i_ respectivamente: $X_{1i}$ (distancia al punto de agua) y $X_{2i}$ (cobertura forestal).
 Como somos nosotros quienes vamos a *simular el proceso* mediante el cual se distribuyen nuestros pinzones, debemos elegir los valores de $\beta_0$, $\beta_1$ y $\beta_2$. Por ejemplo
 
-*   $\beta_{0} = 0.2$
+*   $\beta_{0} = 3$
 *   $\beta_{1} = -0.9$
 *   $\beta_{2} = 0.15$
 
@@ -90,13 +90,13 @@ Como vemos, hemos hecho que la distancia al punto de agua afecte negativamente a
 
 \begin{equation}
 \tag{Eq 3}\label{eq3}
-\lambda_i = exp(0.2 - (0.9 * dwat) + (0.15 * forest))
+\lambda_i = exp(3 - (0.9 * dwat) + (0.15 * forest))
 \end{equation}
 <br/><br/> 
 
 ```{r ch3,fig.height = 6, fig.width = 6, fig.align = "center"}
 # Definimos las betas que vamos a utilizar
-beta0 <- 0.2
+beta0 <- 3
 beta1 <- -0.9
 beta2 <- 0.15
 
@@ -121,8 +121,11 @@ pinzones
 Podemos ahora realizar diferentes visualizaciones de nuestros datos, como dividir nuestro área de estudio en 100 cuadrículas de 10x10 kilómetros y contar el número de pinzones. O crear una función de densidad en 3 dimensiones que represente la abundancia de pinzones en nuestro área de estudio.
 
 ```{r ch5,fig.height = 12, fig.width = 11.4, fig.align = "center"}
+# Dividimos el área de estudio en 100 cuadrículas de 10x10km y contamos los pinzones en su interior
 Q10 <- quadratcount(pinzones, nx = 10, ny = 10)
+# Calculamos una función de densidad de pinzones
 dpinzones <- density(pinzones, sigma = 7)
+# Visualizamos las covariables ambientales y la distribución de los pinzones
 par(mfrow = c(2,2))
 plot(dwat, main = "Distancia al punto de agua")
 plot(forest, main = "Cobertura forestal")
@@ -130,6 +133,47 @@ plot(Q10, main = "Nº de pinzones en cada cuadrícula de 10 x 10 km")
 persp(dpinzones, theta = 1, phi = 30, main = "Densidad de pinzones")
 ```
 
+# Muestreo de la población
 
+Una vez hemos generado nuestra población, llega el momento de salir a muestrearla. Para ello, un único ornitólogo, experto en fingílidos, ha salido al campo y ha realizado estaciones de escucha en 50 cuadrículas aleatorias a las 7:00 AM. Como nuestro ornitólogo es muy experto, ha sido capaz de detectar absolutamente todos los pinzones en cada cuadrícula a partir de la escucha de sus cantos y reclamos (pincha [aquí](https://www.youtube.com/watch?v=1WiOhpRj7rg) para escuchar cómo canta el pinzón vulgar). Además de anotar el número de aves, el investigador ha tomado nota de la cobertura forestal y de la distancia al punto de agua en esos 50 puntos. A continuación vamos a realizar el proceso de muestreo y generaremos una tabla con los datos anotados en nuestro campo _virtual_.
+
+```{r ch6, fig.height = 6, fig.width = 6.2, fig.align = "center"}
+# Primero vamos a almacenar el número de pinzones de cada celda en la capa
+# raster de nuestro área de estudio que dejamos vacía inicialmente. Trabajar con
+# capas raster nos facilitará las tareas posteriores.
+Q100 <- quadratcount(pinzones, nx = 100, ny = 100)
+sarea[] <- Q100
+
+# Seleccionamos 50 cuadrículas de nuestro area de estudio al azar
+sitioID <- sample(1:10000, 50)
+
+# Visualizamos nuestros puntos de muestreo en nuestro área de estudio
+plot(sarea)
+points(xyFromCell(sarea, sitioID), pch = 4, cex = 1.5)
+
+# A continuación crearemos un data.frame (tabla) que tendrá las siguientes
+# columnas: El ID del sitio, el número de pinzones detectados, la distancia al
+# punto del agua y la cobertura forestal. La tabla tendrá 50 filas, una por
+# cada sitio
+dataset <- data.frame(sitioID)
+dataset$pinzonesObs <- extract(sarea,sitioID)
+dataset$dwat <- extract(dwat,sitioID)
+dataset$forest <- extract(forest,sitioID)
+
+# Visualizamos los primeros 20 registros
+dataset[1:20,]
+```
+
+Con estos 50 datos, podríamos intentar ajustar un modelo. Es decir, podríamos relacionar la abundancia de pinzones (nuestra variable respuesta), con los datos que hemos tomado de distancia al punto de agua y de cobertura vegetal (nuestros predictores). A partir de los resultados, podríamos intetar hacer inferencias sobre cómo afectan estos dos factores a la abundancia de pinzones. Vamos a ello...
+
+
+```{r ch7, fig.height = 6, fig.width = 6.2, fig.align = "center"}
+# Utilizaremos un modelo general lineal
+
+m1 <- glm(pinzonesObs ~ dwat + forest, family = poisson(link = "log"), data = dataset)
+summary(m1)
+```
+
+En el resumen de nuestro modelo, los "Estimates" son las $\beta$ de nuestro modelo, siendo el intercepto la $\beta_0$, y las otras dos las $\beta$ correspondientes a los predictores "distancia al punto de agua" y "cobertura forestal". Como en realidad fuimos nosotros quienes simulamos el proceso, tenemos acceso a los _estimates_ reales con los que la abundancia de pinzones fue creada. Ahora, ¡podemos comparar los _estimates_ reales con los que hemos obtenido a partir de nuestro modelo!
 
 

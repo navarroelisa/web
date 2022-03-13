@@ -111,6 +111,7 @@ Una variable aleatoria continua que típicamente sigue una distribución normal 
 ```{r ch7}
 dnorm(150,169,7)
 ```
+
 Como vemos, hay una probabilidad muy baja (0.001) de que al seleccionar una persona al azar mida 150 centímetros. Veamos ahora que probabilidad hay de que la persona seleccionada mida 169 centímetros, que es la media de nuestra distribución.
 
 ```{r ch8}
