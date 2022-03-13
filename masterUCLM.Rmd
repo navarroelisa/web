@@ -15,11 +15,15 @@ output:
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
+
 Universidad de Castilla – La Mancha
 Curso 2021/2022
 
-# Lab 0: Distribuciones de probabilidad
-[Distribuciones de probabilidad](https://jabiologo.github.io/web/tutorials/lab0distribucionesProbabilidad.html)
+# [Lab 0: Distribuciones de probabilidad](https://jabiologo.github.io/web/tutorials/lab0distribucionesProbabilidad.html)
 
-# Lab 1: Simulaciones y modelos generales lineales
-[Simulaciones y modelos generales lineales](https://jabiologo.github.io/web/tutorials/lab1simulaciones.html)
+# [Lab 1: Simulaciones y modelos generales lineales](https://jabiologo.github.io/web/tutorials/lab1simulaciones.html)
+
+# [Lab 2: Modelos de ocupación](https://jabiologo.github.io/web/tutorials/lab2occupancy.html)
+
+# [Lab 3: Modelos N-mixtos](https://jabiologo.github.io/web/tutorials/lab3nmix.html)
+

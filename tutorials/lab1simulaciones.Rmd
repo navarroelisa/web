@@ -47,6 +47,7 @@ set.seed(123)
 #install.package("raster")
 library(raster)
 library(spatstat)
+library(ggplot2)
 
 ```
 A continuación crearemos las dos covariables o variables predictoras que van a gobernar la abundancia de pinzones en nuestro área de estudio, que de momento dejaremos vacía de pinzones.
@@ -90,7 +91,7 @@ Como vemos, hemos hecho que la distancia al punto de agua afecte negativamente a
 
 \begin{equation}
 \tag{Eq 3}\label{eq3}
-\lambda_i = exp(3 - (0.9 * dwat) + (0.15 * forest))
+\lambda_i = exp(3 - (0.9 * dwat_i) + (0.15 * forest_i))
 \end{equation}
 <br/><br/> 
 
@@ -145,6 +146,7 @@ Q100 <- quadratcount(pinzones, nx = 100, ny = 100)
 sarea[] <- Q100
 
 # Seleccionamos 50 cuadrículas de nuestro area de estudio al azar
+set.seed(1)
 sitioID <- sample(1:10000, 50)
 
 # Visualizamos nuestros puntos de muestreo en nuestro área de estudio
@@ -163,8 +165,9 @@ dataset$forest <- extract(forest,sitioID)
 # Visualizamos los primeros 20 registros
 dataset[1:20,]
 ```
+# Ajuste de un modelo general lineal
 
-Con estos 50 datos, podríamos intentar ajustar un modelo. Es decir, podríamos relacionar la abundancia de pinzones (nuestra variable respuesta), con los datos que hemos tomado de distancia al punto de agua y de cobertura vegetal (nuestros predictores). A partir de los resultados, podríamos intetar hacer inferencias sobre cómo afectan estos dos factores a la abundancia de pinzones. Vamos a ello...
+Con estos 50 datos, podríamos intentar ajustar un modelo. Es decir, podríamos relacionar la abundancia de pinzones (nuestra variable respuesta), con los datos que hemos tomado de distancia al punto de agua y de cobertura vegetal (nuestros predictores). A partir de los resultados, podríamos intetar hacer inferencias sobre cómo afectan estos dos factores a la abundancia de pinzones.
 
 
 ```{r ch7, fig.height = 6, fig.width = 6.2, fig.align = "center"}
@@ -174,6 +177,68 @@ m1 <- glm(pinzonesObs ~ dwat + forest, family = poisson(link = "log"), data = da
 summary(m1)
 ```
 
-En el resumen de nuestro modelo, los "Estimates" son las $\beta$ de nuestro modelo, siendo el intercepto la $\beta_0$, y las otras dos las $\beta$ correspondientes a los predictores "distancia al punto de agua" y "cobertura forestal". Como en realidad fuimos nosotros quienes simulamos el proceso, tenemos acceso a los _estimates_ reales con los que la abundancia de pinzones fue creada. Ahora, ¡podemos comparar los _estimates_ reales con los que hemos obtenido a partir de nuestro modelo!
+En el resumen de nuestro modelo, los "Estimates" son las estimas de las $\beta$ de nuestro modelo, siendo el intercepto la $\beta_0$, y las otras dos las $\beta$ correspondientes a los predictores "distancia al punto de agua" y "cobertura forestal" respectivamente. Es aquí donde cobra sentido la simulación. Como en realidad fuimos nosotros quienes simulamos el proceso mediante el cual distribuímos a nuestros pinzones, tenemos acceso a los _estimates_ simuladas con los que la abundancia de pinzones fue creada. Ahora, ¡podemos comparar los _estimates_ simuladas con los que hemos obtenido a partir de nuestro modelo! De esta forma podemos comprobar si nuestro modelo que hemos creado a partir de 50 puntos de muestreo aleatorios es capaz de realizar unas buenas estipas de las _betas_. Recordamos cuales eran las betas con las que simulamos a nuestros pinzones:
+
+### $\beta$'s simuladas
+*   Intercepto $\beta_{0} = 3$
+*   Distancia al punto de agua $\beta_{1} = -0.9$
+*   Cobertura forestal $\beta_{2} = 0.15$
+
+### $\beta$'s estimadas por el modelo
+*   Intercepto $\beta_{0} = 3.69246$
+*   Distancia al punto de agua $\beta_{1} = -0.84340$
+*   Cobertura forestal $\beta_{2} = 0.02722$
+
+Como podemos ver, nuestro modelo obteiene buenas estimas para el efecto de la distancia al punto de agua (-0.84 vs -0.9). Sin embargo, obtenemos una sobre estima en el intercepto, mientras que infraestimamos el efecto de la cobertura forestal.<br/><br/> 
+
+Como ya hemos aprendido, los modelos nos pueden ayudar a comprender mejor un sistema complejo (poder explicativo), pero también para realizar predicciones. Con los _estimates_ obtenidos podemos resolver la ecuación del modelo para predecir el número de pinzores en función a nuestras covariables predictoras. Recordamos que
+
+\begin{equation}
+\tag{Eq 4}\label{eq4}
+\lambda = exp(\beta_0 - (\beta_1 * dwat) + (\beta_2 * forest))
+\end{equation}
+<br/><br/> 
+
+Si sustituimos las $\beta$'s de esa ecuación por los coeficientes estimados por nuestro modelo, podremos realizar predicciones sobre el número de pinzones en función de la distancia al punto de agua y de la cobertura forestal.
+
+### Ecuación predictora de nuestro modelo
+\begin{equation}
+\tag{Eq 5}\label{eq5}
+\lambda = exp(3.69246 - (0.84340 * dwat) + (0.02722 * forest))
+\end{equation}
+<br/><br/> 
+
+Imaginamos un punto que está a una distancia de 4 unidades del punto de agua, y que tiene una cobertura forestal de 15 unidades. Podremos predecir (en base a nuestro modelo), el número de pinzones de ese lugar si resolvemos la ecuación
+
+\begin{equation}
+\tag{Eq 6}\label{eq6}
+\lambda = exp(3.69246 - (0.84340 * 4) + (0.02722 * 15))
+\end{equation}
+<br/><br/> 
+
+```{r ch8}
+# Resolvemos la ecuación
+exp(3.69246 - (0.84340 * 4) + (0.02722 * 15))
+```
+Nuestro modelo predice que en ese lugar habrá 2 pinzones. De esta forma, podemos predecir el número de gorriones en cada uno de nuestros puntos de muestreo. Una forma rápida de hacerlo es utlizar la función `predict`. Después podremos comparar los valores predichos frente a los realmente observados.
+
+```{r ch9, fig.height = 6, fig.width = 6.2, fig.align = "center" }
+# Predecimos el número de pinzones en nuestros puntos de muestreo
+dataset$predM1 <- predict(m1, dataset, type = "response")
+dataset[1:10,]
+
+# Comparamos nuestros valores predichos frente a los valores realmente observados
+
+ggplot(dataset, aes(x = predM1, y = pinzonesObs)) + geom_point() +
+  geom_abline(intercept = 0, slope = 1, color="red", linetype="dashed", size=1.5)
+```
+
+Nuestras predicciones se acercan bastante a nuestros valores observados. Por lo tanto, podríamos decir que aunque los $\beta$'s estimados a partir del modelo no se corresponden exactamente con los $\beta$'s simulados, estas desviaciones no afectan demasiado a las predicciones del modelo.
+
+# Ejercicios
+
+1.   Realiza un nuevo muestreo de otros 100 puntos para obtener los valores de las covariables predictoras y los pinzones observados. Compara estos 100 nuevos datos con las predicciones de la abundancia de pinzones de nuestros modelos en estos lugares.
+<br/><br/>
+2.   Utilizando los dos rasters _"dwat"_ y _"forest"_, realiza una predicción espacialmente explícita del número de pinzones para todo tu área de estudio (mapa de abundancias).
 
 
