@@ -26,4 +26,4 @@ Curso 2021/2022
 # [Lab 2: Modelos de ocupación](https://jabiologo.github.io/web/tutorials/lab2occupancy.html)
 
 # [Lab 3: Modelos N-mixtos](https://jabiologo.github.io/web/tutorials/lab3nmix.html)
-
+ 
