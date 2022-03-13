@@ -236,10 +236,11 @@ ggplot(dataset, aes(x = predM1, y = pinzonesObs)) + geom_point() +
 Nuestras predicciones se acercan bastante a nuestros valores observados. Por lo tanto, podríamos decir que aunque los $\beta$'s estimados a partir del modelo no se corresponden exactamente con los $\beta$'s simulados, estas desviaciones no afectan demasiado a las predicciones del modelo.
 <br/><br/> 
 
+
 # Ejercicios
 
 1.   Realiza un nuevo muestreo de otros 100 puntos para obtener los valores de las covariables predictoras y los pinzones observados. Compara estos 100 nuevos datos con las predicciones de la abundancia de pinzones de nuestros modelos en estos lugares.
 <br/><br/>
-2.   Utilizando los dos rasters _"dwat"_ y _"forest"_, realiza una predicción espacialmente explícita del número de pinzones para todo tu área de estudio (mapa de abundancias).
+2.   Utilizando los dos rasters _"dwat"_ y _"forest"_, realiza una predicción espacialmente explícita del número de pinzones para todo tu área de estudio (mapa de abundancias). Consejo: `help(predict)`
 
 
