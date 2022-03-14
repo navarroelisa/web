@@ -23,9 +23,9 @@ Curso 2021/2022
 
 # [Lab 1: Simulaciones y modelos generales lineales](https://jabiologo.github.io/web/tutorials/lab1simulaciones.html)
 
-# [Lab 2: Modelos de ocupación](https://jabiologo.github.io/web/tutorials/lab2occupancy.html)
+# [Lab 2: Modelos N-mixtos](https://jabiologo.github.io/web/tutorials/nmixture.html)
 
-# [Lab 3: Modelos N-mixtos](https://jabiologo.github.io/web/tutorials/lab3nmix.html)
+# [Lab 3: Modelos de ocupación](https://jabiologo.github.io/web/tutorials/lab2occupancy.html)
 
 # Lab 4: Introducción a la Inferencia Bayesiana (IB)
 
