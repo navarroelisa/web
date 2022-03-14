@@ -3,6 +3,8 @@ title: "Simulaciones y modelos generales lineales"
 author: "Javier Fernández-López"
 date: "5/3/2022"
 output:
+  pdf_document: default
+  word_document: default
   html_document:
     toc: true
     toc_float: true
@@ -10,8 +12,6 @@ output:
     number_sections: false
     toc_depth: 1
     #code_folding: hide
-  word_document: default
-  pdf_document: default
 ---
 
 <style>

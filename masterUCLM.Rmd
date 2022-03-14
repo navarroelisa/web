@@ -29,4 +29,4 @@ Curso 2021/2022
 
 # Lab 4: Introducción a la Inferencia Bayesiana (IB)
 
-# Lab 5: Modelos de ocupación y N-mixtos mediante IB
+# Lab 5: Modelos N-mixtos mediante IB
