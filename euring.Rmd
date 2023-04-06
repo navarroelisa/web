@@ -1,0 +1,18 @@
+---
+title: "euring"
+author: "EURING"
+date: "2023-04-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## EURING daily program
+
+This is a test of a daily program for EURING
+
+- Here we can put the program
+- Here we can put some announcements
+- And here we can include the meeting point for beers after talks :)
