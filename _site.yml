@@ -13,5 +13,7 @@ navbar:
       href: Links.html
     - text: "Máster UCLM"
       href: masterUCLM.html
+    - text: "EURING"
+      href: euring.html
 output_dir: "docs"
 
