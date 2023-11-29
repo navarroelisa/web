@@ -1,0 +1,43 @@
+---
+title: "Taller SECEM"
+author: "Javier Fernández-López"
+date: "28 de noviembre de 2023"
+bibliography: references_tutorials.bib
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+ 
+ 
+ Tutoriales para el taller **Introducción a la modelización jerárquica: detectabilidad imperfecta en modelos de ocupación y N-mixture** impartido en el XVI Congreso de la SECEM (6-9 de diciembre de 2023 en Granollers).
+ 
+# Modelos de ocupación
+
+Vamos a modelizar la ocupación (probabilidad de presencia) de una especie a partir de datos de cámaras trampa. Nuestro área de estudio es una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que nuestra especie utiliza mayormente el hábitat de matorral de los fondos de valle de nuestro área de estudio. Disponemos de un total de 100 cámaras de fototrampeo que hemos dispuesto aleatoriamente en nuestro área de estudio que han estado activas durante 7 noches utilizando una lata de sardinas como atrayente. De las 100 cámaras, 47 de ellas son de la marca A y 53 de la marca B.
+
+## Cargamos los datos
+
+```{r ch1, message=FALSE}
+#install.packages("terra")
+library(terra)
+sarea <- raster(nrows = 10, ncols = 10, xmn = 0, xmx = 10, ymn = 0, ymx = 10)
+
+```
+
+
+
+
