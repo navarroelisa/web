@@ -95,11 +95,16 @@ names(cober) <- "cober"
 names(tempe) <- "tempe"
 par(mfrow = c(1,2))
 plot(tempe, main = "Temperatura")
-points(xyFromCell(elev, datos$id), pch = 19)plot(arbu, main = "Porcentaje arbusto")
+points(xyFromCell(tempe, datos$id), pch = 19, cex = 0.5)
 plot(cober, main = "Cobertura del suelo")
 datos$tempe <- scale(tempe[datos$id])[1:100]
-datos$cober <- scale(cober[datos$id])[1:100]
+datos$cober <- as.factor(cober[datos$id])
 head(datos)
+
+obserCov <- list(tOc = datos[,5:7])
+datosUM <- unmarkedFramePCount(y = as.matrix(datos[,2:4]), siteCovs=datos[,8:9], obsCovs=obserCov)
+datosUM
+m1 <- pcount(~ tOc ~ tempe + cober, data = datosUM)
 ```
 
 
