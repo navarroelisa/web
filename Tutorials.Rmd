@@ -27,4 +27,7 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 [Download presence records from GBIF using `rgbif`](https://jabiologo.github.io/web/tutorials/gbif_tutorial.html)
 
+# Taller SECEM Granollers 2023
+
+[Introducción a la modelización jerárquica: detectabilidad imperfecta en modelos de ocupación y N-mixture](https://jabiologo.github.io/web/tutorials/tallerSECEM.html)
 
