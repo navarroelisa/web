@@ -103,7 +103,7 @@ cob3 <- cober == 3
 cob4 <- cober == 4
 
 lambda <- rast(nrows=50, ncols=50, xmin=0, xmax=50, ymin = 0, ymax = 50)
-lambda[] <- exp( ( -3*cob1 -2.2*cob2 + 0.4*cob3 + 2.8*cob4 + 0.8*scale(tempe))[])
+lambda[] <- exp( (1 -3*cob1 -2.2*cob2 + 0.4*cob3 + 2.8*cob4 + 0.8*scale(tempe))[])
 abun <- rast(nrows=50, ncols=50, xmin=0, xmax=50, ymin = 0, ymax = 50)
 abun[] <- rpois(n, lambda[])
 plot(abun)
@@ -144,8 +144,8 @@ datos <- cbind(id=df$id, cober=df$cober, tempe=scale(df$tempe), df[,5:7], tOc)
 obserCov <- list(tOc = datos[,7:9])
 datosUM <- unmarkedFramePCount(y = as.matrix(datos[,4:6]), siteCovs=datos[,2:3], obsCovs=obserCov)
 m1 <- pcount(~ tOc ~ tempe + cober, data = datosUM)
-m2 <- pcount(~ tempe ~ tempe + cober, data = datosUM)
-m3 <- pcount(~ 1 ~ cober, data = datosUM)
+#m2 <- pcount(~ tempe ~ tempe + cober, data = datosUM)
+#m3 <- pcount(~ 1 ~ cober, data = datosUM)
 
 plotEffects(m1, type = "det", covariate="tOc")
 plotEffects(m1, type = "state", covariate="tempe")
