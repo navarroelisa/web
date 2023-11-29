@@ -41,7 +41,7 @@ datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/tutori
 head(datos)
 ```
 
-```{r ch3, message=FALSE, cache = F, eval = F}
+```{r ch2, message=FALSE, cache = F, eval = F}
 elev <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/elev.tif")
 arbu <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/arbu.tif")
 names(elev) <- "elev"
@@ -56,7 +56,7 @@ datos$arbu <- scale(arbu[datos$id])[1:100]
 head(datos)
 ```
 
-```{r ch5, message=FALSE, cache = T, echo = T, eval = F}
+```{r ch3, message=FALSE, cache = T, echo = T, eval = F}
 obserCov <- list(dia = as.matrix(datos[,10:16]))
 datosUM <- unmarkedFrameOccu(as.matrix(datos[,3:9]), siteCovs=datos[,c(2,17,18)], obsCovs=obserCov)
 #m1 <- occu(~ marca  + dia ~ elev + arbu, data = datosUM)
@@ -83,7 +83,7 @@ mb.gof.test(m2, nsim = 50)
 
 Vamos a modelizar la abundancia (número de individuos) de una especie a partir de conteos realizados en muestreos repetidos. Nuestro área de estudio es una zona de transición agrícola-forestal en una malla de 50x50 celdas. Sabemos que nuestra especie habita principalmente en bosques y tiene querencia por temperaturas cálidas. Hemos muestreado un total de 100 sitios diferentes en los que hemos realizado conteos directos. Como sabemos que nuestra especie es sensible a la temperatura, en cada muestreo tomamos nota de la temperatura que había en ese momento.
 
-```{r ch6, message=FALSE, cache = T, echo = T, eval = F}
+```{r ch4, message=FALSE, cache = T, echo = T, eval = T}
 
 datos <- read.csv("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/nmixDatos.csv")
 head(datos)
@@ -104,6 +104,26 @@ obserCov <- list(tOc = datos[,5:7])
 datosUM <- unmarkedFramePCount(y = as.matrix(datos[,2:4]), siteCovs=datos[,8:9], obsCovs=obserCov)
 m1 <- pcount(~ tOc ~ tempe + cober, data = datosUM)
 m1
+
+plotEffects(m1, type = "det", covariate="tOc")
+plotEffects(m1, type = "state", covariate="cober")
+
+# scaled = (x-mean(x))/sd
+tempeScaled <- (tempe[] - 26.22) / 5.02
+
+dataPred <- data.frame(cbind(tempeScaled, cober[]))
+names(dataPred) <- c("tempe", "cober")
+dataPred$cober <- as.factor(dataPred$cober)
+
+
+pred <- predict(m1, dataPred, type = "state")
+
+predRas <- rast(nrows=50, ncols=50, xmin=0, xmax=50, ymin = 0, ymax = 50)
+predRas[] <- pred$Predicted
+plot(predRas)
+
+#Nmix.gof.test(m1, nsim = 50)
+
 ```
 
 

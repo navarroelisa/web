@@ -37,13 +37,13 @@ library(unmarked)
 library(AICcmodavg)
 
 
-datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/occuDatos.csv")
+datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/tutorials/tallerSECEM_files/occuDatos.csv")
 head(datos)
 ```
 
 ```{r ch3, message=FALSE, cache = F, eval = F}
-elev <- rast("https://github.com/jabiologo/web/raw/master/elev.tif")
-arbu <- rast("https://github.com/jabiologo/web/raw/master/arbu.tif")
+elev <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/elev.tif")
+arbu <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/arbu.tif")
 names(elev) <- "elev"
 names(arbu) <- "arbu"
 par(mfrow = c(1,2))
@@ -85,11 +85,11 @@ Vamos a modelizar la abundancia (número de individuos) de una especie a partir 
 
 ```{r ch6, message=FALSE, cache = T, echo = T, eval = F}
 
-datos <- read.csv("https://github.com/jabiologo/web/raw/master/nmixDatos.csv")
+datos <- read.csv("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/nmixDatos.csv")
 head(datos)
 
-cober <- rast("https://github.com/jabiologo/web/raw/master/cober.tif")
-tempe <- rast("https://github.com/jabiologo/web/raw/master/tempe.tif")
+cober <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/cober.tif")
+tempe <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/tempe.tif")
 names(cober) <- "cober"
 names(tempe) <- "tempe"
 par(mfrow = c(1,2))
