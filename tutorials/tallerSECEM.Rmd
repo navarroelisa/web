@@ -32,9 +32,13 @@ Vamos a modelizar la ocupación (probabilidad de presencia) de una especie a par
 ## Cargamos los datos
 
 ```{r ch1, message=FALSE}
+# Instalamos y cargamos las librerías que vamos a utilizar
 #install.packages("terra")
 library(terra)
-sarea <- raster(nrows = 10, ncols = 10, xmn = 0, xmx = 10, ymn = 0, ymx = 10)
+library(unmarked)
+library(AICcmodavg)
+
+read.csv("https://raw.githubusercontent.com/jabiologo/web/master/occuDatos.csv")
 
 ```
 
