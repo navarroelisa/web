@@ -29,19 +29,46 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Vamos a modelizar la ocupación (probabilidad de presencia) de una especie a partir de datos de cámaras trampa. Nuestro área de estudio es una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que nuestra especie utiliza mayormente el hábitat de matorral de los fondos de valle de nuestro área de estudio. Disponemos de un total de 100 cámaras de fototrampeo que hemos dispuesto aleatoriamente en nuestro área de estudio que han estado activas durante 7 noches utilizando una lata de sardinas como atrayente. De las 100 cámaras, 47 de ellas son de la marca A y 53 de la marca B.
 
-## Cargamos los datos
+### Cargamos los datos
 
-```{r ch1, message=FALSE}
+```{r ch1, message=FALSE, cache = TRUE}
 # Instalamos y cargamos las librerías que vamos a utilizar
 #install.packages("terra")
 library(terra)
 library(unmarked)
 library(AICcmodavg)
 
-read.csv("https://raw.githubusercontent.com/jabiologo/web/master/occuDatos.csv")
 
+datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/occuDatos.csv")
+#head(datos)
 ```
 
+```{r ch2, message=FALSE, cache = TRUE, echo = FALSE}
+library(kableExtra)
+library(dplyr)
+kbl(datos) %>%
+  kable_paper() %>%
+  scroll_box(width = "820px", height = "200px")
+```
+<br/><br/>
+```{r ch3, message=FALSE, cache = TRUE}
+elev <- rast("https://github.com/jabiologo/web/raw/master/elev.tif")
+arbu <- rast("https://github.com/jabiologo/web/raw/master/arbu.tif")
+par(mfrow = c(1,2))
+plot(elev, main = "Elevación (msnm)")
+points(xyFromCell(elev, datos$id[datos$marca == "A"]), col = "darkred", pch = 19)
+points(xyFromCell(elev, datos$id[datos$marca == "B"]), col = "darkblue", pch = 19)
+plot(arbu, main = "Porcentaje arbusto")
+```
+<br/><br/>
 
+### Obtenemos los datos de los rasters
+```{r ch4, message=FALSE, cache = TRUE}
+elev <- scale(elev)
+arbu <- scale(arbu)
+
+datos$elev <- elev[datos$id]
+datos$arbu <- arbu[datos$id]
+```
 
 
