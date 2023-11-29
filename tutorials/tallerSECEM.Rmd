@@ -30,7 +30,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Vamos a modelizar la ocupación (probabilidad de presencia) de una especie a partir de datos de cámaras trampa. Nuestro área de estudio es una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que nuestra especie utiliza mayormente el hábitat de matorral de los fondos de valle de nuestro área de estudio. Disponemos de un total de 100 cámaras de fototrampeo que hemos dispuesto aleatoriamente en nuestro área de estudio que han estado activas durante 7 noches utilizando una lata de sardinas como atrayente. De las 100 cámaras, 47 de ellas son de la marca A y 53 de la marca B.
 
 
-```{r ch1, message=F, cache = F}
+```{r ch1, message=F, cache = F, eval = F}
 # Instalamos y cargamos las librerías que vamos a utilizar
 #install.packages("terra")
 library(terra)
@@ -42,7 +42,7 @@ datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/occuDa
 head(datos)
 ```
 
-```{r ch3, message=FALSE, cache = F}
+```{r ch3, message=FALSE, cache = F, eval = F}
 elev <- rast("https://github.com/jabiologo/web/raw/master/elev.tif")
 arbu <- rast("https://github.com/jabiologo/web/raw/master/arbu.tif")
 names(elev) <- "elev"
@@ -57,7 +57,7 @@ datos$arbu <- scale(arbu[datos$id])[1:100]
 head(datos)
 ```
 
-```{r ch5, message=FALSE, cache = T, echo = T}
+```{r ch5, message=FALSE, cache = T, echo = T, eval = F}
 obserCov <- list(dia = as.matrix(datos[,10:16]))
 datosUM <- unmarkedFrameOccu(as.matrix(datos[,3:9]), siteCovs=datos[,c(2,17,18)], obsCovs=obserCov)
 #m1 <- occu(~ marca  + dia ~ elev + arbu, data = datosUM)
@@ -85,10 +85,21 @@ mb.gof.test(m2, nsim = 50)
 Vamos a modelizar la abundancia (número de individuos) de una especie a partir de conteos realizados en muestreos repetidos. Nuestro área de estudio es una zona de transición agrícola-forestal en una malla de 50x50 celdas. Sabemos que nuestra especie habita principalmente en bosques y tiene querencia por temperaturas cálidas. Hemos muestreado un total de 100 sitios diferentes en los que hemos realizado conteos directos. Como sabemos que nuestra especie es sensible a la temperatura, en cada muestreo tomamos nota de la temperatura que había en ese momento.
 
 ```{r ch6, message=FALSE, cache = T, echo = T}
+
+datos <- read.csv("https://github.com/jabiologo/web/raw/master/nmixDatos.csv")
+head(datos)
+
 cober <- rast("https://github.com/jabiologo/web/raw/master/cober.tif")
 tempe <- rast("https://github.com/jabiologo/web/raw/master/tempe.tif")
-
-
+names(cober) <- "cober"
+names(tempe) <- "tempe"
+par(mfrow = c(1,2))
+plot(tempe, main = "Temperatura")
+points(xyFromCell(elev, datos$id), pch = 19)plot(arbu, main = "Porcentaje arbusto")
+plot(cober, main = "Cobertura del suelo")
+datos$tempe <- scale(tempe[datos$id])[1:100]
+datos$cober <- scale(cober[datos$id])[1:100]
+head(datos)
 ```
 
 
