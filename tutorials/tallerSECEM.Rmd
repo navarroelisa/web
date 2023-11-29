@@ -51,13 +51,13 @@ kbl(datos) %>%
   scroll_box(width = "820px", height = "200px")
 ```
 <br/><br/>
-```{r ch3, message=FALSE, cache = TRUE}
+```{r ch3, message=FALSE, cache = F}
 elev <- rast("https://github.com/jabiologo/web/raw/master/elev.tif")
 arbu <- rast("https://github.com/jabiologo/web/raw/master/arbu.tif")
 elev <- scale(elev)
 arbu <- scale(arbu)
 par(mfrow = c(1,2))
-plot(elev, main = "Elevación (msnm)")
+plot(elev, main = "Elevación")
 points(xyFromCell(elev, datos$id[datos$marca == "A"]), col = "darkred", pch = 19)
 points(xyFromCell(elev, datos$id[datos$marca == "B"]), col = "darkblue", pch = 19)
 plot(arbu, main = "Porcentaje arbusto")
@@ -71,3 +71,33 @@ kbl(datos) %>%
   kable_paper() %>%
   scroll_box(width = "820px", height = "200px")
 ```
+
+```{r ch5, message=FALSE, cache = F, echo = T}
+obserCov <- list(dia = as.matrix(datos[,10:16]))
+datosUM <- unmarkedFrameOccu(as.matrix(datos[,3:9]), siteCovs=datos[,c(2,17,18)], obsCovs=obserCov)
+m1 <- occu(~ marca  + dia ~ elev + arbu, data = datosUM)
+m2 <- occu(~ marca  + dia + arbu ~ elev + arbu, data = datosUM)
+m3 <- occu(~ marca  + dia + arbu + elev ~ elev + arbu, data = datosUM)
+
+
+plotEffects(m2, type = "det", covariate="arbu")
+
+# scaled = (x-mean(x))/sd
+elevScaled <- (elev - 958.29) / 187.6693
+arbuScaled <- (arbu - 49.78) / 7.041493
+
+dataPred <- c(elevScaled, arbuScaled)
+names(dataPred) <- c("elev", "arbu")
+
+pred <- predict(m2, dataPred, type = "state")
+plot(pred)
+
+mb.gof.test(m2, nsim = 50)
+```
+
+
+
+
+
+
+
