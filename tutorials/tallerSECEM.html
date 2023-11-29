@@ -1653,12 +1653,57 @@ text-align: justify}
   addClassKlippyTo("pre.r, pre.markdown");
   addKlippy('right', 'top', 'auto', '1', 'Click para copiar', 'Hecho!');
 </script>
-<p>Tutoriales para el taller <strong>Introducción a la modelización
+<p>Materiales para el taller <strong>Introducción a la modelización
 jerárquica: detectabilidad imperfecta en modelos de ocupación y
 N-mixture</strong> impartido en el XVI Congreso de la SECEM (6-9 de
 diciembre de 2023 en Granollers).</p>
+<div id="proceso-ecológico-y-observacional" class="section level1">
+<h1>Proceso ecológico y observacional</h1>
+<p>Cuando estudiamos la distribución o la abundancia (variables de
+estado) de las especies podemos distinguir entre</p>
+<ul>
+<li><strong>Proceso ecológico</strong>: Mecanismo que da lugar a la
+variable de estado (distribución o abundancia en nuestro caso) mediante
+el cual un conjunto de covariables abióticas (temperatura, composición
+del suelo, etc.), bióticas (interacciones entre especies, etc.) o
+demográficas (tasas de reproducción, mortalidad, dispersión, etc.)
+originan que los organismos se distribuyan de una determinada forma en
+nuestro área de estudio.</li>
+<li><strong>Proceso observacional</strong>: Mecanismo mediante el cual,
+a partir de una distribución o abundancia dada, emergen nuestros datos
+recogidos en el campo: fotos de una cámara de fototrampeo, conteos
+directos, registros de bioacústica, registro de indicios, muestreos de
+ADN ambiental, registros de ciencia ciudadana, etc.</li>
+</ul>
+<p>Si no se tiene en cuenta ese proceso observacional corremos el riesgo
+de asumir que nuestros datos representan fielmente la realidad, lo cual
+podría hacernos obtener estimas de la distribución o la abundancia
+sesgadas y/o poco precisas.</p>
+</div>
+<div id="detectabilidad-imperfecta" class="section level1">
+<h1>Detectabilidad imperfecta</h1>
+<p>Entre los sesgos más comunes en los procesos observacionales a la
+hora de estudiar la distribución y la abundancia de las especies es la
+detectabilidad imperfecta, esto es, la probabilidad de que una especie o
+un individuo no sea registrado estando presente en un lugar dado. Este
+fenómeno es muy habitual, ya que hay muchos factores que pueden afectar
+a la detectabilidad: el caracter elusivo de las especies, su fenología,
+los medios de los que disponemos para detectarlas, las condiciones
+metereológicas en el momento del muestreo, la experiencia del
+entrenador, el propio hábitat donde se encuentra la especie, etc. La
+detectabilidad imperfecta es especialmente importante cuando varía a
+través de nuestros sitios de muestreo, ya que no solo no alcanzaremos
+unas estimas adecuadas, sino que podríamos confundir el efecto de las
+covariables que afectan a la ecología de nuestra especie.</p>
+</div>
 <div id="modelos-de-ocupación" class="section level1">
 <h1>Modelos de ocupación</h1>
+</div>
+<div id="modelos-n-mixture" class="section level1">
+<h1>Modelos N-mixture</h1>
+</div>
+<div id="práctica-1-modelos-de-ocupación" class="section level1">
+<h1>Práctica 1: Modelos de ocupación</h1>
 <p>Vamos a modelizar la ocupación (probabilidad de presencia) de una
 especie a partir de datos de cámaras trampa. Nuestro área de estudio es
 una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que
@@ -1772,8 +1817,8 @@ plot(pred)</code></pre>
 ## 
 ## Estimate of c-hat = 1.11</code></pre>
 </div>
-<div id="modelos-n-mixture" class="section level1">
-<h1>Modelos N-mixture</h1>
+<div id="práctica-2-modelos-n-mixture" class="section level1">
+<h1>Práctica 2: Modelos N-mixture</h1>
 <p>Vamos a modelizar la abundancia (número de individuos) de una especie
 a partir de conteos realizados en muestreos repetidos. Nuestro área de
 estudio es una zona de transición agrícola-forestal en una malla de
@@ -1868,6 +1913,9 @@ Nmix.gof.test(m1, nsim = 50)</code></pre>
 ##  177  233  265  314  590 
 ## 
 ## Estimate of c-hat = 0.69</code></pre>
+</div>
+<div id="referencias" class="section level1">
+<h1>Referencias</h1>
 </div>
 
 

@@ -24,9 +24,26 @@ knitr::opts_chunk$set(echo = TRUE)
 klippy::klippy(tooltip_message = 'Click para copiar', tooltip_success = 'Hecho!',position = c('top', 'right'))
 ```
  
- Tutoriales para el taller **Introducción a la modelización jerárquica: detectabilidad imperfecta en modelos de ocupación y N-mixture** impartido en el XVI Congreso de la SECEM (6-9 de diciembre de 2023 en Granollers).
- 
+ Materiales para el taller **Introducción a la modelización jerárquica: detectabilidad imperfecta en modelos de ocupación y N-mixture** impartido en el XVI Congreso de la SECEM (6-9 de diciembre de 2023 en Granollers).
+
+# Proceso ecológico y observacional
+
+Cuando estudiamos la distribución o la abundancia (variables de estado) de las especies podemos distinguir entre
+
+* **Proceso ecológico**: Mecanismo que da lugar a la variable de estado (distribución o abundancia en nuestro caso) mediante el cual un conjunto de covariables abióticas (temperatura, composición del suelo, etc.), bióticas (interacciones entre especies, etc.) o demográficas (tasas de reproducción, mortalidad, dispersión, etc.) originan que los organismos se distribuyan de una determinada forma en nuestro área de estudio.
+* **Proceso observacional**: Mecanismo mediante el cual, a partir de una distribución o abundancia dada, emergen nuestros datos recogidos en el campo: fotos de una cámara de fototrampeo, conteos directos, registros de bioacústica, registro de indicios, muestreos de ADN ambiental, registros de ciencia ciudadana, etc.
+
+Si no se tiene en cuenta ese proceso observacional corremos el riesgo de asumir que nuestros datos representan fielmente la realidad, lo cual podría hacernos obtener estimas de la distribución o la abundancia sesgadas y/o poco precisas.
+
+# Detectabilidad imperfecta
+
+Entre los sesgos más comunes en los procesos observacionales a la hora de estudiar la distribución y la abundancia de las especies es la detectabilidad imperfecta, esto es, la probabilidad de que una especie o un individuo no sea registrado estando presente en un lugar dado. Este fenómeno es muy habitual, ya que hay muchos factores que pueden afectar a la detectabilidad: el caracter elusivo de las especies, su fenología, los medios de los que disponemos para detectarlas, las condiciones metereológicas en el momento del muestreo, la experiencia del entrenador, el propio hábitat donde se encuentra la especie, etc. La detectabilidad imperfecta es especialmente importante cuando varía a través de nuestros sitios de muestreo, ya que no solo no alcanzaremos unas estimas adecuadas, sino que podríamos confundir el efecto de las covariables que afectan a la ecología de nuestra especie. 
+
 # Modelos de ocupación
+
+# Modelos N-mixture
+
+# Práctica 1: Modelos de ocupación
 
 Vamos a modelizar la ocupación (probabilidad de presencia) de una especie a partir de datos de cámaras trampa. Nuestro área de estudio es una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que nuestra especie utiliza mayormente el hábitat de matorral de los fondos de valle de nuestro área de estudio. Disponemos de un total de 100 cámaras de fototrampeo que hemos dispuesto aleatoriamente en nuestro área de estudio que han estado activas durante 7 noches utilizando una lata de sardinas como atrayente. De las 100 cámaras, 47 de ellas son de la marca A y 53 de la marca B.
 
@@ -81,7 +98,7 @@ plot(pred)
 mb.gof.test(m2, nsim = 50)
 ```
 
-# Modelos N-mixture
+# Práctica 2: Modelos N-mixture
 
 Vamos a modelizar la abundancia (número de individuos) de una especie a partir de conteos realizados en muestreos repetidos. Nuestro área de estudio es una zona de transición agrícola-forestal en una malla de 50x50 celdas. Sabemos que nuestra especie habita principalmente en bosques y tiene querencia por temperaturas cálidas. Hemos muestreado un total de 100 sitios diferentes en los que hemos realizado conteos directos. Como sabemos que nuestra especie es sensible a la temperatura, en cada muestreo tomamos nota de la temperatura que había en ese momento.
 
@@ -127,5 +144,5 @@ plot(predRas)
 Nmix.gof.test(m1, nsim = 50)
 
 ```
-
+# Referencias
 
