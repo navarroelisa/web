@@ -31,7 +31,7 @@ Vamos a modelizar la ocupación (probabilidad de presencia) de una especie a par
 
 ### Cargamos los datos
 
-```{r ch1, message=FALSE, cache = TRUE}
+```{r ch1, message=F, cache = F}
 # Instalamos y cargamos las librerías que vamos a utilizar
 #install.packages("terra")
 library(terra)
@@ -43,7 +43,7 @@ datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/occuDa
 #head(datos)
 ```
 
-```{r ch2, message=FALSE, cache = TRUE, echo = FALSE}
+```{r ch2, message=FALSE, cache = F, echo = FALSE}
 library(kableExtra)
 library(dplyr)
 kbl(datos) %>%
@@ -63,9 +63,10 @@ points(xyFromCell(elev, datos$id[datos$marca == "B"]), col = "darkblue", pch = 1
 plot(arbu, main = "Porcentaje arbusto")
 datos$elev <- elev[datos$id]
 datos$arbu <- arbu[datos$id]
+#head(datos)
 ```
 
-```{r ch4, message=FALSE, cache = TRUE, echo = FALSE}
+```{r ch4, message=FALSE, cache = F, echo = FALSE}
 kbl(datos) %>%
   kable_paper() %>%
   scroll_box(width = "820px", height = "200px")
