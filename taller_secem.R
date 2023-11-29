@@ -55,6 +55,9 @@ for(i in 1:nsitios){
 df$marca <- as.factor(df$marca)
 levels(df$marca) <- c("A", "B")
 
+#datos <- cbind(id=df$id, marca=df$marca, df[,6:12],
+#               matrix(rep(1:7, 1, each =nsitios), nsitios,7))
+#names(datos)[10:16] <- c("dia1","dia2","dia3","dia4","dia5","dia6","dia7")
 
 datos <- cbind(id=df$id, marca=df$marca, elev=scale(df$elev), arbu=scale(df$arbu), df[,6:12],
                matrix(rep(1:7, 1, each =nsitios), nsitios,7))

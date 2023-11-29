@@ -54,21 +54,19 @@ kbl(datos) %>%
 ```{r ch3, message=FALSE, cache = TRUE}
 elev <- rast("https://github.com/jabiologo/web/raw/master/elev.tif")
 arbu <- rast("https://github.com/jabiologo/web/raw/master/arbu.tif")
+elev <- scale(elev)
+arbu <- scale(arbu)
 par(mfrow = c(1,2))
 plot(elev, main = "Elevación (msnm)")
 points(xyFromCell(elev, datos$id[datos$marca == "A"]), col = "darkred", pch = 19)
 points(xyFromCell(elev, datos$id[datos$marca == "B"]), col = "darkblue", pch = 19)
 plot(arbu, main = "Porcentaje arbusto")
-```
-<br/><br/>
-
-### Obtenemos los datos de los rasters
-```{r ch4, message=FALSE, cache = TRUE}
-elev <- scale(elev)
-arbu <- scale(arbu)
-
 datos$elev <- elev[datos$id]
 datos$arbu <- arbu[datos$id]
 ```
 
-
+```{r ch4, message=FALSE, cache = TRUE, echo = FALSE}
+kbl(datos) %>%
+  kable_paper() %>%
+  scroll_box(width = "820px", height = "200px")
+```
