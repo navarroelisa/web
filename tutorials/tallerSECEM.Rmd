@@ -29,7 +29,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Vamos a modelizar la ocupación (probabilidad de presencia) de una especie a partir de datos de cámaras trampa. Nuestro área de estudio es una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que nuestra especie utiliza mayormente el hábitat de matorral de los fondos de valle de nuestro área de estudio. Disponemos de un total de 100 cámaras de fototrampeo que hemos dispuesto aleatoriamente en nuestro área de estudio que han estado activas durante 7 noches utilizando una lata de sardinas como atrayente. De las 100 cámaras, 47 de ellas son de la marca A y 53 de la marca B.
 
-### Cargamos los datos
 
 ```{r ch1, message=F, cache = F}
 # Instalamos y cargamos las librerías que vamos a utilizar
@@ -40,44 +39,30 @@ library(AICcmodavg)
 
 
 datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/occuDatos.csv")
-#head(datos)
+head(datos)
 ```
 
-```{r ch2, message=FALSE, cache = F, echo = FALSE}
-library(kableExtra)
-library(dplyr)
-kbl(datos) %>%
-  kable_paper() %>%
-  scroll_box(width = "820px", height = "200px")
-```
-<br/><br/>
 ```{r ch3, message=FALSE, cache = F}
 elev <- rast("https://github.com/jabiologo/web/raw/master/elev.tif")
 arbu <- rast("https://github.com/jabiologo/web/raw/master/arbu.tif")
-elev <- scale(elev)
-arbu <- scale(arbu)
+names(elev) <- "elev"
+names(arbu) <- "arbu"
 par(mfrow = c(1,2))
 plot(elev, main = "Elevación")
 points(xyFromCell(elev, datos$id[datos$marca == "A"]), col = "darkred", pch = 19)
 points(xyFromCell(elev, datos$id[datos$marca == "B"]), col = "darkblue", pch = 19)
 plot(arbu, main = "Porcentaje arbusto")
-datos$elev <- elev[datos$id]
-datos$arbu <- arbu[datos$id]
-#head(datos)
+datos$elev <- scale(elev[datos$id])[1:100]
+datos$arbu <- scale(arbu[datos$id])[1:100]
+head(datos)
 ```
 
-```{r ch4, message=FALSE, cache = F, echo = FALSE}
-kbl(datos) %>%
-  kable_paper() %>%
-  scroll_box(width = "820px", height = "200px")
-```
-
-```{r ch5, message=FALSE, cache = F, echo = T}
+```{r ch5, message=FALSE, cache = T, echo = T}
 obserCov <- list(dia = as.matrix(datos[,10:16]))
 datosUM <- unmarkedFrameOccu(as.matrix(datos[,3:9]), siteCovs=datos[,c(2,17,18)], obsCovs=obserCov)
-m1 <- occu(~ marca  + dia ~ elev + arbu, data = datosUM)
+#m1 <- occu(~ marca  + dia ~ elev + arbu, data = datosUM)
 m2 <- occu(~ marca  + dia + arbu ~ elev + arbu, data = datosUM)
-m3 <- occu(~ marca  + dia + arbu + elev ~ elev + arbu, data = datosUM)
+#m3 <- occu(~ marca  + dia + arbu + elev ~ elev + arbu, data = datosUM)
 
 
 plotEffects(m2, type = "det", covariate="arbu")
@@ -95,8 +80,9 @@ plot(pred)
 mb.gof.test(m2, nsim = 50)
 ```
 
+# Modelos N-mixture
 
-
+Vamos a modelizar la abundancia (número de individuos) de una especie a partir de conteos realizados en muestreos repetidos. Nuestro área de estudio es una zona de transición agrícola-forestal en una malla de 50x50 celdas. Sabemos que nuestra especie habita principalmente en bosques y tiene querencia por temperaturas cálidas. Hemos muestreado un total de 100 sitios diferentes en los que hemos realizado conteos directos. Como sabemos que nuestra especie es sensible a la temperatura, en cada muestreo tomamos nota de la temperatura que había en ese momento.
 
 
 
