@@ -84,7 +84,7 @@ mb.gof.test(m2, nsim = 50)
 
 Vamos a modelizar la abundancia (número de individuos) de una especie a partir de conteos realizados en muestreos repetidos. Nuestro área de estudio es una zona de transición agrícola-forestal en una malla de 50x50 celdas. Sabemos que nuestra especie habita principalmente en bosques y tiene querencia por temperaturas cálidas. Hemos muestreado un total de 100 sitios diferentes en los que hemos realizado conteos directos. Como sabemos que nuestra especie es sensible a la temperatura, en cada muestreo tomamos nota de la temperatura que había en ese momento.
 
-```{r ch6, message=FALSE, cache = T, echo = T}
+```{r ch6, message=FALSE, cache = T, echo = T, eval = F}
 
 datos <- read.csv("https://github.com/jabiologo/web/raw/master/nmixDatos.csv")
 head(datos)
