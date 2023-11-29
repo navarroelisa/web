@@ -20,7 +20,9 @@ text-align: justify}
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
- 
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(tooltip_message = 'Click para copiar', tooltip_success = 'Hecho!',position = c('top', 'right'))
+```
  
  Tutoriales para el taller **Introducción a la modelización jerárquica: detectabilidad imperfecta en modelos de ocupación y N-mixture** impartido en el XVI Congreso de la SECEM (6-9 de diciembre de 2023 en Granollers).
  
@@ -29,7 +31,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Vamos a modelizar la ocupación (probabilidad de presencia) de una especie a partir de datos de cámaras trampa. Nuestro área de estudio es una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que nuestra especie utiliza mayormente el hábitat de matorral de los fondos de valle de nuestro área de estudio. Disponemos de un total de 100 cámaras de fototrampeo que hemos dispuesto aleatoriamente en nuestro área de estudio que han estado activas durante 7 noches utilizando una lata de sardinas como atrayente. De las 100 cámaras, 47 de ellas son de la marca A y 53 de la marca B.
 
 
-```{r ch1, message=F, cache = F, eval = F}
+```{r ch1, message=F, cache = T, eval = T}
 # Instalamos y cargamos las librerías que vamos a utilizar
 #install.packages("terra")
 library(terra)
@@ -41,7 +43,7 @@ datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/tutori
 head(datos)
 ```
 
-```{r ch2, message=FALSE, cache = F, eval = F}
+```{r ch2, message=FALSE, cache = T, eval = T}
 elev <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/elev.tif")
 arbu <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/arbu.tif")
 names(elev) <- "elev"
@@ -56,7 +58,7 @@ datos$arbu <- scale(arbu[datos$id])[1:100]
 head(datos)
 ```
 
-```{r ch3, message=FALSE, cache = T, echo = T, eval = F}
+```{r ch3, message=FALSE, cache = T, echo = T, eval = T}
 obserCov <- list(dia = as.matrix(datos[,10:16]))
 datosUM <- unmarkedFrameOccu(as.matrix(datos[,3:9]), siteCovs=datos[,c(2,17,18)], obsCovs=obserCov)
 #m1 <- occu(~ marca  + dia ~ elev + arbu, data = datosUM)
@@ -122,7 +124,7 @@ predRas <- rast(nrows=50, ncols=50, xmin=0, xmax=50, ymin = 0, ymax = 50)
 predRas[] <- pred$Predicted
 plot(predRas)
 
-#Nmix.gof.test(m1, nsim = 50)
+Nmix.gof.test(m1, nsim = 50)
 
 ```
 
