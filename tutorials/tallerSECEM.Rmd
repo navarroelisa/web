@@ -1,7 +1,7 @@
 ---
 title: "Taller SECEM"
 author: "Javier Fernández-López"
-date: "28 de noviembre de 2023"
+date: "6 de diciembre de 2023"
 bibliography: references_tutorials.bib
 output: 
   html_document:
@@ -24,7 +24,14 @@ knitr::opts_chunk$set(echo = TRUE)
 klippy::klippy(tooltip_message = 'Click para copiar', tooltip_success = 'Hecho!',position = c('top', 'right'))
 ```
  
- Materiales para el taller **Introducción a la modelización jerárquica: detectabilidad imperfecta en modelos de ocupación y N-mixture** impartido en el XVI Congreso de la SECEM (6-9 de diciembre de 2023 en Granollers).
+# Presentación
+
+ En este espacio se encuentran los contenidos teóricos y prácticos para el taller **Introducción a la modelización jerárquica: detectabilidad imperfecta en modelos de ocupación y N-mixture** impartido en el XVI Congreso de la SECEM (6-9 de diciembre de 2023 en Granollers). En los siguientes enlaces se pueden descargar los materiales se utilizarán durante el taller:
+ 
+* Presentaciones (PDF) de los contenidos teóricos
+* Script en R y datos necesarios para las sesiones prácticas
+
+ A continuación se presenta de manera resumida la teoría del taller y posteriormente los casos prácticos.
 
 # Proceso ecológico y observacional
 
@@ -41,75 +48,170 @@ Uno de los sesgos más comunes en los procesos observacionales a la hora de estu
 
 # Modelos de ocupación
 
-Los modelos de ocupación nos permiten estimar la **probabilidad de presencia de una especie** (a menudo denominada simplemente distribución, _variable de estado_) en nuestro área de estudio teniendo en cuenta la detectabilidad imperfecta a partir de muestreos repetidos registrando **detecciones/no detecciones** (_observaciones_). 
+Los modelos de ocupación nos permiten estimar la **probabilidad de presencia o _distribución_ de una especie** (esta será nuestra _variable de estado_) en nuestro área de estudio teniendo en cuenta la detectabilidad imperfecta a partir de muestreos repetidos registrando **detecciones/no detecciones** (*observaciones*). Para ello, asumiremos que el proceso de que una especie esté presente en el sitio $i$ ($z_{i} = 1$) sigue una distribución de $Bernoulli$ con probabilidad de éxito (_probabilidad de ocupación_) $\psi_{i}$:
 
 \begin{equation}
 \tag{Eq 1}\label{eq1}
 z_{i} \sim Bernoulli(\psi_{i})
 \end{equation}
+
+Esta probabilidad de ocupación a su vez puede ser modelizada por medio de covariables predictoras utilizando la maquinaria habitual de los modelos lineales generalizados, utilizando por ejemplo la función vínculo $logit$ para asegurarnos de que el parámetro $\psi_{i}$ toma valores entre 0 y 1, ya que se trata de una probabilidad (otras funciones vínculo como $probit$ o $cloglog$ son igualmente posibles):
+
 \begin{equation}
 \tag{Eq 2}\label{eq2}
-h_{ij}|z_{i} \sim Bernoulli(z_{i}p_{i})
+logit(\psi_{i}) = \boldsymbol{\beta X_{i}}
 \end{equation}
 
+donde $\boldsymbol{\beta}$ representa el vector de que forman el intercepto $\beta_{0}$ y los coeficientes o _estimates_ de cada una de las covariables predictoras ($\beta_{1}, \beta_{2}, ... \beta_{n}$), mientras que $\boldsymbol{X_{i}}$ representa el valor de cada una de las covariables predictoras ($X1_{i}, X2_{i}, ... Xn_{i}$) en el sitio $i$.<br/>
 
+Hasta aquí, el procedimiento es exáctamente idéntico a una regresión logística utilizada normalmente para modelizar la presencia/ausencia de las especies. La diferencia en los modelos de ocupación radica en que se añade un sub-modelo que describe el proceso observacional y se sirve del histórico de detecciones/no detecciones para estimar la probabilidad de detección de la especie en cada sitio $i$:
+
+\begin{equation}
+\tag{Eq 3}\label{eq3}
+h_{ij}|z_{i} \sim Bernoulli(z_{i}p_{ij})
+\end{equation}
+
+donde $h_{ij}|z_{i}$ es el histórico de $j$ detecciones/no detecciones dado que la especie esté realmente presente o ausente (1 / 0) en el sitio $i$ ($z_{i}$), mientras que $p_{ij}$ es la probabilidad de detección de la especie en el sitio $i$ durante el muestreo $j$. Una de las ventajas de los modelos de ocupación es que nos permiten a la vez modelizar esa probabilidad de detección $p_{ij}$ por medio de covariables predictoras de la misma forma que hicimos con la ocupación: 
+
+\begin{equation}
+\tag{Eq 4}\label{eq4}
+logit(p_{ij}) = \boldsymbol{\beta X_{ij}}
+\end{equation}
+
+Cabe destacar que en el **proceso observacional** pueden existir dos tipos de covariables predictoras: covariables que afecten al sitio $i$, o covariables que afecten a la ocasión de muestreo $j$. Puede ser que la detectabilidad de la especie se vea afectada por las características físicas de una determinada localidad $i$ si por ejemplo nos encontramos en un terreno muy escarpado con mucho desnivel y esto nos impide localizar fácilmente a nuestra especie en comparación con localidades más planas. Pero también puede suceder que las condiciones meteorológicas en una determinada ocasión de muestreo impidan la detección de la especie (por ejemplo, momentos de mucha niebla) en comparación a otras ocasiones de muestreo en la misma localidad (días despejados). Nótese que esta es una característica propia del proceso observacional, ya que en los modelos de ocupación se asume que la variable de estado (presencia o ausencia real de la especie en una localidad) no varía durante la realización del estudio. Esta situación es igualmente aplicable a los modelos N-mixture que veremos a continuación.<br/>
+
+De esta forma se puede apreciar la estructura _jerárquica_ de los modelos de ocupación, ya que el **proceso observacional** (\\ref{eq3} y \\ref{eq4}) se construye sobre la base de que la especie esté realmente presente o ausente en cada sitio (**proceso ecológico**, \\ref{eq1} y \\ref{eq2}), pudiendo estar afectado independientemente por otras covariables. 
 
 # Modelos N-mixture
 
+Los modelos N-mixture son la versión para trabajar con conteos y abundancias de los modelos de ocupación. Nos permiten estimar la **_abundancia_ de una especie** (esta será nuestra _variable de estado_) en nuestro área de estudio teniendo en cuenta la detectabilidad imperfecta a partir de muestreos repetidos registrando **conteos** de los individuos de nuestra especie (*observaciones*). Para ello, asumiremos que la abundancia de una especie en el sitio $i$ ($N_{i}$) sigue una distribución de $Poisson$ con intensidad o abundancia media $\lambda_{i}$:
+
+\begin{equation}
+\tag{Eq 5}\label{eq5}
+N_{i} \sim Poisson(\lambda_{i})
+\end{equation}
+
+De forma similar a los modelos de ocupación, esta intensidad o abundancia media $\lambda_{i}$ puede modelizarse a través de covariables predictoras utilizando la maquinaria habitual en los modelos lineales generalizados utilizando esta vez la función vínculo $log$ para que el valor de $\lambda_{i}$ siempre sea positivo:
+
+\begin{equation}
+\tag{Eq 6}\label{eq6}
+log(\lambda_{i}) = \boldsymbol{\beta X_{i}}
+\end{equation}
+
+donde, análogamente al modelo de ocupación, $\boldsymbol{\beta}$ representa el vector de que forman el intercepto $\beta_{0}$ y los coeficientes o _estimates_ de cada una de las covariables predictoras ($\beta_{1}, \beta_{2}, ... \beta_{n}$), mientras que $\boldsymbol{X_{i}}$ representa el valor de cada una de las covariables predictoras ($X1_{i}, X2_{i}, ... Xn_{i}$) en el sitio $i$.<br/><br/>
+
+Una vez más, hasta aquí el procedimiento sería idéntico a una regresión de Poisson, o un modelo lineal generalizado utilizando la familia de $Poisson$. Sin embargo, ahora podemos añadir un nuevo sub-modelo que se encargue de modelizar el proceso observacional y tener en cuenta la detectabilidad imperfecta a la hora de contar los indivduos de nuestra especie. Para ello utilizaremos la distribución $Binomial$ en la que cada uno de los individuos realmente presentes en cada sitio de muestreo $i$ será un ensayo de "éxito o fracaso" que dependerá de una probabilidad de detección individual ($p_{ij}$):
+
+\begin{equation}
+\tag{Eq 7}\label{eq7}
+C_{ij}|N_{i} \sim Binomial(N_{i},p_{ij})
+\end{equation}
+
+En este caso, $C_{ij}$ será el resultado del conteo de individuos en el sitio $i$ durante el muestreo $j$, mientras que $N_{i}$ será el número de individuos realmente presentes en el sitio $i$. De igual forma que en los modelos de ocupación, la probabilidad de detección (esta vez a nivel de individuo), puede ser a su vez modelizada mediante covariables predictoras (nótese que volvemos a usar la función vínculo $logit$ ya que la probabilidad debe encontrarse entre 0 y 1):
+
+\begin{equation}
+\tag{Eq 8}\label{eq8}
+logit(p_{ij}) = \boldsymbol{\beta X_{ij}}
+\end{equation}
+
+Entre las numerosas extensiones disponibles de este modelo general, una de las más básicas es la de asumir que la abundancia de nuestra especie sigue otra distribución que no sea la de $Poisson$ determinada en la \\ref{eq7}, como la $\text{Binomial negativa}$ o la $\text{Poisson inflada de ceros}$
+
 # Práctica 1: Modelos de ocupación
 
-Vamos a modelizar la ocupación (probabilidad de presencia) de una especie a partir de datos de cámaras trampa. Nuestro área de estudio es una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que nuestra especie utiliza mayormente el hábitat de matorral de los fondos de valle de nuestro área de estudio. Disponemos de un total de 100 cámaras de fototrampeo que hemos dispuesto aleatoriamente en nuestro área de estudio que han estado activas durante 7 noches utilizando una lata de sardinas como atrayente. De las 100 cámaras, 47 de ellas son de la marca A y 53 de la marca B.
+Queremos modelizar la ocupación (probabilidad de presencia) de una especie a partir de datos de cámaras trampa. Nuestro área de estudio es una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que nuestra especie utiliza mayormente el hábitat de matorral de los fondos de valle de nuestro área de estudio. Disponemos de un total de 100 cámaras de fototrampeo que hemos dispuesto aleatoriamente en nuestro área de estudio que han estado activas durante 7 noches utilizando una lata de sardinas como atrayente. De las 100 cámaras, 47 de ellas son de la marca A y 53 de la marca B.
 
 
 ```{r ch1, message=F, cache = T, eval = T}
 # Instalamos y cargamos las librerías que vamos a utilizar
 #install.packages("terra")
+#install.packages("unmarked")
+#install.packages("AICcmodavg")
 library(terra)
 library(unmarked)
 library(AICcmodavg)
 
-
+# Leemos nuestros datos en formato CVS
 datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/tutorials/tallerSECEM_files/occuDatos.csv")
+# datos <- read.csv("mi/ruta/occuDatos.csv")
+
+# Le pedimos a R que nos muestre las primeras filas de nuestros datos
 head(datos)
 ```
 
 ```{r ch2, message=FALSE, cache = T, eval = T}
+# Cargamos las capas raster correspondientes a nuestras covariables predictoras,
+# en este caso elevación y porcentaje de vegetación arbustiva
 elev <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/elev.tif")
 arbu <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/arbu.tif")
 names(elev) <- "elev"
 names(arbu) <- "arbu"
+
+# Vamos a graficar estas capas para hacernos una idea de cómo son. Además,
+# colocaremos encima las localizaciones de nuestros dos modelos de cámaras
 par(mfrow = c(1,2))
 plot(elev, main = "Elevación")
 points(xyFromCell(elev, datos$id[datos$marca == "A"]), col = "darkred", pch = 19)
 points(xyFromCell(elev, datos$id[datos$marca == "B"]), col = "darkblue", pch = 19)
 plot(arbu, main = "Porcentaje arbusto")
+
+# En este paso estandarizaremos nuestras variables para que su media sea 0 y su
+# desviación estándar 1. Esta es una práctica habitual en modelización que ayuda
+# a ajustar los modelos de forma más efectiva. La fórmula es:
+# valor escalado = (valor de la cov - valor medio de la cov)/ SD de la cov
 datos$elev <- scale(elev[datos$id])[1:100]
 datos$arbu <- scale(arbu[datos$id])[1:100]
+
+# Volvemos a inspeccionar las primeras filas de nuestro juego de datos
 head(datos)
 ```
 
 ```{r ch3, message=FALSE, cache = T, echo = T, eval = T}
+# A continuación prepararemos los datos para que sean entendidos por el paquete
+# unmarked. Para ello debemos colocar de una forma determinada nuestras
+# observaciones (detecciones/no detecciones en este caso), nuestras covariables
+# predictoras. Recordad que las covariables predictoras que pueden estar
+# relacionadas con los sitios de muestreos (siteCovs) o con las ocasiones de
+# muestreo (obsCovs)
 obserCov <- list(dia = as.matrix(datos[,10:16]))
 datosUM <- unmarkedFrameOccu(as.matrix(datos[,3:9]), siteCovs=datos[,c(2,17,18)], obsCovs=obserCov)
-#m1 <- occu(~ marca  + dia ~ elev + arbu, data = datosUM)
-m2 <- occu(~ marca  + dia + arbu ~ elev + arbu, data = datosUM)
-#m3 <- occu(~ marca  + dia + arbu + elev ~ elev + arbu, data = datosUM)
 
+# A continuación ajustaremos el modelo de ocupación utilizando la marca de la 
+# cámara trampa y los días desde que se colocó la cámara como covariables que
+# afectan a la detectabilidad (proceso observacional), y elevación y porcentaje
+# de cobertura arbustiva como covariables que afectan a la ocupación o
+# probabilidad de presencia (proceso ecológico)
+m1 <- occu(~ marca  + dia ~ elev + arbu, data = datosUM)
+#Inspeccionamos los resultados del modelo
+summary(m1)
 
-plotEffects(m2, type = "det", covariate="arbu")
+# Inspeccionamos los efectos de la covariable de la cámara  y del procentaje 
+# de arbusto
+plotEffects(m1, type = "det", covariate="marca")
+plotEffects(m1, type = "state", covariate="arbu")
 
-# scaled = (x-mean(x))/sd
+# También podemos predecir de forma espacialmente explícita nuestro modelo 
+# de ocupación para inspeccionar la probabilidad de presencia de nuestra especie
+# sobre un mapa. Para ello primero estandarizaremos los rásters de la misma
+# forma que lo hicimos con nuestras variables
 elevScaled <- (elev - 958.29) / 187.6693
 arbuScaled <- (arbu - 49.78) / 7.041493
-
 dataPred <- c(elevScaled, arbuScaled)
 names(dataPred) <- c("elev", "arbu")
 
-pred <- predict(m2, dataPred, type = "state")
+# Después, podemos utilizar la función predict con nuestro modelo y las nuevas
+# capas raster estandarizadas y graficar los resultados
+pred <- predict(m1, dataPred, type = "state")
 plot(pred)
 
-mb.gof.test(m2, nsim = 50)
+# Por último podemos explorar la bondad de ajuste de nuestro modelo, esto es,
+# cuanto de bien predice nuestras observaciones el modelo que hemos construido.
+mb.gof.test(m1, nsim = 50)
 ```
+
+¿Qué podemos decir de este modelo? En primer lugar, puede sorprendernos el coeficiente estimado para la covariable _porcentaje de arbusto_. Este coeficiente es ligeramente negativo (-0.02), pero es poco significativo, su _p-value_ es mayor de 0.05 y el intervalo de confianza de este valor utilizando el error estándar incluye el valor 0, por lo que esta covariable predictora parece que tiene poco efecto en nuestra especie. Sin embargo, como investigadores estábamos seguros de que esta especie utilizaba el hábitat de matorral del fondo de valle de nuestra área de estudio...<br/>
+Cuando graficamos los efectos de las covariables en nuestro modelo también podemos apreciar que la marca de cámara trampa **B** es bastante más efectiva que la **A** a la hora de detectar nuestra especie, y confirmamos que el porcentaje de arbusto apenas tiene efecto sobre la probabilidad de presencia de nuestra especie.<br/>
+Por último podemos comprobar que la bondad de ajuste de nuestro modelo no es demasiado buena... el p-valor = 0.06 está a punto de ser significativo, lo que indicaría que nuestros datos difieren bastante de los predichos por el modelo. Atendiendo al valor de ĉ = 1.54 apreciamos algo de sobredispersión.<br/>
+Quizás podríamos construir otro modelo modificando las covariables predictoras en los diferentes sub-modelos para los procesos ecológico y observacional y compararlo con el modelo 1 mediante su valor de AIC.
 
 # Práctica 2: Modelos N-mixture
 
@@ -157,5 +259,8 @@ plot(predRas)
 Nmix.gof.test(m1, nsim = 50)
 
 ```
+# Extensiones
+A continuación se mencionan algunas extensiones a estos modelos y otras lecturas recomendadas:
+
 # Referencias
 
