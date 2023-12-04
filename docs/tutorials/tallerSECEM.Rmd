@@ -121,7 +121,7 @@ Entre las numerosas extensiones disponibles de este modelo general, una de las m
 Queremos modelizar la ocupación (probabilidad de presencia) de una especie a partir de datos de cámaras trampa. Nuestro área de estudio es una zona montañosa dividida en una malla de 50x50 celdas. Sabemos que nuestra especie utiliza mayormente el hábitat de matorral de los fondos de valle de nuestro área de estudio. Disponemos de un total de 100 cámaras de fototrampeo que hemos dispuesto aleatoriamente en nuestro área de estudio que han estado activas durante 7 noches utilizando una lata de sardinas como atrayente. De las 100 cámaras, 47 de ellas son de la marca A y 53 de la marca B.
 
 
-```{r ch1, message=F, cache = T, eval = T}
+```{r ch1, message=F, cache = F, eval = T}
 # Instalamos y cargamos las librerías que vamos a utilizar.
 #install.packages("terra")
 #install.packages("unmarked")
@@ -140,7 +140,7 @@ datos <- read.csv("https://raw.githubusercontent.com/jabiologo/web/master/tutori
 head(datos)
 ```
 
-```{r ch2, message=FALSE, cache = T, eval = T}
+```{r ch2, message=FALSE, cache = F, eval = T}
 # Cargamos las capas raster correspondientes a nuestras covariables predictoras,
 # en este caso elevación y porcentaje de vegetación arbustiva.
 elev <- rast("https://github.com/jabiologo/web/raw/master/tutorials/tallerSECEM_files/elev.tif")
@@ -213,12 +213,12 @@ plot(pred)
 
 # Por último podemos explorar la bondad de ajuste de nuestro modelo, esto es,
 # cuanto de bien predice nuestras observaciones el modelo que hemos construido.
-mb.gof.test(m1, nsim = 50)
+mb.gof.test(m1, nsim = 100)
 ```
 
 ¿Qué podemos decir de este modelo? En primer lugar, puede sorprendernos el coeficiente estimado para la covariable _porcentaje de arbusto_. Este coeficiente es ligeramente negativo (-0.02), pero es poco significativo, su _p-value_ es mayor de 0.05 y el intervalo de confianza de este valor utilizando el error estándar incluye el valor 0, por lo que esta covariable predictora parece que tiene poco efecto en nuestra especie. Sin embargo, como investigadores estábamos seguros de que esta especie utilizaba el hábitat de matorral del fondo de valle de nuestra área de estudio...<br/>
 Cuando graficamos los efectos de las covariables en nuestro modelo también podemos apreciar que la marca de cámara trampa **B** es bastante más efectiva que la **A** a la hora de detectar nuestra especie, y confirmamos que el porcentaje de arbusto apenas tiene efecto sobre la probabilidad de presencia de nuestra especie.<br/>
-Por último podemos comprobar que la bondad de ajuste de nuestro modelo no es demasiado buena... el p-valor = 0.06 está a punto de ser significativo, lo que indicaría que nuestros datos difieren bastante de los predichos por el modelo. Atendiendo al valor de ĉ = 1.54 apreciamos algo de sobredispersión.<br/>
+Por último podemos comprobar que la bondad de ajuste de nuestro modelo no es demasiado buena... el p-valor no es demasiado significativo pero atendiendo al valor de ĉ apreciamos algo de sobredispersión.<br/>
 Quizás podríamos construir otro modelo modificando las covariables predictoras en los diferentes sub-modelos para los procesos ecológico y observacional y compararlo con el modelo 1 mediante su valor de AIC.
 
 # Práctica 2: Modelos N-mixture
@@ -301,21 +301,23 @@ predRas[] <- pred$Predicted
 plot(predRas)
 
 # Por último, podemos analizar la bondad de ajuste de nuestro modelo.
-Nmix.gof.test(m1, nsim = 50)
+Nmix.gof.test(m1, nsim = 100)
 ```
 Al igual que en el caso anterior, nos podemos preguntar muchas cosas sobre este modelo. ¿Qué efecto parece que tiene la temperatura media del sitio de muestreo sobre la detectabilidad de los individuos de nuestra especie? ¿Cómo podríamos mejorar este modelo?<br/>
 Hay otras preguntas sobre las que podemos reflexionar comparando los modelos de ocupación y los modelos N-mixture:
+
 * ¿Las detectabilidades $p_{ij}$ que estamos calculando en cada modelo son la misma métrica?
 * ¿Afecta de igual forma la asunción de población cerrada en los modelos de ocupación y en los modelos N-mixture?<br/>
 
 # Extensiones
 A continuación se mencionan algunas extensiones a estos modelos y otras lecturas recomendadas:
 
-* Modelos de ocupación con más de un estado o más de un nivel, interesantes para modelizar diferentes categorías de ocupación, como ausencia/presencia/presencia con crías o ausencia/presencia/presencia con infección.
-* Modelos de ocupación teniendo en cuenta falsos positivos, interesantes cuando consideramos que la probabilidad de cometer falsos positivos es alta, como a la hora de identificar una especie a partir de contactos indirectos o genéticamente cuando la incertidumbre es alta).
-* Modelos de Royle-Nichols, para estimas de abundancias a partir de detecciones/no detecciones de una especie.
-* Modelos dinámicos, interesantes para dinámicas poblacionales temporales o cuando tenemos certeza de que se viola la asunción de población cerrada.
-* Modelos integrados verosimilitud conjunta, cuando queremos combinar más de una fuente de datos en un único modelo.
+* Modelos de ocupación con más de un estado, interesantes para modelizar diferentes categorías de ocupación, como ausencia/presencia/presencia con crías o ausencia/presencia/presencia con infección. Función `occuMS` del paquete `unmarked` [@Nichols2007].
+* Modelos de ocupación teniendo en cuenta falsos positivos, interesantes cuando consideramos que la probabilidad de cometer falsos positivos es alta, como a la hora de identificar una especie a partir de contactos indirectos o genéticamente cuando la incertidumbre es alta [@Royle2006]. Función `occuFP`del paquete `unmarked`.
+* Modelos de Royle-Nichols, para estimas de abundancias a partir de detecciones/no detecciones de una especie. Función `occuRN` del paquete `unmarked` [@Royle2003]. Un ejemplo en [@Fernández-López2022](https://onlinelibrary.wiley.com/doi/epdf/10.1111/ecog.06113).
+* Modelos dinámicos, interesantes para dinámicas poblacionales temporales o cuando tenemos certeza de que se viola la asunción de población cerrada. Funciones `colext()` [@MacKenzie2003] y `pcountOpen()` [@Dail2011] del paquete `unmarked`.
+* Modelos de ocupación multi específicos. Función `occuMulti` del paquete `unmarked`.
+* Modelos integrados verosimilitud conjunta, cuando queremos combinar más de una fuente de datos en un único modelo. Tutorial utilizando NIMBLE en [@Fernández-López2023](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/2527).
 
 #### Go Bayesian!
 
@@ -324,8 +326,8 @@ Entre otras ventajas, la Inferencia Bayesiana proporciona una mayor flexibilidad
 * paquete de R [hSDM](https://cran.r-project.org/web/packages/hSDM/vignettes/hSDM.html)
 * paquete de R [ubms](https://cran.r-project.org/web/packages/ubms/vignettes/random-effects.html)
 * paquetes de R [spOccupancy](https://www.jeffdoser.com/files/spoccupancy-web/) y [spAbundance](https://www.jeffdoser.com/files/spabundance-web/)
-* [NIMBLE](https://r-nimble.org/), JAGS, BUGS, [Stan](https://mc-stan.org/), etc.
 * [INLA](https://www.r-inla.org/)
+* [NIMBLE](https://r-nimble.org/), JAGS, BUGS, [Stan](https://mc-stan.org/), etc.
 
 # Referencias
 
