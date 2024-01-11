@@ -5,15 +5,5 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "Tutorials"
-      href: Tutorials.html
-    - text: "Research"
-      href: Research.html
-    - text: "Links"
-      href: Links.html
-    - text: "Máster UCLM"
-      href: masterUCLM.html
-    - text: "EURING"
-      href: euring.html
 output_dir: "docs"
 
