@@ -6,7 +6,7 @@ navbar:
       icon: fa-home
       href: index.html
     - text: "Research"
-      icon: fa-library
+      icon: fa-book
       href: research.html
 output_dir: "docs"
 

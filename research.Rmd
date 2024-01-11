@@ -1,0 +1,14 @@
+---
+title: "research"
+author: "Elisa Navarro"
+date: "2024-01-11"
+output: html_document
+bibliography: references.bib
+nocite: | 
+  @navarro2021
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
