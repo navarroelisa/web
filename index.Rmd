@@ -7,6 +7,7 @@ output:
     fig_height: 6
 ---
 
+```{=html}
 <style type="text/css">
 .title {
   display: none;
@@ -17,27 +18,21 @@ output:
 }
 
 </style>
-
+```
 <div class="row" style="padding-top: 30px;">
-<div class="col-sm-6">
 
+::: col-sm-6
 # **Eli&Noe's site**
-
 
 This is a test web site. Just a test
 
-
 ## Links
 
-1. my github profile [https://github.com/navarroelisa](https://github.com/navarroelisa)
+1.  my github profile <https://github.com/navarroelisa>
 
-2. more research in my [Google Schoolar](https://scholar.google.com/citations?user=fa-E_e8AAAAJ&hl=en)
+2.  more research in my [Google Schoolar](https://scholar.google.com/citations?user=fa-E_e8AAAAJ&hl=en)
+:::
 
-</div>
-<div class="col-sm-6">
-
-
-<a href = "https://www.ucm.es/">
-![](images/escudo.png)
-</a>
-</div>
+::: col-sm-6
+<a href = "https://www.ucm.es/"> ![](images/escudo.png) </a>
+:::
