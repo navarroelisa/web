@@ -3,6 +3,8 @@ title: "webpage site"
 bibliography: references.bib
 output: 
   html_document:
+    theme: sandstone
+    highlight: haddock
     fig_width: 20
     fig_height: 6
 ---
@@ -22,7 +24,7 @@ output:
 <div class="row" style="padding-top: 30px;">
 
 ::: col-sm-6
-# **Eli&Noe's site**
+# **Neuroscience lab**
 
 This is a test web site. Just a test
 
@@ -34,5 +36,5 @@ This is a test web site. Just a test
 :::
 
 ::: col-sm-6
-<a href = "https://www.ucm.es/"> ![](images/escudo.png) </a>
+<a href = "https://www.ucm.es/"> ![](images/word-cloud.png) </a>
 :::

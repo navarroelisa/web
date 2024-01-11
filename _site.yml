@@ -1,12 +1,21 @@
-name: "Javi's site"
+name: "Neuroscience lab"
 navbar:
   title: "Welcome"
   left:
     - text: "Home"
       icon: fa-home
       href: index.html
+    - text: "Meet Elisa Navarro"
+      icon: fa-home
+      href: elisa.html
+    - text: "Meet Noemí Esteras"
+      icon: fa-home
+      href: index.html
     - text: "Research"
       icon: fa-book
       href: research.html
+    - text: "News"
+      icon: fa-home
+      href: news.html
 output_dir: "docs"
 

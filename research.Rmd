@@ -2,7 +2,12 @@
 title: "research"
 author: "Elisa Navarro"
 date: "2024-01-11"
-output: html_document
+output: 
+  html_document:
+    theme: sandstone
+    highlight: haddock
+    fig_width: 20
+    fig_height: 6
 bibliography: references.bib
 nocite: | 
   @navarro2021
