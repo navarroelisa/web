@@ -15,26 +15,26 @@ output:
   display: none;
 }
 
-#getting-started img {
-  margin-right: 10px;
+main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+text-align: justify
 }
 
 </style>
 ```
 <div class="row" style="padding-top: 30px;">
 
-::: col-sm-6
 # **Neuroscience lab**
 
-This is a test web site. Just a test
+## *Understanding the role of mitochondria and microglia in the development of neurodegenerative diseases*
 
-## Links
+<a href = "https://www.ucm.es/"> <img style="float: right;" height=230 width=500 src="images/word-cloud.png"> </a>
 
-1.  my github profile <https://github.com/navarroelisa>
+Our lab is located at [Universidad Complutense de Madrid](https://www.ucm.es/). We are a multidisciplinary team interested in understanding the molecular basis of neruodegenerative diseases
 
-2.  more research in my [Google Schoolar](https://scholar.google.com/citations?user=fa-E_e8AAAAJ&hl=en)
-:::
 
-::: col-sm-6
-<a href = "https://www.ucm.es/"> ![](images/word-cloud.png) </a>
-:::

@@ -10,10 +10,13 @@ navbar:
       href: elisa.html
     - text: "Meet Noemí Esteras"
       icon: fa-home
-      href: index.html
+      href: noemi.html
     - text: "Research"
       icon: fa-book
       href: research.html
+    - text: "Lab members"
+      icon: fa-book
+      href: labmembers.html
     - text: "News"
       icon: fa-home
       href: news.html
