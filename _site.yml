@@ -5,5 +5,8 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
+    - text: "Research"
+      icon: fa-library
+      href: research.html
 output_dir: "docs"
 
