@@ -27,15 +27,15 @@ text-align: justify
 </style>
 ```
 
-# **Meet Elisa Navarro (she/hers/hers)**
+<a href = "https://scholar.google.com/citations?user=fa-E_e8AAAAJ&hl=en/"> <img style="float: right;" height=296 width=444 src="images/Elisa.jpg"> </a>
+
+# **Meet Elisa Navarro (she/her/hers)**
 ## **About me**
-I hold a major in Biochemistry from UCM and completed my Ph.D. at Universidad Autónoma de Madrid under the guidance of Dr. Manuela García López. My doctoral research focused on investigating the role of the alpha7 nicotinic receptor in controlling inflammation as a potential target for neuroprotection.<br/>
+I hold a major in Biochemistry from UCM and completed my Ph.D. at Universidad Autónoma de Madrid under the guidance of Dr. Manuela García López. My doctoral research focused on investigating the role of the alpha7 nicotinic receptor in controlling inflammation as a potential target for neuroprotection.
 
 After completing my Ph.D., I embarked on a postdoctoral research journey in New York City at Mount Sinai Hospital. Working under the supervision of Dr. Towfique Raj, I contributed to the [Ronald M. Loeb Center for Alzheimer’s Disease](https://icahn.mssm.edu/research/loeb-alzheimers). My work specifically involved the development of MyND, a multidisciplinary effort aimed at recruiting innate immune cells from patients suffering from Alzheimer's and Parkinson's diseases.
 
 In 2020, I returned to my hometown, Madrid. Currently, I serve as an Assistant Professor in the Biochemistry department at UCM, where I balance teaching and research responsibilities. I am part of the [Cannabinoids research group](https://www.ucm.es/grupos/grupo/73). I have recently established my independent research line, supported by the Ministry of Science and Innovation.
-
-<a href = "https://www.ucm.es/"> <img style="float: right;" height=426 width=640 src="images/Elisa.png"> </a>
 
 ## **Ongoing projects**
 I am a **microglial lover** interested in understanding the role of the innate immune system in the development of neurodegenerative diseases. I am currently working in different lines of investigation
