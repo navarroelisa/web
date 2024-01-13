@@ -1,0 +1,38 @@
+---
+title: "webpage"
+output: 
+  html_document:
+    theme: sandstone
+    highlight: haddock
+    fig_width: 20
+    fig_height: 6
+---
+
+```{=html}
+<style type="text/css">
+.title {
+  display: none;
+}
+
+main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+text-align: justify
+}
+
+</style>
+```
+
+# **Santiago Rodríguez Carreiro**
+
+<img style="float: left; vertical-align:middle;margin:30px 50px" height=279 width=284 src="images/santi_circle.jpg"> </a>
+
+Biochemistry graduate from the Complutense University of Madrid (UCM) and holder of a Master's in Neuroscience from the Autonomous University of Madrid (UAM), Santi is presently pursuing a Ph.D. in Biochemistry, Molecular Biology, and Biomedicine at UCM. His research centers on Parkinson's disease and explores the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
+
+
+
+

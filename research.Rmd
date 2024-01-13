@@ -1,7 +1,5 @@
 ---
-title: "research"
-author: "Elisa Navarro"
-date: "2024-01-11"
+title: "Selected publications of the lab"
 output: 
   html_document:
     theme: sandstone

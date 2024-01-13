@@ -6,19 +6,19 @@ navbar:
       icon: fa-home
       href: index.html
     - text: "Meet Elisa Navarro"
-      icon: fa-home
+      icon: fa-magnifying-glass
       href: elisa.html
     - text: "Meet Noemí Esteras"
-      icon: fa-home
+      icon: fa-magnifying-glass
       href: noemi.html
     - text: "Research"
       icon: fa-book
       href: research.html
     - text: "Lab members"
-      icon: fa-book
+      icon: fa-person
       href: labmembers.html
     - text: "News"
-      icon: fa-home
+      icon: fa-newspaper
       href: news.html
 output_dir: "docs"
 
