@@ -1,7 +1,8 @@
 name: "Neuroscience lab"
+icon: fa-home
 navbar:
   title: "Welcome"
-  left:
+  right:
     - text: "Home"
       icon: fa-home
       href: index.html
