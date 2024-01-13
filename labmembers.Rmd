@@ -29,10 +29,37 @@ text-align: justify
 
 # **Santiago Rodríguez Carreiro**
 
-<img style="float: left; vertical-align:middle;margin:30px 50px" height=279 width=284 src="images/santi_circle.jpg"> </a>
+<img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/santi_circle.jpg"> </a>
 
-Biochemistry graduate from the Complutense University of Madrid (UCM) and holder of a Master's in Neuroscience from the Autonomous University of Madrid (UAM), Santi is presently pursuing a Ph.D. in Biochemistry, Molecular Biology, and Biomedicine at UCM. His research centers on Parkinson's disease and explores the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
+Biochemistry graduate from the Complutense University of Madrid (UCM) and holder of a Master's in Neuroscience from the Autonomous University of Madrid (UAM), Santi is presently pursuing a Ph.D. in Biochemistry, Molecular Biology, and Biomedicine at UCM. 
 
+His research centers on Parkinson's disease and explores the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
+
+</br>
+</br>
+</br>
+</br>
+
+# **Sara Pardo Calderón**
+
+<img style="float: right; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/santi_circle.jpg"> </a>
+
+Biochemistry graduate from the Complutense University of Madrid (UCM) and holder of a Master's in Neuroscience from the Autonomous University of Madrid (UAM), Santi is presently pursuing a Ph.D. in Biochemistry, Molecular Biology, and Biomedicine at UCM. 
+
+His research centers on Parkinson's disease and explores the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
+
+</br>
+</br>
+</br>
+</br>
+
+# **Sara Pardo Calderón**
+
+<img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/santi_circle.jpg"> </a>
+
+Biochemistry graduate from the Complutense University of Madrid (UCM) and holder of a Master's in Neuroscience from the Autonomous University of Madrid (UAM), Santi is presently pursuing a Ph.D. in Biochemistry, Molecular Biology, and Biomedicine at UCM. 
+
+His research centers on Parkinson's disease and explores the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
 
 
 
