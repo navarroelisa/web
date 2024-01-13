@@ -27,11 +27,13 @@ text-align: justify
 </style>
 ```
 
-# **Santiago Rodríguez Carreiro**
+# **Here you can meet the whole team!**
+
+### **Santiago Rodríguez Carreiro**
 
 <img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/santi_circle.jpg"> </a>
 
-Biochemistry graduate from the Complutense University of Madrid (UCM) and holder of a Master's in Neuroscience from the Autonomous University of Madrid (UAM), Santi is presently pursuing a Ph.D. in Biochemistry, Molecular Biology, and Biomedicine at UCM. 
+Santi is a Biochemistry graduate from UCM and holds of a Master's in Neuroscience from the Autonomous University of Madrid (UAM). Currently, Santi is a **Ph.D student** in Biochemistry, Molecular Biology, and Biomedicine at UCM. 
 
 His research centers on Parkinson's disease and explores the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
 
@@ -40,26 +42,26 @@ His research centers on Parkinson's disease and explores the endocannabinoid sys
 </br>
 </br>
 
-# **Sara Pardo Calderón**
+### **Sara Pardo Calderón**
 
 <img style="float: right; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/santi_circle.jpg"> </a>
 
-Biochemistry graduate from the Complutense University of Madrid (UCM) and holder of a Master's in Neuroscience from the Autonomous University of Madrid (UAM), Santi is presently pursuing a Ph.D. in Biochemistry, Molecular Biology, and Biomedicine at UCM. 
+Sara graduated in Biochemistry in 2023 and she is currently a **Master student** of Biochemistry, Molecular Biology and Biomedicine Master at UCM. 
 
-His research centers on Parkinson's disease and explores the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
+Her project focuses on exploring the endocannabinoid receptor GPR55. She is studying the potential role of GPR55 in the development of Parkinson´s disease. Besides her experiments, ou can also find Sara XXX.
 
 </br>
 </br>
 </br>
 </br>
 
-# **Sara Pardo Calderón**
+### **Alicia Caro Martín**
 
 <img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/santi_circle.jpg"> </a>
 
-Biochemistry graduate from the Complutense University of Madrid (UCM) and holder of a Master's in Neuroscience from the Autonomous University of Madrid (UAM), Santi is presently pursuing a Ph.D. in Biochemistry, Molecular Biology, and Biomedicine at UCM. 
+Alicia is an **undergraduate student** of Biochemistry and she is doing her end-of degree project in the lab.  
 
-His research centers on Parkinson's disease and explores the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
+Alicia is interested in studying microglia functionality in context of physiology and under pro-inflammatory situations. Apart from microglia, Alicia also loves ...XXXX.
 
 
 
