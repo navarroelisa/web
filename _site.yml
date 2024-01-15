@@ -12,13 +12,13 @@ navbar:
     - text: "Meet Noemí Esteras"
       icon: fa-magnifying-glass
       href: noemi.html
-    - text: "Research"
-      icon: fa-book
-      href: research.html
     - text: "Lab members"
       icon: fa-person
       href: labmembers.html
-    - text: "News"
+    - text: "Outreach"
+      icon: fa-book
+      href: outreach.html
+    - text: "News & lab events"
       icon: fa-newspaper
       href: news.html
 output_dir: "docs"

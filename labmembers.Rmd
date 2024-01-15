@@ -29,9 +29,12 @@ text-align: justify
 
 # **Here you can meet the whole team!**
 
-### **Santiago Rodríguez Carreiro**
+### **Santiago Rodríguez-Carreiro**
 
 <img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/santi_circle.jpg"> </a>
+
+</br>
+</br>
 
 Santi is a Biochemistry graduate from UCM and holds of a Master's in Neuroscience from the Autonomous University of Madrid (UAM). Currently, Santi is a **Ph.D student** in Biochemistry, Molecular Biology, and Biomedicine at UCM. 
 

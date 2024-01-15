@@ -27,8 +27,36 @@ text-align: justify
 </style>
 ```
 
-# **Announcements**
+# **News**
+
+<img style="float: right; vertical-align:middle; margin:10px 50px"  height=109 width=160 src="images/fpu.png"> </a>
 
 We are looking for a PhD candidate to apply for a [FPU contract](https://www.universidades.gob.es/ayudas-para-la-formacion-de-profesorado-universitario-fpu-2022/). 
 If interested, please contact: elisnava@ucm.es or nesteras@ucm.es
+
+</br>
+</br>
+</br>
+</br>
+
+# **Lab events**
+
+### **Christmas party & gift exchange 2023**
+
+2023 comes to the end and it´s not all about work...We also have to celebrate the achievements of the year
+
+<img style="margin:10px 50px"  height=353 width=523 src="images/xmas.jpg"> </a>
+
+</br>
+</br>
+</br>
+</br>
+
+### **Leire´s defense**
+
+June 2023, Leire successfully defended her end-of-degree project. Congrats Leire!! It´s being great to have you in the lab 
+
+<img style="float: middle; middle-align:middle; margin:10px 50px"  height=201 width=402 src="images/leire.jpg"> </a>
+
+
 
