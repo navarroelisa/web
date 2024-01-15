@@ -31,9 +31,9 @@ text-align: justify
 <a href = "https://scholar.google.com/citations?user=fa-E_e8AAAAJ&hl=en/"> <img style="float: right; vertical-align:middle;margin:10px 50px"  height=379 width=384 src="images/Elisa1.jpg"> </a>
 
 ## **About me**
-I hold a major in Biochemistry from UCM and completed my Ph.D. at Universidad Autónoma de Madrid under the guidance of Dr. Manuela García López. My doctoral research focused on investigating the role of the alpha7 nicotinic receptor in controlling inflammation as a potential target for neuroprotection.
+I graduated in Biochemistry (2011) and completed my Ph.D. at Universidad Autónoma de Madrid (2016) under the supervision of Dr. Manuela García López. My doctoral research focused on investigating the role of the alpha7 nicotinic receptor in controlling inflammation as a potential target for neuroprotection.
 
-After completing my Ph.D., I embarked on a postdoctoral research journey in New York City at Mount Sinai Hospital. Working under the supervision of Dr. Towfique Raj, I contributed to the [Ronald M. Loeb Center for Alzheimer’s Disease](https://icahn.mssm.edu/research/loeb-alzheimers). My work specifically involved the development of MyND, a multidisciplinary effort aimed at recruiting innate immune cells from patients suffering from Alzheimer's and Parkinson's diseases.
+After completing my Ph.D., I joined the lab of Dr. Towfique Raj, part of the [Ronald M. Loeb Center for Alzheimer’s Disease](https://icahn.mssm.edu/research/loeb-alzheimers) at Mount Sinai Hospital in New York city. My work specifically involved the development of MyND, a multidisciplinary effort aimed at recruiting innate immune cells from patients suffering from Alzheimer's and Parkinson's diseases. During this period, I focused in multi-omic and genetic approach to study the implication of immune system in neurodegeneration.
 
 In 2020, I returned to my hometown, Madrid. Currently, I serve as an Assistant Professor in the Biochemistry department at UCM, where I balance teaching and research responsibilities. I am part of the [Cannabinoids research group](https://www.ucm.es/grupos/grupo/73). I have recently established my independent research line, supported by the Ministry of Science and Innovation.
 
@@ -49,10 +49,11 @@ This project focuses in studying LRRK2 (or dardarin) which is a protein-coding g
 
 I also collaborate with Dr. Javier Fernandez Ruiz studying the role of the Cannabinoid system in Parkinson´s disease. We use different strategies to modulate the cannabonoid system as a target for neuroprotection. We are currently working in undertstanding the role of GPR55 receptor as a potential driver of Parkinson´s disease.
 
-## **Selected publications**
 
 ### **Learn more about my research**
 
 1. more research in my [Google Schoolar](https://scholar.google.com/citations?user=fa-E_e8AAAAJ&hl=en) 
 
-2. my github profile <https://github.com/navarroelisa>
+2. [Web of Science](https://www.webofscience.com/wos/author/record/AEQ-2789-2022)
+
+3. my github profile <https://github.com/navarroelisa>
