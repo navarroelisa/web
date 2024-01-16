@@ -31,8 +31,8 @@ text-align: justify
 
 <img style="float: right; vertical-align:middle; margin:10px 50px"  height=109 width=160 src="images/fpu.png"> </a>
 
-We are looking for a PhD candidate to apply for a [FPU contract](https://www.universidades.gob.es/ayudas-para-la-formacion-de-profesorado-universitario-fpu-2022/). 
-More info [here](https://github.com/navarroelisa/web/docs/fpu_elisa.pdf).
+We are looking for 2 PhD candidates to apply for a [FPU contract](https://www.universidades.gob.es/ayudas-para-la-formacion-de-profesorado-universitario-fpu-2022/). 
+You can find more detailed info [here](https://github.com/navarroelisa/web/tree/master/docs/fpu_elisa.pdf) and [here](https://github.com/navarroelisa/web/tree/master/docs/fpu_noe.pdf).
 If interested, please contact: elisnava@ucm.es or nesteras@ucm.es
 
 </br>
