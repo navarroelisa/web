@@ -33,6 +33,12 @@ text-align: justify
 
 ## *Understanding the role of mitochondria and microglia in the development of neurodegenerative diseases*
 
+</br>
+
+<img style="float: left; vertical-align:left;margin:10px 0px" height=400 width=977 src="images/elinoe1.jpg"> </a>
+
+</br>
+
 <a href = "https://www.ucm.es/"> <img style="float: right; vertical-align:middle;margin:10px 50px" height=230 width=500 src="images/word-cloud.png"> </a>
 
 </br>
