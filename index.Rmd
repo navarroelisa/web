@@ -29,9 +29,9 @@ text-align: justify
 ```
 <div class="row" style="padding-top: 30px;">
 
-# **Neuroscience lab**
+# **Mitoglia lab**
 
-## *Understanding the role of mitochondria and microglia in the development of neurodegenerative diseases*
+## *Understanding the role of **mitochondria** and **microglia** in the development of neurodegenerative diseases*
 
 </br>
 
