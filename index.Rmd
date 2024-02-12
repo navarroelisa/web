@@ -1,5 +1,5 @@
 ---
-title: "webpage site"
+title: "MitoGlia lab webpage"
 bibliography: references.bib
 output: 
   html_document:
