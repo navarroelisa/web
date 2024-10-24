@@ -29,7 +29,7 @@ text-align: justify
 
 # **News**
 
-Check our latest [comment](https://febs.onlinelibrary.wiley.com/doi/epdf/10.1111/febs.17155) about how mutations in *FBXO7* gene associated to Parkinson´s disease affect mitochondrial and proteasomal activity. 
+Check our latest publications! First, an invited expert [comment](https://febs.onlinelibrary.wiley.com/doi/epdf/10.1111/febs.17155) about how mutations in *FBXO7* gene associated to Parkinson´s disease affect mitochondrial and proteasomal activity. Also, a [review](https://journals.lww.com/rmr/fulltext/2024/01010/role_of_non_neuronal_cells_in_neurorepair__a_focus.4.aspx) about to learn more about how non-neuronal cells may contribute to neuropathology. 
 You can find more about our research [here](https://www.webofscience.com/wos/author/record/AEQ-2789-2022) and [here](https://www.researchgate.net/profile/Noemi-Esteras).
 If interested, please contact: elisnava@ucm.es or nesteras@ucm.es
 
