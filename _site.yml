@@ -16,7 +16,7 @@ navbar:
       icon: fa-person
       href: labmembers.html
     - text: "Projects & Papers"
-      icon: fa-person
+      icon: fa-book
       href: papers.html
     - text: "Outreach"
       icon: fa-book
