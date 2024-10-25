@@ -27,7 +27,8 @@ text-align: justify
 </style>
 ```
 
-# **Here you can see our latest publications!**
+# **Publications in the last years**
+To learn more about our background and expertise, here you have detailed information about the publications of the last years. You can find more about our research [here](https://www.webofscience.com/wos/author/record/AEQ-2789-2022) and [here](https://www.researchgate.net/profile/Noemi-Esteras).
 
 <img style="float: left; vertical-align:left;margin:20px 0px" height=257 width=860 src="images/papers.jpg"> </a>
 
@@ -133,31 +134,31 @@ Choi, M. L.; Chappard, A.; Singh, B. P.; Maclachlan, C.; Rodrigues, M.; Fedotova
 
 <brk>
 
-Navarro, E.; Udine, E.; Lopes, K. P.; Parks, M.; Riboldi, G.; Schilder, B. M.; Humphrey, J.; Snijders, G. J. L.; Vialle, R. A.; Zhuang, M.; et al. Dysregulation of mitochondrial and proteolysosomal genes in Parkinson's disease myeloid cells. Nat Aging 2021, 1 (9), 850-863. [link](https://pmc.ncbi.nlm.nih.gov/articles/PMC8728893/)
+Navarro, E.; Udine, E.; Lopes, K. P.; Parks, M.; Riboldi, G.; Schilder, B. M.; Humphrey, J.; Snijders, G. J. L.; Vialle, R. A.; Zhuang, M.; et al. [Dysregulation of mitochondrial and proteolysosomal genes in Parkinson's disease myeloid cells](https://pmc.ncbi.nlm.nih.gov/articles/PMC8728893/) Nat Aging, 1 (9), 850-863 (2021). 
 
 <brk>
 
-Navarro, E.; Norden, D. M.; Trojanowski, P. J.; Godbout, J. P.; López, M. G. Central Activation of Alpha7 Nicotinic Signaling Attenuates LPS-Induced Neuroinflammation and Sickness Behavior in Adult but Not in Aged Animals. Molecules 2021, 26 (8). [link](https://pmc.ncbi.nlm.nih.gov/articles/PMC8067582/)
+Navarro, E.; Norden, D. M.; Trojanowski, P. J.; Godbout, J. P.; López, M. G. [Central Activation of Alpha7 Nicotinic Signaling Attenuates LPS-Induced Neuroinflammation and Sickness Behavior in Adult but Not in Aged Animals[(https://pmc.ncbi.nlm.nih.gov/articles/PMC8067582/) Molecules, 26 (8) (2021). 
 
 <brk>
 
-Kopach, O.; Esteras, N.; Wray, S.; Abramov, A. Y.; Rusakov, D. A. Genetically engineered MAPT 10+16 mutation causes pathophysiological excitability of human iPSC-derived neurons related to 4R tau-induced dementia. Cell Death Dis 2021, 12 (8), 716. [link](https://www.nature.com/articles/s41419-021-04007-w)
+Kopach, O.; Esteras, N.; Wray, S.; Abramov, A. Y.; Rusakov, D. A. [Genetically engineered MAPT 10+16 mutation causes pathophysiological excitability of human iPSC-derived neurons related to 4R tau-induced dementia](https://www.nature.com/articles/s41419-021-04007-w) Cell Death Dis, 12 (8), 716 (2021). 
 
 <brk>
 
-Kamynina, A.; Esteras, N.; Koroev, D. O.; Angelova, P. R.; Volpina, O. M.; Abramov, A. Y. Activation of RAGE leads to the release of glutamate from astrocytes and stimulates calcium signal in neurons. J Cell Physiol 2021, 236 (9), 6496-6506. [link](https://pmc.ncbi.nlm.nih.gov/articles/PMC8651009/)
+Kamynina, A.; Esteras, N.; Koroev, D. O.; Angelova, P. R.; Volpina, O. M.; Abramov, A. Y. [Activation of RAGE leads to the release of glutamate from astrocytes and stimulates calcium signal in neurons](https://pmc.ncbi.nlm.nih.gov/articles/PMC8651009/) J Cell Physiol, 236 (9), 6496-6506 (2021). 
 
 <brk>
 
-Esteras, N.; Kundel, F.; Amodeo, G. F.; Pavlov, E. V.; Klenerman, D.; Abramov, A. Y. Insoluble tau aggregates induce neuronal death through modification of membrane ion conductance, activation of voltage-gated calcium channels and NADPH oxidase. Febs j 2021, 288 (1), 127-141. [link](https://febs.onlinelibrary.wiley.com/doi/10.1111/febs.15340)
+Esteras, N.; Kundel, F.; Amodeo, G. F.; Pavlov, E. V.; Klenerman, D.; Abramov, A. Y. [Insoluble tau aggregates induce neuronal death through modification of membrane ion conductance, activation of voltage-gated calcium channels and NADPH oxidase](https://febs.onlinelibrary.wiley.com/doi/10.1111/febs.15340) Febs j, 288 (1), 127-141 (2021). 
 
 <brk>
 
-Cheng, X.; Vinokurov, A. Y.; Zherebtsov, E. A.; Stelmashchuk, O. A.; Angelova, P. R.; Esteras, N.; Abramov, A. Y. Variability of mitochondrial energy balance across brain regions. J Neurochem 2021, 157 (4), 1234-1243. [link](https://onlinelibrary.wiley.com/doi/10.1111/jnc.15239)
+Cheng, X.; Vinokurov, A. Y.; Zherebtsov, E. A.; Stelmashchuk, O. A.; Angelova, P. R.; Esteras, N.; Abramov, A. Y. [Variability of mitochondrial energy balance across brain regions](https://onlinelibrary.wiley.com/doi/10.1111/jnc.15239) J Neurochem, 157 (4), 1234-1243 (2021). 
 
 <brk>
 
-Angelova, P. R.; Esteras, N.; Abramov, A. Y. Mitochondria and lipid peroxidation in the mechanism of neurodegeneration: Finding ways for prevention. Med Res Rev 2021, 41 (2), 770-784. [link](https://onlinelibrary.wiley.com/doi/10.1002/med.21712)
+Angelova, P. R.; Esteras, N.; Abramov, A. Y. [Mitochondria and lipid peroxidation in the mechanism of neurodegeneration: Finding ways for prevention](https://onlinelibrary.wiley.com/doi/10.1002/med.21712) Med Res Rev, 41 (2), 770-784 (2021). 
 
 <brk>
 <brk>
@@ -168,23 +169,23 @@ Angelova, P. R.; Esteras, N.; Abramov, A. Y. Mitochondria and lipid peroxidation
 
 <brk>
 
-Turovsky, E. A.; Braga, A.; Yu, Y.; Esteras, N.; Korsak, A.; Theparambil, S. M.; Hadjihambi, A.; Hosford, P. S.; Teschemacher, A. G.; Marina, N.; et al. Mechanosensory Signaling in Astrocytes. J Neurosci 2020, 40 (49), 9364-9371. [link](https://pmc.ncbi.nlm.nih.gov/articles/PMC7724146/)
+Turovsky, E. A.; Braga, A.; Yu, Y.; Esteras, N.; Korsak, A.; Theparambil, S. M.; Hadjihambi, A.; Hosford, P. S.; Teschemacher, A. G.; Marina, N.; et al. [Mechanosensory Signaling in Astrocytes](https://pmc.ncbi.nlm.nih.gov/articles/PMC7724146/) J Neurosci, 40 (49), 9364-9371 (2020). 
 
 <brk>
 
-Ramdhani, S.; Navarro, E.; Udine, E.; Efthymiou, A. G.; Schilder, B. M.; Parks, M.; Goate, A.; Raj, T. Tensor decomposition of stimulated monocyte and macrophage gene expression profiles identifies neurodegenerative disease-specific trans-eQTLs. PLoS Genet 2020, 16 (2), e1008549.[link](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008549)
+Ramdhani, S.; Navarro, E.; Udine, E.; Efthymiou, A. G.; Schilder, B. M.; Parks, M.; Goate, A.; Raj, T. [Tensor decomposition of stimulated monocyte and macrophage gene expression profiles identifies neurodegenerative disease-specific trans-eQTLs](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008549) PLoS Genet, 16 (2), e1008549 (2020).
 
 <brk>
 
-Kopach, O.; Esteras, N.; Wray, S.; Rusakov, D. A.; Abramov, A. Y. Maturation and phenotype of pathophysiological neuronal excitability of human cells in tau-related dementia. J Cell Sci 2020, 133 (10). [link](https://pmc.ncbi.nlm.nih.gov/articles/PMC7272359/)
+Kopach, O.; Esteras, N.; Wray, S.; Rusakov, D. A.; Abramov, A. Y. [Maturation and phenotype of pathophysiological neuronal excitability of human cells in tau-related dementia](https://pmc.ncbi.nlm.nih.gov/articles/PMC7272359/) J Cell Sci, 133 (10) (2020). 
 
 <brk>
 
-Esteras, N.; Adjobo-Hermans, M. J. W.; Abramov, A. Y.; Koopman, W. J. H. Visualization of mitochondrial membrane potential in mammalian cells. Methods Cell Biol 2020, 155, 221-245.[link](https://www.sciencedirect.com/science/article/abs/pii/S0091679X19301207?via%3Dihub)
+Esteras, N.; Adjobo-Hermans, M. J. W.; Abramov, A. Y.; Koopman, W. J. H. [Visualization of mitochondrial membrane potential in mammalian cells](https://www.sciencedirect.com/science/article/abs/pii/S0091679X19301207?via%3Dihub) Methods Cell Biol, 155, 221-245 (2020).
 
-Esteras, N.; Abramov, A. Y. Mitochondrial Calcium Deregulation in the Mechanism of Beta-Amyloid and Tau Pathology. Cells 2020, 9 (9). [link](https://pmc.ncbi.nlm.nih.gov/articles/PMC7564294/)
+Esteras, N.; Abramov, A. Y. [Mitochondrial Calcium Deregulation in the Mechanism of Beta-Amyloid and Tau Pathology](https://pmc.ncbi.nlm.nih.gov/articles/PMC7564294/) Cells, 9 (9) (2020). 
 
 <brk>
 
-Britti, E.; Ros, J.; Esteras, N.; Abramov, A. Y. Tau inhibits mitochondrial calcium efflux and makes neurons vulnerable to calcium-induced cell death. Cell Calcium 2020, 86, 102150. [link](https://www.sciencedirect.com/science/article/pii/S0143416019302192?via%3Dihub)
+Britti, E.; Ros, J.; Esteras, N.; Abramov, A. Y. [Tau inhibits mitochondrial calcium efflux and makes neurons vulnerable to calcium-induced cell death](https://www.sciencedirect.com/science/article/pii/S0143416019302192?via%3Dihub) Cell Calcium, 86, 102150 (2020). 
 
