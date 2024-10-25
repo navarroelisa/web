@@ -19,7 +19,7 @@ navbar:
       icon: fa-book
       href: papers.html
     - text: "Outreach"
-      icon: fa-book
+      icon: volume-high
       href: outreach.html
     - text: "News & lab events"
       icon: fa-newspaper
