@@ -61,7 +61,7 @@ among others.
 
 **NRF2 TARGETING IN NEURODEGENERATION**
 
-The transcription factor Nrf2 has emerged in the last years as an important modulator of multiple aspects of mitochondrial function. Given the importance of mitochondria in the development of multiple neurodegenerative diseases, I am interested in the study of the potential therapeutic role of pharmacological activation of Nrf2 in neurodegeneration.
+The transcription factor Nrf2 has emerged in the last years as an important modulator of multiple aspects of mitochondrial function. Given the importance of mitochondria in the development of multiple neurodegenerative diseases, I am interested in the study of the potential therapeutic role of pharmacological activation of Nrf2 in neurodegeneration. Not only in collaboration with my previous mentor **Andrey Abramov** but also in collaboration with **Lisa Rancán**, **Sergio Paredes** and **Manuela García**, we are aiming to explore the role of Nrf2 in pathologies related to LRRK2 and Tau mutations. Our goal is to identify new neuroprotective agents based on Nrf2 induction. 
 
 
 ### **Learn more about my research**

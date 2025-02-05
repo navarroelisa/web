@@ -43,12 +43,15 @@ I am a **microglial lover** interested in understanding the role of the innate i
 
 **DARDAGLIA**
 
-This project focuses in studying LRRK2 (or dardarin) which is a protein-coding gene. Mutations in this gene increase the risk to develop Parkinson´s disease, although the exact molecular mechanisms are still elusive. With this project I am interestied in diving in the function of LRRK2 controlling microglial homeostasis and functionality, especially its role in participating in lipid metabolism. Thus, Dardaglia project was born in an attempt to disentangle the role of dardarin (LRRK2) in microglia through regulation of lipid metabolism. This project is supported by the Ministry of Science and Innovation. 
+This project focuses in studying LRRK2 (or dardarin) which is a protein-coding gene. Mutations in this gene increase the risk to develop Parkinson´s disease, although the exact molecular mechanisms are still elusive. With this project I am interestied in diving in the function of LRRK2 controlling microglial homeostasis and functionality, especially its role in participating in lipid metabolism. Thus, Dardaglia project was born in an attempt to disentangle the role of dardarin (LRRK2) in microglia through regulation of lipid metabolism. This project is supported by the Ministry of Science and Innovation and incorporates top field researchers in the area such as **Jorge Montesinos**, **Towfique Raj** and **Estela Area**. 
 
 **CANNABINOIDS IN PARKINSON DISEASE**
 
-I also collaborate with Dr. Javier Fernandez Ruiz studying the role of the Cannabinoid system in Parkinson´s disease. We use different strategies to modulate the cannabonoid system as a target for neuroprotection. We are currently working in undertstanding the role of GPR55 receptor as a potential driver of Parkinson´s disease. This project is supported by the Michael J. Fox Foundation.
+I also collaborate with **Dr. Javier Fernandez-Ruiz** studying the role of the Cannabinoid system in Parkinson´s disease. We use different strategies to modulate the cannabonoid system as a target for neuroprotection. We are currently working in undertstanding the role of GPR55 receptor as a potential driver of Parkinson´s disease. This project is supported by the Michael J. Fox Foundation.
 
+**NRF2 IN NEURODEGENERATION**
+
+We are also interested in understanding the role of the transcription factor Nrf2 in health and disease. We have initiated a collaborative project with both Noemí & Elisa, in combination with other researchers such as **Lisa Rancán**, **Sergio Paredes** and **Manuela García**, aiming to explore the role of Nrf2 in pathologies related to LRRK2 and Tau mutations. Our goal is to identify new neuroprotective agents based on Nrf2 induction. 
 
 ### **Learn more about my research**
 

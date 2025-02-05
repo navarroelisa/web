@@ -32,7 +32,17 @@ To learn more about our background and expertise, here you have detailed informa
 
 <img style="float: left; vertical-align:left;margin:20px 0px" height=257 width=860 src="images/papers.jpg"> </a>
 
+### **2025**
+
+<brk>
+
+Navarro E & Montesinos J. [Mitochondria-associated endoplasmic reticulum membranes in microglia: one contact to rule them all](https://pmc.ncbi.nlm.nih.gov/articles/PMC11775980/pdf/10.1177_25152564241312807.pdf) Contact. 8: 1-16 (2025)
+
 ### **2024**
+
+<brk>
+
+Navarro E & Esteras N. [Multitarget effects of Nrf2 signalling in the brain: common and specific functions in different cell types](https://www.mdpi.com/2076-3921/13/12/1502) Antioxidants. 13(12): 1502 (2024).
 
 <brk>
 
