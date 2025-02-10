@@ -35,7 +35,7 @@ text-align: justify
 
 </br>
 
-<img style="float: left; vertical-align:left;margin:10px 0px" height=400 width=977 src="images/elinoe1.jpg"> </a>
+<img style="float: left; vertical-align:left;margin:10px 0px" height=403 width=937 src="images/labo2025.jpg"> </a>
 
 </br>
 

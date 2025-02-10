@@ -50,7 +50,6 @@ Among their vital functions, mitochondria buffer and shape cytosolic calcium sig
 essential for neuronal activity. In our previous works, we found that tau protein, which is
 involved in many different neurodegenerative conditions, alters the way mitochondria handles
 calcium. Specifically, we discovered it inhibits NCLX, the Na + /Ca 2+ exchanger that pumps
-
 calcium out of the mitochondria. The impairment of the mitochondrial calcium efflux leads to
 calcium overload inside the mitochondria, which is a trigger for neuronal death.
 In the present project, recently funded by the Ministry of Science (PID2022-137011OA-I00), we
