@@ -1,454 +1,87 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
-
-
-
-<title>webpage</title>
-
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-
-
-
-
-
-
-
-
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
-</style>
-
-
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
-<!-- code folding -->
-
-
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MitoGlia Lab at Universidad Complutense de Madrid. Exploring mitochondria, microglia and the mechanisms of neurodegeneration.">
+<title>Lab life | MitoGlia Lab</title>
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 </head>
-
 <body>
-
-
-<div class="container-fluid main-container">
-
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Welcome</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="index.html">
-    <span class="fa fa-home"></span>
-     
-    Home
-  </a>
-</li>
-<li>
-  <a href="elisa.html">
-    <span class="fa fa-magnifying-glass"></span>
-     
-    Meet Elisa Navarro
-  </a>
-</li>
-<li>
-  <a href="noemi.html">
-    <span class="fa fa-magnifying-glass"></span>
-     
-    Meet Noemí Esteras
-  </a>
-</li>
-<li>
-  <a href="labmembers.html">
-    <span class="fa fa-person"></span>
-     
-    Lab members
-  </a>
-</li>
-<li>
-  <a href="papers.html">
-    <span class="fa fa-book"></span>
-     
-    Papers
-  </a>
-</li>
-<li>
-  <a href="outreach.html">
-    <span class="fa fa-volume-high"></span>
-     
-    Outreach
-  </a>
-</li>
-<li>
-  <a href="news.html">
-    <span class="fa fa-newspaper"></span>
-     
-    News &amp; lab events
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">webpage</h1>
-
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-shell">
+<a class="brand" href="index.html" aria-label="MitoGlia Lab home"><span class="brand-symbol" aria-hidden="true">m<span>g</span></span><span>MitoGlia<span class="brand-lab"> LAB</span></span></a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu <span aria-hidden="true">☰</span></button>
+<nav id="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="elisa.html">Elisa Navarro</a><a href="noemi.html">Noemí Esteras</a><a href="labmembers.html">People</a><a href="papers.html">Publications</a><a href="outreach.html">Outreach</a><a href="news.html">News &amp; events</a></nav>
+</div></header>
+<main id="main" class="main-container" tabindex="-1">
+<div class="page-intro">
+<h1>
+News &amp; lab events
+</h1>
+<a class="button" href="papers.html">See our latest publications →</a>
 </div>
-
-
-<style type="text/css">
-.title {
-  display: none;
-}
-
-main-container {
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-body {
-text-align: justify
-}
-
-</style>
-<div id="news" class="section level1">
-<h1><strong>News</strong></h1>
-<p>Check our latest publications! A couple of reviews about the role of
-<a href="https://www.mdpi.com/2076-3921/13/12/1502">Nrf2</a> in
-different cell types of the brain as well as the role of <a
-href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11775980/pdf/10.1177_25152564241312807.pdf">MAM</a>
-in microglial functionality. We have also participated as invited expert
-<a
-href="https://febs.onlinelibrary.wiley.com/doi/epdf/10.1111/febs.17155">comment</a>
-about how mutations in <em>FBXO7</em> gene associated to Parkinson´s
-disease affect mitochondrial and proteasomal activity. You can also
-check this <a
-href="https://journals.lww.com/rmr/fulltext/2024/01010/role_of_non_neuronal_cells_in_neurorepair__a_focus.4.aspx">review</a>
-to learn more about how non-neuronal cells may contribute to
-neuropathology. If interested, please contact: <a
-href="mailto:elisnava@ucm.es" class="email">elisnava@ucm.es</a> or <a
-href="mailto:nesteras@ucm.es" class="email">nesteras@ucm.es</a></p>
-<p></br> </br> </br> </br></p>
-</div>
-<div id="lab-events" class="section level1">
-<h1><strong>Lab events</strong></h1>
-<div id="loving-mamitogliers" class="section level3">
-<h3><strong>Loving MAMitoGliers</strong></h3>
+<div class="archive">
+<div id="loving-mamitogliers" class="section level2 event">
+<h2><strong>Loving MAMitoGliers</strong></h2>
 <p>Every month Montesinos´ and MitoGlia´s labs gather together to
 discuss science and enjoy homemade Noemi´s recipes. Here you can see a
 summary of what these last months have meant</p>
-<p><img style="margin:10px 50px"  height=381 width=1073 src="images/mamitoglia2025.jpg">
-</a></p>
-<p></br> </br></p>
+<p><img src="images/mamitoglia2025.jpg" alt="Loving MAMitoGliers" loading="lazy"></p>
 </div>
 <div id="día-de-la-niña-y-la-mujer-en-la-ciencia"
-class="section level3">
-<h3><strong>Día de la niña y la mujer en la Ciencia</strong></h3>
+class="section level2 event">
+<h2><strong>Día de la niña y la mujer en la Ciencia</strong></h2>
 <p>Mamen and Lucía celebrated the day of Girls and Women in Science
 visiting GSD Las Suertes school to bring the research they are doing to
 high school students</p>
-<p><img style="margin:10px 50px"  height=367 width=800 src="images/ni%C3%B1a_ciencia_2025.jpg">
-</a></p>
-<p></br> </br></p>
+<p><img src="images/ni%C3%B1a_ciencia_2025.jpg" alt="Día de la niña y la mujer en la Ciencia" loading="lazy"></p>
 </div>
 <div id="celebrating-the-success-after-a-hard-2024-academic-year"
-class="section level3">
-<h3><strong>Celebrating the success after a hard 2024 academic
-year!</strong></h3>
+class="section level2 event">
+<h2><strong>Celebrating the success after a hard 2024 academic
+year!</strong></h2>
 <p>June 2024 has been exhausting! Santi did amazing (as always!) in
 #Farmadrid30 &amp; Sara Pardo in CEBBM presenting their work about GPR55
 in the context of Parkinson. Moreover, David, Sara and Alicia rocked in
 the defense of their final degree projects. Plus, Mamen is officially a
 new PhD student of the #Mitoglia Lab after receiving a competitive CAM
 fellowship. No more excuses needed to go out and celebrate!</p>
-<p><img style="margin:10px 50px"  height=448 width=599 src="images/lab2024.png">
-</a></p>
-<p></br> </br></p>
+<p><img src="images/lab2024.png" alt="Celebrating the success after a hard 2024 academic year!" loading="lazy"></p>
 </div>
-<div id="students-conference-at-ucm-2024" class="section level3">
-<h3><strong>Student´s conference at UCM 2024</strong></h3>
+<div id="students-conference-at-ucm-2024" class="section level2 event">
+<h2><strong>Student´s conference at UCM 2024</strong></h2>
 <p>This year we have had a great representation at the UCM Student´s
 Conference, with 3 talks and 2 poster presentations from the Mitoglia
 Lab!! Huge congratulations to all students for amazing work in the
 conference and especially to Alicia Caro for winning prize for the best
 talk!</p>
-<p><img style="margin:10px 50px"  height=277 width=628 src="images/congreso_estudiantes_2024.png">
-</a></p>
-<p></br> </br> </br> </br></p>
+<p><img src="images/congreso_estudiantes_2024.png" alt="Student´s conference at UCM 2024" loading="lazy"></p>
 </div>
-<div id="christmas-party-gift-exchange-2023" class="section level3">
-<h3><strong>Christmas party &amp; gift exchange 2023</strong></h3>
+<div id="christmas-party-gift-exchange-2023"
+class="section level2 event">
+<h2><strong>Christmas party &amp; gift exchange 2023</strong></h2>
 <p>2023 comes to the end and it´s not all about work…We also have to
 celebrate the achievements of the year</p>
-<p><img style="margin:10px 50px"  height=353 width=523 src="images/xmas.jpg">
-</a></p>
-<p></br> </br> </br> </br></p>
+<p><img src="images/xmas.jpg" alt="Christmas party &amp; gift exchange 2023" loading="lazy"></p>
 </div>
-<div id="leires-defense" class="section level3">
-<h3><strong>Leire´s defense</strong></h3>
+<div id="leires-defense" class="section level2 event">
+<h2><strong>Leire´s defense</strong></h2>
 <p>In June 2023, Leire successfully defended her end-of-degree project.
 Congrats Leire!! It´s being great to have you in the lab!</p>
-<p><img style="float: middle; middle-align:middle; margin:10px 50px"  height=201 width=402 src="images/leire.jpg">
-</a></p>
+<p><img src="images/leire.jpg" alt="Leire´s defense" loading="lazy"></p>
 </div>
-<div id="santi-prize-to-the-best-presentation" class="section level3">
-<h3><strong>Santi, prize to the best presentation!</strong></h3>
-<p><img style="float: left; middle-align:middle; margin:10px 50px"  height=254 width=224 src="images/santi_prize.jpg">
-</a></p>
-<p></br> </br></p>
+<div id="santi-prize-to-the-best-presentation"
+class="section level2 event">
+<h2><strong>Santi, prize to the best presentation!</strong></h2>
+<p><img src="images/santi_prize.jpg" alt="Santi, prize to the best presentation!" loading="lazy"></p>
 <p>We are so happy of Santi´s winning the 3rd prize to the best oral
 communication in the <em>BBM students conference</em> at UCM. Congrats
 Santi, you have done it great!!</p>
 </div>
 </div>
-
-
-
-
-</div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-
-</body>
-</html>
+</main>
+<footer class="site-footer"><div><a class="footer-brand" href="index.html">MitoGlia Lab</a><p>Mitochondria. Microglia. Neurodegeneration.</p><p>Department of Biochemistry · School of Medicine<br>Universidad Complutense de Madrid, Spain</p></div><div><h2>Contact info</h2><a href="mailto:elisnava@ucm.es">Elisa Navarro ↗</a><a href="mailto:nesteras@ucm.es">Noemí Esteras ↗</a><a href="https://www.ucm.es/">Universidad Complutense de Madrid ↗</a></div></footer>
+</body></html>

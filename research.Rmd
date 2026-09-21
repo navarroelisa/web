@@ -1,17 +1,15 @@
 ---
-title: "Selected publications of the lab"
-output: 
+title: "Research | MitoGlia Lab"
+lang: en
+output:
   html_document:
-    theme: sandstone
-    highlight: haddock
-    fig_width: 20
-    fig_height: 6
-bibliography: references.bib
-nocite: | 
-  @navarro2021
+    theme: null
+    self_contained: false
+    template: site-template.html
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+# Our research
 
+We study mitochondria, microglia and neuroprotection in neurodegenerative diseases.
+
+[Explore Elisa Navarro’s research](elisa.html) · [Explore Noemí Esteras’s research](noemi.html) · [Read our publications](papers.html)

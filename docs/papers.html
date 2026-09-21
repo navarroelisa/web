@@ -1,356 +1,218 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
-
-
-
-<title>webpage</title>
-
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-
-
-
-
-
-
-
-
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
-</style>
-
-
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
-<!-- code folding -->
-
-
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MitoGlia Lab at Universidad Complutense de Madrid. Exploring mitochondria, microglia and the mechanisms of neurodegeneration.">
+<title>Publications | MitoGlia Lab</title>
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 </head>
-
 <body>
-
-
-<div class="container-fluid main-container">
-
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Welcome</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="index.html">
-    <span class="fa fa-home"></span>
-     
-    Home
-  </a>
-</li>
-<li>
-  <a href="elisa.html">
-    <span class="fa fa-magnifying-glass"></span>
-     
-    Meet Elisa Navarro
-  </a>
-</li>
-<li>
-  <a href="noemi.html">
-    <span class="fa fa-magnifying-glass"></span>
-     
-    Meet Noemí Esteras
-  </a>
-</li>
-<li>
-  <a href="labmembers.html">
-    <span class="fa fa-person"></span>
-     
-    Lab members
-  </a>
-</li>
-<li>
-  <a href="papers.html">
-    <span class="fa fa-book"></span>
-     
-    Papers
-  </a>
-</li>
-<li>
-  <a href="outreach.html">
-    <span class="fa fa-volume-high"></span>
-     
-    Outreach
-  </a>
-</li>
-<li>
-  <a href="news.html">
-    <span class="fa fa-newspaper"></span>
-     
-    News &amp; lab events
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">webpage</h1>
-
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-shell">
+<a class="brand" href="index.html" aria-label="MitoGlia Lab home"><span class="brand-symbol" aria-hidden="true">m<span>g</span></span><span>MitoGlia<span class="brand-lab"> LAB</span></span></a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu <span aria-hidden="true">☰</span></button>
+<nav id="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="elisa.html">Elisa Navarro</a><a href="noemi.html">Noemí Esteras</a><a href="labmembers.html">People</a><a href="papers.html">Publications</a><a href="outreach.html">Outreach</a><a href="news.html">News &amp; events</a></nav>
+</div></header>
+<main id="main" class="main-container" tabindex="-1">
+<div class="page-intro">
+<h1>
+Publications
+</h1>
+<p class="lead">
+To learn more about our background and expertise, here you can find our
+publications from recent years.
+</p>
+<div class="profile-links">
+<a class="button" href="https://orcid.org/0000-0002-4056-7146">Elisa
+Navarro · ORCID
+↗</a><a class="button" href="https://orcid.org/0000-0002-7938-6131">Noemí
+Esteras · ORCID ↗</a>
 </div>
-
-
-<style type="text/css">
-.title {
-  display: none;
-}
-
-main-container {
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-body {
-text-align: justify
-}
-
-</style>
-<div id="publications-in-the-last-years" class="section level1">
-<h1><strong>Publications in the last years</strong></h1>
-<p>To learn more about our background and expertise, here you have
-detailed information about the publications of the last years. You can
-find more about our research <a
-href="https://www.webofscience.com/wos/author/record/AEQ-2789-2022">here</a>
-and <a
-href="https://www.researchgate.net/profile/Noemi-Esteras">here</a>.</p>
-<p><img style="float: left; vertical-align:left;margin:20px 0px" height=257 width=860 src="images/papers.jpg">
-</a></p>
-<div id="section" class="section level3">
-<h3><strong>2025</strong></h3>
-<p><brk></p>
-<p>Navarro E &amp; Montesinos J. <a
-href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11775980/pdf/10.1177_25152564241312807.pdf">Mitochondria-associated
-endoplasmic reticulum membranes in microglia: one contact to rule them
-all</a> Contact. 8: 1-16 (2025)</p>
+<p class="source-note">
+Updated on 21 September 2026 using our public ORCID records and DOI
+metadata. Published versions are preferred when available; preprints are
+labelled separately. Earlier publications are retained below.
+</p>
 </div>
-<div id="section-1" class="section level3">
-<h3><strong>2024</strong></h3>
-<p><brk></p>
+<nav class="year-nav" aria-label="Publication years">
+<a href="#year-2026">2026</a><a href="#year-2025">2025</a><a href="#year-2024">2024</a><a href="#year-2023">2023</a><a href="#year-2022">2022</a><a href="#year-2021">2021</a><a href="#year-2020">2020</a>
+</nav>
+<div id="year-2026" class="section level2">
+<h2>2026</h2>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag">Journal article</span>Nature Communications · 17 · (1)
+· 6299
+</p>
+<a class="pub-title" href="https://doi.org/10.1038/s41467-026-71351-w">Variants
+in the proteasome regulator PSMF1 cause a phenotypic spectrum from
+parkinsonism to perinatal lethality</a>
+<p class="pub-authors">
+Francesca Magrinelli, Christelle Tesson, Plamena R. Angelova, Jose A.
+Rodriguez, Annarita Scardamaglia, Benjamin O’Callaghan, Simon A. Lowe,
+Ainara Salazar-Villacorta, Brian Hon-Yin Chung, Matthew Jaconelli, et
+al.
+</p>
+<a href="https://doi.org/10.1038/s41467-026-71351-w">Read paper ↗</a>
+</article>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag">Journal article</span>Brain, Behavior, and Immunity ·
+133 · 106253
+</p>
+<a class="pub-title" href="https://doi.org/10.1016/j.bbi.2026.106253">Long-term
+NRF2-driven microglial repopulation mitigates microgliosis, neuronal
+loss and cognitive deficits in tauopathy</a>
+<p class="pub-authors">
+Lucía Viqueira, Elisa Navarro, Pilar Negredo, Juan Antonio Bernal, María
+Isabel Rodríguez-Franco, Elena Tortosa, Manuela G. López
+</p>
+<a href="https://doi.org/10.1016/j.bbi.2026.106253">Read paper ↗</a>
+</article>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag">Journal article</span>Biomedicine &amp;amp;
+Pharmacotherapy · 195 · 119034
+</p>
+<a class="pub-title" href="https://doi.org/10.1016/j.biopha.2026.119034">Cerebral
+dopamine neurotrophic factor and its functional fragments induce calcium
+signal through sigma-1 receptor and protect neurons against
+glutamate-induced excitotoxicity</a>
+<p class="pub-authors">
+Nafisa Komilova, Noemi Esteras, Alessandra Preziuso, Lauren Millichap,
+Ausra Domanska, Anastasia Ludwig, Natalia Kulesskaya, Henri J. Huttunen,
+Kira M. Holmström, Andrey Y. Abramov, Plamena R. Angelova
+</p>
+<a href="https://doi.org/10.1016/j.biopha.2026.119034">Read paper ↗</a>
+</article>
+</div>
+<div id="year-2025" class="section level2">
+<h2>2025</h2>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag preprint">Preprint · not peer reviewed</span>medRxiv
+</p>
+<a class="pub-title" href="https://doi.org/10.1101/2025.10.08.25337448">Integrated
+Stress Response Signatures Drive Monocyte Dysfunction in GBA1 - and
+LRRK2 -Linked Parkinson’s Disease</a>
+<p class="pub-authors">
+Daniele Mattei, Erica Brophy, Mikaela Rosen, Oriol Narcis Majos,
+Aloysius Domingo, Elena Meijia, Beomjin Jang, Tarek Khashan, Mengxi
+Yang, Deborah Raymond, et al.
+</p>
+<a href="https://doi.org/10.1101/2025.10.08.25337448">Read preprint
+↗</a>
+</article>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag">Journal article</span>Redox Biology · 86 · 103817
+</p>
+<a class="pub-title" href="https://doi.org/10.1016/j.redox.2025.103817">α-synuclein
+fibrils per se but not α-synuclein seeded aggregation causes
+mitochondrial dysfunction and cell death in human neurons</a>
+<p class="pub-authors">
+Plamena R. Angelova, Noemi Esteras, James Evans, Marko Kostic, Ronald
+Melki, Jochen H.M. Prehn, Sonia Gandhi, Andrey Y. Abramov
+</p>
+<a href="https://doi.org/10.1016/j.redox.2025.103817">Read paper ↗</a>
+</article>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag">Journal article</span>Antioxidants · 14 · (10) · 1190
+</p>
+<a class="pub-title" href="https://doi.org/10.3390/antiox14101190">Melatonin-Mediated
+Nrf2 Activation as a Potential Therapeutic Strategy in Mutation-Driven
+Neurodegenerative Diseases</a>
+<p class="pub-authors">
+Lucía Íñigo-Catalina, María Ortiz-Cabello, Elisa Navarro, Noemí Esteras,
+Lisa Rancan, Sergio D. Paredes
+</p>
+<a href="https://doi.org/10.3390/antiox14101190">Read paper ↗</a>
+</article>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag preprint">Preprint · not peer reviewed</span>bioRxiv
+</p>
+<a class="pub-title" href="https://doi.org/10.1101/2025.03.14.643382">Cytosine-to-uracil
+RNA editing is upregulated by pro-inflammatory stimulation of myeloid
+cells</a>
+<p class="pub-authors">
+Hyomin Seo, Winston H. Cuddleston, Ting Fu, Elisa Navarro, Madison
+Parks, Amanda Allan, Anastasia G. Efthymiou, Michael S. Breen, Xinshu
+Xiao, Towfique Raj, Jack Humphrey
+</p>
+<a href="https://doi.org/10.1101/2025.03.14.643382">Read preprint ↗</a>
+</article>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag">Journal article</span>Nature Genetics · 57 · (3) ·
+604-615
+</p>
+<a class="pub-title" href="https://doi.org/10.1038/s41588-025-02099-0">Long-read
+RNA sequencing atlas of human microglia isoforms elucidates
+disease-associated genetic regulation of splicing</a>
+<p class="pub-authors">
+Jack Humphrey, Erica Brophy, Roman Kosoy, Biao Zeng, Elena Coccia,
+Daniele Mattei, Ashvin Ravi, Tatsuhiko Naito, Anastasia G. Efthymiou,
+Elisa Navarro, et al.
+</p>
+<a href="https://doi.org/10.1038/s41588-025-02099-0">Read paper ↗</a>
+</article>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag">Journal article</span>Cellular and Molecular Life
+Sciences · 82 · (1) · 72
+</p>
+<a class="pub-title" href="https://doi.org/10.1007/s00018-025-05612-0">Charcot
+Marie Tooth disease pathology is associated with mitochondrial
+dysfunction and lower glutathione production</a>
+<p class="pub-authors">
+Nafisa R. Komilova, Plamena R. Angelova, Elisa Cali, Annarita
+Scardamaglia, Ulugbek Z. Mirkhodjaev, Henry Houlden, Noemi Esteras,
+Andrey Y. Abramov
+</p>
+<a href="https://doi.org/10.1007/s00018-025-05612-0">Read paper ↗</a>
+</article>
+<article class="publication">
+<p class="pub-meta">
+<span class="tag">Journal article</span>Contact: The Journal of
+Inter-Organelle Communication · 8 · 25152564241312807
+</p>
+<a class="pub-title" href="https://doi.org/10.1177/25152564241312807">Mitochondria-Associated
+Endoplasmic Reticulum Membranes in Microglia: One Contact Site to Rule
+Them all</a>
+<p class="pub-authors">
+Elisa Navarro, Jorge Montesinos
+</p>
+<a href="https://doi.org/10.1177/25152564241312807">Read paper ↗</a>
+</article>
+</div>
+<div id="year-2024" class="section level2">
+<h2>2024</h2>
+<div class="publication">
 <p>Navarro E &amp; Esteras N. <a
 href="https://www.mdpi.com/2076-3921/13/12/1502">Multitarget effects of
 Nrf2 signalling in the brain: common and specific functions in different
 cell types</a> Antioxidants. 13(12): 1502 (2024).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Rodríguez-Carreiro S, Nogales M, Jiménez-Galán D, Carmona-Lorenzo S,
 Caro-Martín A, Navarro E, Esteras N. <a
 href="https://journals.lww.com/rmr/fulltext/2024/01010/role_of_non_neuronal_cells_in_neurorepair__a_focus.4.aspx">Role
 of non-neuronal cells in neurorepair: a focus on proteinopathy and
 neurodegeneration</a> Regen Med Rep. 1: 31-51 (2024).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Navarro, E.; Esteras, N. <a
 href="https://febs.onlinelibrary.wiley.com/doi/epdf/10.1111/febs.17155">A
 new mutation in the Parkinson’s-related FBXO7 gene impairs mitochondrial
 and proteasomal function</a> Febs j, 291 (12), 2562-2564 (2024).</p>
-<p><brk></p>
+</div>
+<div class="publication">
+<p><span class="tag preprint">Preprint · not peer reviewed</span></p>
 <p>Navarro, E.; Efthymiou, A. G.; Parks, M.; Riboldi, G. M.; Vialle, R.
 A.; Udine, E.; Muller, B. Z.; Humphrey, J.; Allan, A.; Argyrou, C. C.;
 et al. <a
@@ -358,99 +220,104 @@ href="https://www.biorxiv.org/content/10.1101/2024.05.27.594821v1">LRRK2
 G2019S variant is associated with transcriptional changes in Parkinson’s
 disease human myeloid cells under proinflammatory environment</a>
 bioRxiv (2024).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>de Talhouët, C.; Esteras, N.; Soutar, M. P. M.; O’Callaghan, B.;
 Plun-Favreau, H. <a
 href="https://www.nature.com/articles/s41598-024-60602-9">KAT8 compound
 inhibition inhibits the initial steps of PINK1-dependant mitophagy</a>
 Sci Rep, 14 (1), 11721 (2024).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Choya-Foces, C.; Navarro, E.; Ríos, C. L.; López, M. G.; Egea, J.;
 Hernansanz-Agustín, P.; Martínez-Ruiz, A. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11470253/">The
 mitochondrial Na(+)/Ca(2+) exchanger NCLX is implied in the activation
 of hypoxia-inducible factors</a> Redox Biol, 77, 103364 (2024).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Theparambil, S. M.; Kopach, O.; Braga, A.; Nizari, S.; Hosford, P.
 S.; Sagi-Kiss, V.; Hadjihambi, A.; Konstantinou, C.; Esteras, N.;
 Gutierrez Del Arroyo, A.; et al. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11291286/">Adenosine
 signalling to astrocytes coordinates brain metabolism and function</a>
 Nature, 632 (8023), 139-146 (2024).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Vinokurov, A. Y.; Palalov, A. A.; Kritskaya, K. A.; Demyanenko, S.
 V.; Garbuz, D. G.; Evgen’ev, M. B.; Esteras, N.; Abramov, A. Y. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11415435/">Cell-Permeable
 HSP70 Protects Neurons and Astrocytes Against Cell Death in the
 Rotenone-Induced and Familial Models of Parkinson’s Disease</a> Mol
 Neurobiol, 61 (10), 7785-7795 (2024).</p>
-<p><brk> <brk> <brk></p>
 </div>
-<div id="section-2" class="section level3">
-<h3><strong>2023</strong></h3>
-<p><brk></p>
+</div>
+<div id="year-2023" class="section level2">
+<h2>2023</h2>
+<div class="publication">
 <p>Rodríguez-Carreiro, S.; Navarro, E.; Muñoz, E.; Fernández-Ruiz, J. <a
 href="https://www.mdpi.com/2076-3425/13/9/1272">The Cannabigerol
 Derivative VCE-003.2 Exerts Therapeutic Effects in
 6-Hydroxydopamine-Lesioned Mice: Comparison with The Classic
 Dopaminergic Replacement Therapy</a> Brain Sci, 13 (9) (2023).</p>
-<p><brk></p>
-<p>Humphrey, J.; Brophy, E.; Kosoy, R.; Zeng, B.; Coccia, E.; Mattei,
-D.; Ravi, A.; Efthymiou, A. G.; Navarro, E.; Muller, B. Z.; et al. <a
-href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10705658/">Long-read
-RNA-seq atlas of novel microglia isoforms elucidates disease-associated
-genetic regulation of splicing</a> medRxiv (2023).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Gómez-Cañas, M.; Rodríguez-Cueto, C.; Satta, V.; Hernández-Fisac, I.;
 Navarro, E.; Fernández-Ruiz, J. <a
 href="https://link.springer.com/protocol/10.1007/978-1-0716-2728-0_6">Endocannabinoid-Binding
 Receptors as Drug Targets. Methods Mol Biol 2023, 2576, 67-94</a>
 (2023)</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Esteras, N.; Blacker, T. S.; Zherebtsov, E. A.; Stelmashuk, O. A.;
 Zhang, Y.; Wigley, W. C.; Duchen, M. R.; Dinkova-Kostova, A. T.;
 Abramov, A. Y. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10034142/">Nrf2 regulates
 glucose uptake and metabolism in neurons and astrocytes</a> Redox Biol,
 62, 102672 (2023).</p>
-<p><brk> <brk> <brk></p>
 </div>
-<div id="section-3" class="section level3">
-<h3><strong>2022</strong></h3>
-<p><brk></p>
+</div>
+<div id="year-2022" class="section level2">
+<h2>2022</h2>
+<div class="publication">
 <p>Shevtsova, E. F.; Angelova, P. R.; Stelmashchuk, O. A.; Esteras, N.;
 Vasil’eva, N. A.; Maltsev, A. V.; Shevtsov, P. N.; Shaposhnikov, A. V.;
 Fisenko, V. P.; Bachurin, S. O.; et al. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9329451/">Pharmacological
 sequestration of mitochondrial calcium uptake protects against dementia
 and β-amyloid neurotoxicity</a> Sci Rep, 12 (1), 12766 (2022).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Setó-Salvia, N.; Esteras, N.; de Silva, R.; de Pablo-Fernandez, E.;
 Arber, C.; Toomey, C. E.; Polke, J. M.; Morris, H. R.; Rohrer, J. D.;
 Abramov, A. Y.; et al. <a
 href="https://europepmc.org/article/pmc/8831975">Elevated 4R-tau in
 astrocytes from asymptomatic carriers of the MAPT 10+16 intronic
 mutation</a> J Cell Mol Med, 26 (4), 1327-1331 (2022).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Schilder, B. M.; Navarro, E.; Raj, T. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10101343/">Multi-omic
 insights into Parkinson’s Disease: From genetic associations to
 functional mechanisms</a> Neurobiol Dis, 163, 105580 (2022).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Riboldi, G. M.; Vialle, R. A.; Navarro, E.; Udine, E.; de Paiva
 Lopes, K.; Humphrey, J.; Allan, A.; Parks, M.; Henderson, B.; Astudillo,
 K.; et al. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9386994/">Transcriptome
 deregulation of peripheral monocytes and whole blood in GBA-related
 Parkinson’s disease</a> Mol Neurodegener, 17 (1), 52 (2022).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Lopes, K. P.; Snijders, G. J. L.; Humphrey, J.; Allan, A.; Sneeboer,
 M. A. M.; Navarro, E.; Schilder, B. M.; Vialle, R. A.; Parks, M.;
 Missall, R.; et al. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9245609/">Genetic
 analysis of the human microglial transcriptome across brain regions,
 aging and disease pathologies</a> Nat Genet, 54 (1), 4-17 (2022).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Komilova, N. R.; Angelova, P. R.; Berezhnov, A. V.; Stelmashchuk, O.
 A.; Mirkhodjaev, U. Z.; Houlden, H.; Gourine, A. V.; Esteras, N.;
 Abramov, A. Y. <a
@@ -458,158 +325,127 @@ href="https://febs.onlinelibrary.wiley.com/doi/10.1111/febs.16198">Metabolically
 induced intracellular pH changes activate mitophagy, autophagy, and cell
 protection in familial forms of Parkinson’s disease</a> Febs j, 289 (3),
 699-711 (2022).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Esteras, N.; Kopach, O.; Maiolino, M.; Lariccia, V.; Amoroso, S.;
 Qamar, S.; Wray, S.; Rusakov, D. A.; Jaganjac, M.; Abramov, A. Y. <a
 href="https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.12394">Mitochondrial
 ROS control neuronal excitability and cell fate in frontotemporal
 dementia</a> Alzheimers Dement, 18 (2), 318-338 (2022).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Esteras, N.; Abramov, A. Y. <a
 href="https://www.sciencedirect.com/science/article/pii/S0891584922004968?via%3Dihub">Nrf2
 as a regulator of mitochondrial function: Energy metabolism and
 beyond</a> Free Radic Biol Med, 189, 136-153 (2022).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Choi, M. L.; Chappard, A.; Singh, B. P.; Maclachlan, C.; Rodrigues,
 M.; Fedotova, E. I.; Berezhnov, A. V.; De, S.; Peddie, C. J.; Athauda,
 D. […] Esteras N […]; et al. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9448679/">Pathological
 structural conversion of α-synuclein at the mitochondria induces
 neuronal toxicity</a> Nat Neurosci, 25 (9), 1134-1148 (2022).</p>
-<p><brk> <brk> <brk></p>
 </div>
-<div id="section-4" class="section level3">
-<h3><strong>2021</strong></h3>
-<p><brk></p>
+</div>
+<div id="year-2021" class="section level2">
+<h2>2021</h2>
+<div class="publication">
 <p>Navarro, E.; Udine, E.; Lopes, K. P.; Parks, M.; Riboldi, G.;
 Schilder, B. M.; Humphrey, J.; Snijders, G. J. L.; Vialle, R. A.;
 Zhuang, M.; et al. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8728893/">Dysregulation
 of mitochondrial and proteolysosomal genes in Parkinson’s disease
 myeloid cells</a> Nat Aging, 1 (9), 850-863 (2021).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Navarro, E.; Norden, D. M.; Trojanowski, P. J.; Godbout, J. P.;
-López, M. G. [Central Activation of Alpha7 Nicotinic Signaling
-Attenuates LPS-Induced Neuroinflammation and Sickness Behavior in Adult
-but Not in Aged Animals[(<a
-href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8067582/"
-class="uri">https://pmc.ncbi.nlm.nih.gov/articles/PMC8067582/</a>)
-Molecules, 26 (8) (2021).</p>
-<p><brk></p>
+López, M. G. <a
+href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8067582/">Central
+Activation of Alpha7 Nicotinic Signaling Attenuates LPS-Induced
+Neuroinflammation and Sickness Behavior in Adult but Not in Aged
+Animals</a> Molecules, 26 (8) (2021).</p>
+</div>
+<div class="publication">
 <p>Kopach, O.; Esteras, N.; Wray, S.; Abramov, A. Y.; Rusakov, D. A. <a
 href="https://www.nature.com/articles/s41419-021-04007-w">Genetically
 engineered MAPT 10+16 mutation causes pathophysiological excitability of
 human iPSC-derived neurons related to 4R tau-induced dementia</a> Cell
 Death Dis, 12 (8), 716 (2021).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Kamynina, A.; Esteras, N.; Koroev, D. O.; Angelova, P. R.; Volpina,
 O. M.; Abramov, A. Y. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8651009/">Activation of
 RAGE leads to the release of glutamate from astrocytes and stimulates
 calcium signal in neurons</a> J Cell Physiol, 236 (9), 6496-6506
 (2021).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Esteras, N.; Kundel, F.; Amodeo, G. F.; Pavlov, E. V.; Klenerman, D.;
 Abramov, A. Y. <a
 href="https://febs.onlinelibrary.wiley.com/doi/10.1111/febs.15340">Insoluble
 tau aggregates induce neuronal death through modification of membrane
 ion conductance, activation of voltage-gated calcium channels and NADPH
 oxidase</a> Febs j, 288 (1), 127-141 (2021).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Cheng, X.; Vinokurov, A. Y.; Zherebtsov, E. A.; Stelmashchuk, O. A.;
 Angelova, P. R.; Esteras, N.; Abramov, A. Y. <a
 href="https://onlinelibrary.wiley.com/doi/10.1111/jnc.15239">Variability
 of mitochondrial energy balance across brain regions</a> J Neurochem,
 157 (4), 1234-1243 (2021).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Angelova, P. R.; Esteras, N.; Abramov, A. Y. <a
 href="https://onlinelibrary.wiley.com/doi/10.1002/med.21712">Mitochondria
 and lipid peroxidation in the mechanism of neurodegeneration: Finding
 ways for prevention</a> Med Res Rev, 41 (2), 770-784 (2021).</p>
-<p><brk> <brk> <brk></p>
 </div>
-<div id="section-5" class="section level3">
-<h3><strong>2020</strong></h3>
-<p><brk></p>
+</div>
+<div id="year-2020" class="section level2">
+<h2>2020</h2>
+<div class="publication">
 <p>Turovsky, E. A.; Braga, A.; Yu, Y.; Esteras, N.; Korsak, A.;
 Theparambil, S. M.; Hadjihambi, A.; Hosford, P. S.; Teschemacher, A. G.;
 Marina, N.; et al. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7724146/">Mechanosensory
 Signaling in Astrocytes</a> J Neurosci, 40 (49), 9364-9371 (2020).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Ramdhani, S.; Navarro, E.; Udine, E.; Efthymiou, A. G.; Schilder, B.
 M.; Parks, M.; Goate, A.; Raj, T. <a
 href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008549">Tensor
 decomposition of stimulated monocyte and macrophage gene expression
 profiles identifies neurodegenerative disease-specific trans-eQTLs</a>
 PLoS Genet, 16 (2), e1008549 (2020).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Kopach, O.; Esteras, N.; Wray, S.; Rusakov, D. A.; Abramov, A. Y. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7272359/">Maturation and
 phenotype of pathophysiological neuronal excitability of human cells in
 tau-related dementia</a> J Cell Sci, 133 (10) (2020).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Esteras, N.; Adjobo-Hermans, M. J. W.; Abramov, A. Y.; Koopman, W. J.
 H. <a
 href="https://www.sciencedirect.com/science/article/abs/pii/S0091679X19301207?via%3Dihub">Visualization
 of mitochondrial membrane potential in mammalian cells</a> Methods Cell
 Biol, 155, 221-245 (2020).</p>
+</div>
+<div class="publication">
 <p>Esteras, N.; Abramov, A. Y. <a
 href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7564294/">Mitochondrial
 Calcium Deregulation in the Mechanism of Beta-Amyloid and Tau
 Pathology</a> Cells, 9 (9) (2020).</p>
-<p><brk></p>
+</div>
+<div class="publication">
 <p>Britti, E.; Ros, J.; Esteras, N.; Abramov, A. Y. <a
 href="https://www.sciencedirect.com/science/article/pii/S0143416019302192?via%3Dihub">Tau
 inhibits mitochondrial calcium efflux and makes neurons vulnerable to
 calcium-induced cell death</a> Cell Calcium, 86, 102150 (2020).</p>
 </div>
 </div>
-
-
-
-
-</div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-
-</body>
-</html>
+</main>
+<footer class="site-footer"><div><a class="footer-brand" href="index.html">MitoGlia Lab</a><p>Mitochondria. Microglia. Neurodegeneration.</p><p>Department of Biochemistry · School of Medicine<br>Universidad Complutense de Madrid, Spain</p></div><div><h2>Contact info</h2><a href="mailto:elisnava@ucm.es">Elisa Navarro ↗</a><a href="mailto:nesteras@ucm.es">Noemí Esteras ↗</a><a href="https://www.ucm.es/">Universidad Complutense de Madrid ↗</a></div></footer>
+</body></html>

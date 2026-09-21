@@ -1,201 +1,246 @@
 ---
-title: "webpage"
-output: 
+title: "Publications | MitoGlia Lab"
+lang: en
+output:
   html_document:
-    theme: sandstone
-    highlight: haddock
-    fig_width: 20
-    fig_height: 6
+    theme: null
+    self_contained: false
+    template: site-template.html
 ---
 
-```{=html}
-<style type="text/css">
-.title {
-  display: none;
-}
+<div class="page-intro"><h1>Publications</h1><p class="lead">To learn more about our background and expertise, here you can find our publications from recent years.</p><div class="profile-links"><a class="button" href="https://orcid.org/0000-0002-4056-7146">Elisa Navarro · ORCID ↗</a><a class="button" href="https://orcid.org/0000-0002-7938-6131">Noemí Esteras · ORCID ↗</a></div><p class="source-note">Updated on 21 September 2026 using our public ORCID records and DOI metadata. Published versions are preferred when available; preprints are labelled separately. Earlier publications are retained below.</p></div>
+<nav class="year-nav" aria-label="Publication years"><a href="#year-2026">2026</a><a href="#year-2025">2025</a><a href="#year-2024">2024</a><a href="#year-2023">2023</a><a href="#year-2022">2022</a><a href="#year-2021">2021</a><a href="#year-2020">2020</a></nav>
 
-main-container {
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
-}
+## 2026 {#year-2026}
 
-body {
-text-align: justify
-}
+<article class="publication"><p class="pub-meta"><span class="tag">Journal article</span>Nature Communications · 17 · (1) · 6299</p><a class="pub-title" href="https://doi.org/10.1038/s41467-026-71351-w">Variants in the proteasome regulator PSMF1 cause a phenotypic spectrum from parkinsonism to perinatal lethality</a><p class="pub-authors">Francesca Magrinelli, Christelle Tesson, Plamena R. Angelova, Jose A. Rodriguez, Annarita Scardamaglia, Benjamin O’Callaghan, Simon A. Lowe, Ainara Salazar-Villacorta, Brian Hon-Yin Chung, Matthew Jaconelli, et al.</p><a href="https://doi.org/10.1038/s41467-026-71351-w">Read paper ↗</a></article>
 
-</style>
-```
+<article class="publication"><p class="pub-meta"><span class="tag">Journal article</span>Brain, Behavior, and Immunity · 133 · 106253</p><a class="pub-title" href="https://doi.org/10.1016/j.bbi.2026.106253">Long-term NRF2-driven microglial repopulation mitigates microgliosis, neuronal loss and cognitive deficits in tauopathy</a><p class="pub-authors">Lucía Viqueira, Elisa Navarro, Pilar Negredo, Juan Antonio Bernal, María Isabel Rodríguez-Franco, Elena Tortosa, Manuela G. López</p><a href="https://doi.org/10.1016/j.bbi.2026.106253">Read paper ↗</a></article>
 
-# **Publications in the last years**
-To learn more about our background and expertise, here you have detailed information about the publications of the last years. You can find more about our research [here](https://www.webofscience.com/wos/author/record/AEQ-2789-2022) and [here](https://www.researchgate.net/profile/Noemi-Esteras).
+<article class="publication"><p class="pub-meta"><span class="tag">Journal article</span>Biomedicine &amp;amp; Pharmacotherapy · 195 · 119034</p><a class="pub-title" href="https://doi.org/10.1016/j.biopha.2026.119034">Cerebral dopamine neurotrophic factor and its functional fragments induce calcium signal through sigma-1 receptor and protect neurons against glutamate-induced excitotoxicity</a><p class="pub-authors">Nafisa Komilova, Noemi Esteras, Alessandra Preziuso, Lauren Millichap, Ausra Domanska, Anastasia Ludwig, Natalia Kulesskaya, Henri J. Huttunen, Kira M. Holmström, Andrey Y. Abramov, Plamena R. Angelova</p><a href="https://doi.org/10.1016/j.biopha.2026.119034">Read paper ↗</a></article>
 
-<img style="float: left; vertical-align:left;margin:20px 0px" height=257 width=860 src="images/papers.jpg"> </a>
+## 2025 {#year-2025}
 
-### **2025**
+<article class="publication"><p class="pub-meta"><span class="tag preprint">Preprint · not peer reviewed</span>medRxiv</p><a class="pub-title" href="https://doi.org/10.1101/2025.10.08.25337448">Integrated Stress Response Signatures Drive Monocyte Dysfunction in GBA1 - and LRRK2 -Linked Parkinson’s Disease</a><p class="pub-authors">Daniele Mattei, Erica Brophy, Mikaela Rosen, Oriol Narcis Majos, Aloysius Domingo, Elena Meijia, Beomjin Jang, Tarek Khashan, Mengxi Yang, Deborah Raymond, et al.</p><a href="https://doi.org/10.1101/2025.10.08.25337448">Read preprint ↗</a></article>
 
-<brk>
+<article class="publication"><p class="pub-meta"><span class="tag">Journal article</span>Redox Biology · 86 · 103817</p><a class="pub-title" href="https://doi.org/10.1016/j.redox.2025.103817">α-synuclein fibrils per se but not α-synuclein seeded aggregation causes mitochondrial dysfunction and cell death in human neurons</a><p class="pub-authors">Plamena R. Angelova, Noemi Esteras, James Evans, Marko Kostic, Ronald Melki, Jochen H.M. Prehn, Sonia Gandhi, Andrey Y. Abramov</p><a href="https://doi.org/10.1016/j.redox.2025.103817">Read paper ↗</a></article>
 
-Navarro E & Montesinos J. [Mitochondria-associated endoplasmic reticulum membranes in microglia: one contact to rule them all](https://pmc.ncbi.nlm.nih.gov/articles/PMC11775980/pdf/10.1177_25152564241312807.pdf) Contact. 8: 1-16 (2025)
+<article class="publication"><p class="pub-meta"><span class="tag">Journal article</span>Antioxidants · 14 · (10) · 1190</p><a class="pub-title" href="https://doi.org/10.3390/antiox14101190">Melatonin-Mediated Nrf2 Activation as a Potential Therapeutic Strategy in Mutation-Driven Neurodegenerative Diseases</a><p class="pub-authors">Lucía Íñigo-Catalina, María Ortiz-Cabello, Elisa Navarro, Noemí Esteras, Lisa Rancan, Sergio D. Paredes</p><a href="https://doi.org/10.3390/antiox14101190">Read paper ↗</a></article>
 
-### **2024**
+<article class="publication"><p class="pub-meta"><span class="tag preprint">Preprint · not peer reviewed</span>bioRxiv</p><a class="pub-title" href="https://doi.org/10.1101/2025.03.14.643382">Cytosine-to-uracil RNA editing is upregulated by pro-inflammatory stimulation of myeloid cells</a><p class="pub-authors">Hyomin Seo, Winston H. Cuddleston, Ting Fu, Elisa Navarro, Madison Parks, Amanda Allan, Anastasia G. Efthymiou, Michael S. Breen, Xinshu Xiao, Towfique Raj, Jack Humphrey</p><a href="https://doi.org/10.1101/2025.03.14.643382">Read preprint ↗</a></article>
 
-<brk>
+<article class="publication"><p class="pub-meta"><span class="tag">Journal article</span>Nature Genetics · 57 · (3) · 604-615</p><a class="pub-title" href="https://doi.org/10.1038/s41588-025-02099-0">Long-read RNA sequencing atlas of human microglia isoforms elucidates disease-associated genetic regulation of splicing</a><p class="pub-authors">Jack Humphrey, Erica Brophy, Roman Kosoy, Biao Zeng, Elena Coccia, Daniele Mattei, Ashvin Ravi, Tatsuhiko Naito, Anastasia G. Efthymiou, Elisa Navarro, et al.</p><a href="https://doi.org/10.1038/s41588-025-02099-0">Read paper ↗</a></article>
+
+<article class="publication"><p class="pub-meta"><span class="tag">Journal article</span>Cellular and Molecular Life Sciences · 82 · (1) · 72</p><a class="pub-title" href="https://doi.org/10.1007/s00018-025-05612-0">Charcot Marie Tooth disease pathology is associated with mitochondrial dysfunction and lower glutathione production</a><p class="pub-authors">Nafisa R. Komilova, Plamena R. Angelova, Elisa Cali, Annarita Scardamaglia, Ulugbek Z. Mirkhodjaev, Henry Houlden, Noemi Esteras, Andrey Y. Abramov</p><a href="https://doi.org/10.1007/s00018-025-05612-0">Read paper ↗</a></article>
+
+<article class="publication"><p class="pub-meta"><span class="tag">Journal article</span>Contact: The Journal of Inter-Organelle Communication · 8 · 25152564241312807</p><a class="pub-title" href="https://doi.org/10.1177/25152564241312807">Mitochondria-Associated Endoplasmic Reticulum Membranes in Microglia: One Contact Site to Rule Them all</a><p class="pub-authors">Elisa Navarro, Jorge Montesinos</p><a href="https://doi.org/10.1177/25152564241312807">Read paper ↗</a></article>
+
+## 2024 {#year-2024}
+
+::: {.publication}
 
 Navarro E & Esteras N. [Multitarget effects of Nrf2 signalling in the brain: common and specific functions in different cell types](https://www.mdpi.com/2076-3921/13/12/1502) Antioxidants. 13(12): 1502 (2024).
 
-<brk>
+:::
+
+::: {.publication}
 
 Rodríguez-Carreiro S, Nogales M, Jiménez-Galán D, Carmona-Lorenzo S, Caro-Martín A, Navarro E, Esteras N. [Role of non-neuronal cells in neurorepair: a focus on proteinopathy and neurodegeneration](https://journals.lww.com/rmr/fulltext/2024/01010/role_of_non_neuronal_cells_in_neurorepair__a_focus.4.aspx) Regen Med Rep. 1: 31-51 (2024).
 
-<brk>
+:::
+
+::: {.publication}
 
 Navarro, E.; Esteras, N. [A new mutation in the Parkinson's-related FBXO7 gene impairs mitochondrial and proteasomal function](https://febs.onlinelibrary.wiley.com/doi/epdf/10.1111/febs.17155) Febs j, 291 (12), 2562-2564 (2024).
 
-<brk>
+:::
 
-Navarro, E.; Efthymiou, A. G.; Parks, M.; Riboldi, G. M.; Vialle, R. A.; Udine, E.; Muller, B. Z.; Humphrey, J.; Allan, A.; Argyrou, C. C.; et al. [LRRK2 G2019S variant is associated with transcriptional changes in Parkinson's disease human myeloid cells under proinflammatory environment](https://www.biorxiv.org/content/10.1101/2024.05.27.594821v1) bioRxiv (2024). 
+::: {.publication}
 
-<brk>
+<span class="tag preprint">Preprint · not peer reviewed</span>
 
-de Talhouët, C.; Esteras, N.; Soutar, M. P. M.; O'Callaghan, B.; Plun-Favreau, H. [KAT8 compound inhibition inhibits the initial steps of PINK1-dependant mitophagy](https://www.nature.com/articles/s41598-024-60602-9) Sci Rep, 14 (1), 11721 (2024). 
+Navarro, E.; Efthymiou, A. G.; Parks, M.; Riboldi, G. M.; Vialle, R. A.; Udine, E.; Muller, B. Z.; Humphrey, J.; Allan, A.; Argyrou, C. C.; et al. [LRRK2 G2019S variant is associated with transcriptional changes in Parkinson's disease human myeloid cells under proinflammatory environment](https://www.biorxiv.org/content/10.1101/2024.05.27.594821v1) bioRxiv (2024).
 
-<brk>
+:::
 
-Choya-Foces, C.; Navarro, E.; Ríos, C. L.; López, M. G.; Egea, J.; Hernansanz-Agustín, P.; Martínez-Ruiz, A. [The mitochondrial Na(+)/Ca(2+) exchanger NCLX is implied in the activation of hypoxia-inducible factors](https://pmc.ncbi.nlm.nih.gov/articles/PMC11470253/) Redox Biol, 77, 103364 (2024). 
+::: {.publication}
 
-<brk>
+de Talhouët, C.; Esteras, N.; Soutar, M. P. M.; O'Callaghan, B.; Plun-Favreau, H. [KAT8 compound inhibition inhibits the initial steps of PINK1-dependant mitophagy](https://www.nature.com/articles/s41598-024-60602-9) Sci Rep, 14 (1), 11721 (2024).
 
-Theparambil, S. M.; Kopach, O.; Braga, A.; Nizari, S.; Hosford, P. S.; Sagi-Kiss, V.; Hadjihambi, A.; Konstantinou, C.; Esteras, N.; Gutierrez Del Arroyo, A.; et al. [Adenosine signalling to astrocytes coordinates brain metabolism and function](https://pmc.ncbi.nlm.nih.gov/articles/PMC11291286/) Nature, 632 (8023), 139-146 (2024). 
+:::
 
-<brk>
+::: {.publication}
 
-Vinokurov, A. Y.; Palalov, A. A.; Kritskaya, K. A.; Demyanenko, S. V.; Garbuz, D. G.; Evgen'ev, M. B.; Esteras, N.; Abramov, A. Y. [Cell-Permeable HSP70 Protects Neurons and Astrocytes Against Cell Death in the Rotenone-Induced and Familial Models of Parkinson's Disease](https://pmc.ncbi.nlm.nih.gov/articles/PMC11415435/) Mol Neurobiol, 61 (10), 7785-7795 (2024). 
+Choya-Foces, C.; Navarro, E.; Ríos, C. L.; López, M. G.; Egea, J.; Hernansanz-Agustín, P.; Martínez-Ruiz, A. [The mitochondrial Na(+)/Ca(2+) exchanger NCLX is implied in the activation of hypoxia-inducible factors](https://pmc.ncbi.nlm.nih.gov/articles/PMC11470253/) Redox Biol, 77, 103364 (2024).
 
-<brk>
-<brk>
-<brk>
+:::
 
-### **2023**
+::: {.publication}
 
-<brk>
+Theparambil, S. M.; Kopach, O.; Braga, A.; Nizari, S.; Hosford, P. S.; Sagi-Kiss, V.; Hadjihambi, A.; Konstantinou, C.; Esteras, N.; Gutierrez Del Arroyo, A.; et al. [Adenosine signalling to astrocytes coordinates brain metabolism and function](https://pmc.ncbi.nlm.nih.gov/articles/PMC11291286/) Nature, 632 (8023), 139-146 (2024).
 
-Rodríguez-Carreiro, S.; Navarro, E.; Muñoz, E.; Fernández-Ruiz, J. [The Cannabigerol Derivative VCE-003.2 Exerts Therapeutic Effects in 6-Hydroxydopamine-Lesioned Mice: Comparison with The Classic Dopaminergic Replacement Therapy](https://www.mdpi.com/2076-3425/13/9/1272) Brain Sci, 13 (9) (2023). 
+:::
 
-<brk>
+::: {.publication}
 
-Humphrey, J.; Brophy, E.; Kosoy, R.; Zeng, B.; Coccia, E.; Mattei, D.; Ravi, A.; Efthymiou, A. G.; Navarro, E.; Muller, B. Z.; et al. [Long-read RNA-seq atlas of novel microglia isoforms elucidates disease-associated genetic regulation of splicing](https://pmc.ncbi.nlm.nih.gov/articles/PMC10705658/) medRxiv (2023). 
+Vinokurov, A. Y.; Palalov, A. A.; Kritskaya, K. A.; Demyanenko, S. V.; Garbuz, D. G.; Evgen'ev, M. B.; Esteras, N.; Abramov, A. Y. [Cell-Permeable HSP70 Protects Neurons and Astrocytes Against Cell Death in the Rotenone-Induced and Familial Models of Parkinson's Disease](https://pmc.ncbi.nlm.nih.gov/articles/PMC11415435/) Mol Neurobiol, 61 (10), 7785-7795 (2024).
 
-<brk>
+:::
+
+## 2023 {#year-2023}
+
+::: {.publication}
+
+Rodríguez-Carreiro, S.; Navarro, E.; Muñoz, E.; Fernández-Ruiz, J. [The Cannabigerol Derivative VCE-003.2 Exerts Therapeutic Effects in 6-Hydroxydopamine-Lesioned Mice: Comparison with The Classic Dopaminergic Replacement Therapy](https://www.mdpi.com/2076-3425/13/9/1272) Brain Sci, 13 (9) (2023).
+
+:::
+
+::: {.publication}
 
 Gómez-Cañas, M.; Rodríguez-Cueto, C.; Satta, V.; Hernández-Fisac, I.; Navarro, E.; Fernández-Ruiz, J. [Endocannabinoid-Binding Receptors as Drug Targets. Methods Mol Biol 2023, 2576, 67-94](https://link.springer.com/protocol/10.1007/978-1-0716-2728-0_6) (2023)
 
-<brk>
+:::
 
-Esteras, N.; Blacker, T. S.; Zherebtsov, E. A.; Stelmashuk, O. A.; Zhang, Y.; Wigley, W. C.; Duchen, M. R.; Dinkova-Kostova, A. T.; Abramov, A. Y. [Nrf2 regulates glucose uptake and metabolism in neurons and astrocytes](https://pmc.ncbi.nlm.nih.gov/articles/PMC10034142/) Redox Biol, 62, 102672 (2023). 
+::: {.publication}
 
-<brk>
-<brk>
-<brk>
+Esteras, N.; Blacker, T. S.; Zherebtsov, E. A.; Stelmashuk, O. A.; Zhang, Y.; Wigley, W. C.; Duchen, M. R.; Dinkova-Kostova, A. T.; Abramov, A. Y. [Nrf2 regulates glucose uptake and metabolism in neurons and astrocytes](https://pmc.ncbi.nlm.nih.gov/articles/PMC10034142/) Redox Biol, 62, 102672 (2023).
 
-### **2022**
+:::
 
-<brk>
+## 2022 {#year-2022}
 
-Shevtsova, E. F.; Angelova, P. R.; Stelmashchuk, O. A.; Esteras, N.; Vasil'eva, N. A.; Maltsev, A. V.; Shevtsov, P. N.; Shaposhnikov, A. V.; Fisenko, V. P.; Bachurin, S. O.; et al. [Pharmacological sequestration of mitochondrial calcium uptake protects against dementia and β-amyloid neurotoxicity](https://pmc.ncbi.nlm.nih.gov/articles/PMC9329451/) Sci Rep, 12 (1), 12766 (2022). 
+::: {.publication}
 
-<brk>
+Shevtsova, E. F.; Angelova, P. R.; Stelmashchuk, O. A.; Esteras, N.; Vasil'eva, N. A.; Maltsev, A. V.; Shevtsov, P. N.; Shaposhnikov, A. V.; Fisenko, V. P.; Bachurin, S. O.; et al. [Pharmacological sequestration of mitochondrial calcium uptake protects against dementia and β-amyloid neurotoxicity](https://pmc.ncbi.nlm.nih.gov/articles/PMC9329451/) Sci Rep, 12 (1), 12766 (2022).
 
-Setó-Salvia, N.; Esteras, N.; de Silva, R.; de Pablo-Fernandez, E.; Arber, C.; Toomey, C. E.; Polke, J. M.; Morris, H. R.; Rohrer, J. D.; Abramov, A. Y.; et al. [Elevated 4R-tau in astrocytes from asymptomatic carriers of the MAPT 10+16 intronic mutation](https://europepmc.org/article/pmc/8831975) J Cell Mol Med, 26 (4), 1327-1331 (2022). 
+:::
 
-<brk>
+::: {.publication}
 
-Schilder, B. M.; Navarro, E.; Raj, T. [Multi-omic insights into Parkinson's Disease: From genetic associations to functional mechanisms](https://pmc.ncbi.nlm.nih.gov/articles/PMC10101343/) Neurobiol Dis, 163, 105580 (2022). 
+Setó-Salvia, N.; Esteras, N.; de Silva, R.; de Pablo-Fernandez, E.; Arber, C.; Toomey, C. E.; Polke, J. M.; Morris, H. R.; Rohrer, J. D.; Abramov, A. Y.; et al. [Elevated 4R-tau in astrocytes from asymptomatic carriers of the MAPT 10+16 intronic mutation](https://europepmc.org/article/pmc/8831975) J Cell Mol Med, 26 (4), 1327-1331 (2022).
 
-<brk>
+:::
 
-Riboldi, G. M.; Vialle, R. A.; Navarro, E.; Udine, E.; de Paiva Lopes, K.; Humphrey, J.; Allan, A.; Parks, M.; Henderson, B.; Astudillo, K.; et al. [Transcriptome deregulation of peripheral monocytes and whole blood in GBA-related Parkinson's disease](https://pmc.ncbi.nlm.nih.gov/articles/PMC9386994/) Mol Neurodegener, 17 (1), 52 (2022). 
+::: {.publication}
 
-<brk>
+Schilder, B. M.; Navarro, E.; Raj, T. [Multi-omic insights into Parkinson's Disease: From genetic associations to functional mechanisms](https://pmc.ncbi.nlm.nih.gov/articles/PMC10101343/) Neurobiol Dis, 163, 105580 (2022).
 
-Lopes, K. P.; Snijders, G. J. L.; Humphrey, J.; Allan, A.; Sneeboer, M. A. M.; Navarro, E.; Schilder, B. M.; Vialle, R. A.; Parks, M.; Missall, R.; et al. [Genetic analysis of the human microglial transcriptome across brain regions, aging and disease pathologies](https://pmc.ncbi.nlm.nih.gov/articles/PMC9245609/) Nat Genet, 54 (1), 4-17 (2022). 
+:::
 
-<brk>
+::: {.publication}
 
-Komilova, N. R.; Angelova, P. R.; Berezhnov, A. V.; Stelmashchuk, O. A.; Mirkhodjaev, U. Z.; Houlden, H.; Gourine, A. V.; Esteras, N.; Abramov, A. Y. [Metabolically induced intracellular pH changes activate mitophagy, autophagy, and cell protection in familial forms of Parkinson's disease](https://febs.onlinelibrary.wiley.com/doi/10.1111/febs.16198) Febs j, 289 (3), 699-711 (2022). 
+Riboldi, G. M.; Vialle, R. A.; Navarro, E.; Udine, E.; de Paiva Lopes, K.; Humphrey, J.; Allan, A.; Parks, M.; Henderson, B.; Astudillo, K.; et al. [Transcriptome deregulation of peripheral monocytes and whole blood in GBA-related Parkinson's disease](https://pmc.ncbi.nlm.nih.gov/articles/PMC9386994/) Mol Neurodegener, 17 (1), 52 (2022).
 
-<brk>
+:::
 
-Esteras, N.; Kopach, O.; Maiolino, M.; Lariccia, V.; Amoroso, S.; Qamar, S.; Wray, S.; Rusakov, D. A.; Jaganjac, M.; Abramov, A. Y. [Mitochondrial ROS control neuronal excitability and cell fate in frontotemporal dementia](https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.12394) Alzheimers Dement, 18 (2), 318-338 (2022). 
+::: {.publication}
 
-<brk>
+Lopes, K. P.; Snijders, G. J. L.; Humphrey, J.; Allan, A.; Sneeboer, M. A. M.; Navarro, E.; Schilder, B. M.; Vialle, R. A.; Parks, M.; Missall, R.; et al. [Genetic analysis of the human microglial transcriptome across brain regions, aging and disease pathologies](https://pmc.ncbi.nlm.nih.gov/articles/PMC9245609/) Nat Genet, 54 (1), 4-17 (2022).
 
-Esteras, N.; Abramov, A. Y. [Nrf2 as a regulator of mitochondrial function: Energy metabolism and beyond](https://www.sciencedirect.com/science/article/pii/S0891584922004968?via%3Dihub) Free Radic Biol Med, 189, 136-153 (2022). 
+:::
 
-<brk>
+::: {.publication}
 
-Choi, M. L.; Chappard, A.; Singh, B. P.; Maclachlan, C.; Rodrigues, M.; Fedotova, E. I.; Berezhnov, A. V.; De, S.; Peddie, C. J.; Athauda, D. […] Esteras N […]; et al. [Pathological structural conversion of α-synuclein at the mitochondria induces neuronal toxicity](https://pmc.ncbi.nlm.nih.gov/articles/PMC9448679/) Nat Neurosci, 25 (9), 1134-1148 (2022). 
+Komilova, N. R.; Angelova, P. R.; Berezhnov, A. V.; Stelmashchuk, O. A.; Mirkhodjaev, U. Z.; Houlden, H.; Gourine, A. V.; Esteras, N.; Abramov, A. Y. [Metabolically induced intracellular pH changes activate mitophagy, autophagy, and cell protection in familial forms of Parkinson's disease](https://febs.onlinelibrary.wiley.com/doi/10.1111/febs.16198) Febs j, 289 (3), 699-711 (2022).
 
-<brk>
-<brk>
-<brk>
+:::
 
-### **2021**
+::: {.publication}
 
-<brk>
+Esteras, N.; Kopach, O.; Maiolino, M.; Lariccia, V.; Amoroso, S.; Qamar, S.; Wray, S.; Rusakov, D. A.; Jaganjac, M.; Abramov, A. Y. [Mitochondrial ROS control neuronal excitability and cell fate in frontotemporal dementia](https://alz-journals.onlinelibrary.wiley.com/doi/10.1002/alz.12394) Alzheimers Dement, 18 (2), 318-338 (2022).
 
-Navarro, E.; Udine, E.; Lopes, K. P.; Parks, M.; Riboldi, G.; Schilder, B. M.; Humphrey, J.; Snijders, G. J. L.; Vialle, R. A.; Zhuang, M.; et al. [Dysregulation of mitochondrial and proteolysosomal genes in Parkinson's disease myeloid cells](https://pmc.ncbi.nlm.nih.gov/articles/PMC8728893/) Nat Aging, 1 (9), 850-863 (2021). 
+:::
 
-<brk>
+::: {.publication}
 
-Navarro, E.; Norden, D. M.; Trojanowski, P. J.; Godbout, J. P.; López, M. G. [Central Activation of Alpha7 Nicotinic Signaling Attenuates LPS-Induced Neuroinflammation and Sickness Behavior in Adult but Not in Aged Animals[(https://pmc.ncbi.nlm.nih.gov/articles/PMC8067582/) Molecules, 26 (8) (2021). 
+Esteras, N.; Abramov, A. Y. [Nrf2 as a regulator of mitochondrial function: Energy metabolism and beyond](https://www.sciencedirect.com/science/article/pii/S0891584922004968?via%3Dihub) Free Radic Biol Med, 189, 136-153 (2022).
 
-<brk>
+:::
 
-Kopach, O.; Esteras, N.; Wray, S.; Abramov, A. Y.; Rusakov, D. A. [Genetically engineered MAPT 10+16 mutation causes pathophysiological excitability of human iPSC-derived neurons related to 4R tau-induced dementia](https://www.nature.com/articles/s41419-021-04007-w) Cell Death Dis, 12 (8), 716 (2021). 
+::: {.publication}
 
-<brk>
+Choi, M. L.; Chappard, A.; Singh, B. P.; Maclachlan, C.; Rodrigues, M.; Fedotova, E. I.; Berezhnov, A. V.; De, S.; Peddie, C. J.; Athauda, D. […] Esteras N […]; et al. [Pathological structural conversion of α-synuclein at the mitochondria induces neuronal toxicity](https://pmc.ncbi.nlm.nih.gov/articles/PMC9448679/) Nat Neurosci, 25 (9), 1134-1148 (2022).
 
-Kamynina, A.; Esteras, N.; Koroev, D. O.; Angelova, P. R.; Volpina, O. M.; Abramov, A. Y. [Activation of RAGE leads to the release of glutamate from astrocytes and stimulates calcium signal in neurons](https://pmc.ncbi.nlm.nih.gov/articles/PMC8651009/) J Cell Physiol, 236 (9), 6496-6506 (2021). 
+:::
 
-<brk>
+## 2021 {#year-2021}
 
-Esteras, N.; Kundel, F.; Amodeo, G. F.; Pavlov, E. V.; Klenerman, D.; Abramov, A. Y. [Insoluble tau aggregates induce neuronal death through modification of membrane ion conductance, activation of voltage-gated calcium channels and NADPH oxidase](https://febs.onlinelibrary.wiley.com/doi/10.1111/febs.15340) Febs j, 288 (1), 127-141 (2021). 
+::: {.publication}
 
-<brk>
+Navarro, E.; Udine, E.; Lopes, K. P.; Parks, M.; Riboldi, G.; Schilder, B. M.; Humphrey, J.; Snijders, G. J. L.; Vialle, R. A.; Zhuang, M.; et al. [Dysregulation of mitochondrial and proteolysosomal genes in Parkinson's disease myeloid cells](https://pmc.ncbi.nlm.nih.gov/articles/PMC8728893/) Nat Aging, 1 (9), 850-863 (2021).
 
-Cheng, X.; Vinokurov, A. Y.; Zherebtsov, E. A.; Stelmashchuk, O. A.; Angelova, P. R.; Esteras, N.; Abramov, A. Y. [Variability of mitochondrial energy balance across brain regions](https://onlinelibrary.wiley.com/doi/10.1111/jnc.15239) J Neurochem, 157 (4), 1234-1243 (2021). 
+:::
 
-<brk>
+::: {.publication}
 
-Angelova, P. R.; Esteras, N.; Abramov, A. Y. [Mitochondria and lipid peroxidation in the mechanism of neurodegeneration: Finding ways for prevention](https://onlinelibrary.wiley.com/doi/10.1002/med.21712) Med Res Rev, 41 (2), 770-784 (2021). 
+Navarro, E.; Norden, D. M.; Trojanowski, P. J.; Godbout, J. P.; López, M. G. [Central Activation of Alpha7 Nicotinic Signaling Attenuates LPS-Induced Neuroinflammation and Sickness Behavior in Adult but Not in Aged Animals](https://pmc.ncbi.nlm.nih.gov/articles/PMC8067582/) Molecules, 26 (8) (2021).
 
-<brk>
-<brk>
-<brk>
+:::
 
+::: {.publication}
 
-### **2020**
+Kopach, O.; Esteras, N.; Wray, S.; Abramov, A. Y.; Rusakov, D. A. [Genetically engineered MAPT 10+16 mutation causes pathophysiological excitability of human iPSC-derived neurons related to 4R tau-induced dementia](https://www.nature.com/articles/s41419-021-04007-w) Cell Death Dis, 12 (8), 716 (2021).
 
-<brk>
+:::
 
-Turovsky, E. A.; Braga, A.; Yu, Y.; Esteras, N.; Korsak, A.; Theparambil, S. M.; Hadjihambi, A.; Hosford, P. S.; Teschemacher, A. G.; Marina, N.; et al. [Mechanosensory Signaling in Astrocytes](https://pmc.ncbi.nlm.nih.gov/articles/PMC7724146/) J Neurosci, 40 (49), 9364-9371 (2020). 
+::: {.publication}
 
-<brk>
+Kamynina, A.; Esteras, N.; Koroev, D. O.; Angelova, P. R.; Volpina, O. M.; Abramov, A. Y. [Activation of RAGE leads to the release of glutamate from astrocytes and stimulates calcium signal in neurons](https://pmc.ncbi.nlm.nih.gov/articles/PMC8651009/) J Cell Physiol, 236 (9), 6496-6506 (2021).
+
+:::
+
+::: {.publication}
+
+Esteras, N.; Kundel, F.; Amodeo, G. F.; Pavlov, E. V.; Klenerman, D.; Abramov, A. Y. [Insoluble tau aggregates induce neuronal death through modification of membrane ion conductance, activation of voltage-gated calcium channels and NADPH oxidase](https://febs.onlinelibrary.wiley.com/doi/10.1111/febs.15340) Febs j, 288 (1), 127-141 (2021).
+
+:::
+
+::: {.publication}
+
+Cheng, X.; Vinokurov, A. Y.; Zherebtsov, E. A.; Stelmashchuk, O. A.; Angelova, P. R.; Esteras, N.; Abramov, A. Y. [Variability of mitochondrial energy balance across brain regions](https://onlinelibrary.wiley.com/doi/10.1111/jnc.15239) J Neurochem, 157 (4), 1234-1243 (2021).
+
+:::
+
+::: {.publication}
+
+Angelova, P. R.; Esteras, N.; Abramov, A. Y. [Mitochondria and lipid peroxidation in the mechanism of neurodegeneration: Finding ways for prevention](https://onlinelibrary.wiley.com/doi/10.1002/med.21712) Med Res Rev, 41 (2), 770-784 (2021).
+
+:::
+
+## 2020 {#year-2020}
+
+::: {.publication}
+
+Turovsky, E. A.; Braga, A.; Yu, Y.; Esteras, N.; Korsak, A.; Theparambil, S. M.; Hadjihambi, A.; Hosford, P. S.; Teschemacher, A. G.; Marina, N.; et al. [Mechanosensory Signaling in Astrocytes](https://pmc.ncbi.nlm.nih.gov/articles/PMC7724146/) J Neurosci, 40 (49), 9364-9371 (2020).
+
+:::
+
+::: {.publication}
 
 Ramdhani, S.; Navarro, E.; Udine, E.; Efthymiou, A. G.; Schilder, B. M.; Parks, M.; Goate, A.; Raj, T. [Tensor decomposition of stimulated monocyte and macrophage gene expression profiles identifies neurodegenerative disease-specific trans-eQTLs](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008549) PLoS Genet, 16 (2), e1008549 (2020).
 
-<brk>
+:::
 
-Kopach, O.; Esteras, N.; Wray, S.; Rusakov, D. A.; Abramov, A. Y. [Maturation and phenotype of pathophysiological neuronal excitability of human cells in tau-related dementia](https://pmc.ncbi.nlm.nih.gov/articles/PMC7272359/) J Cell Sci, 133 (10) (2020). 
+::: {.publication}
 
-<brk>
+Kopach, O.; Esteras, N.; Wray, S.; Rusakov, D. A.; Abramov, A. Y. [Maturation and phenotype of pathophysiological neuronal excitability of human cells in tau-related dementia](https://pmc.ncbi.nlm.nih.gov/articles/PMC7272359/) J Cell Sci, 133 (10) (2020).
+
+:::
+
+::: {.publication}
 
 Esteras, N.; Adjobo-Hermans, M. J. W.; Abramov, A. Y.; Koopman, W. J. H. [Visualization of mitochondrial membrane potential in mammalian cells](https://www.sciencedirect.com/science/article/abs/pii/S0091679X19301207?via%3Dihub) Methods Cell Biol, 155, 221-245 (2020).
 
-Esteras, N.; Abramov, A. Y. [Mitochondrial Calcium Deregulation in the Mechanism of Beta-Amyloid and Tau Pathology](https://pmc.ncbi.nlm.nih.gov/articles/PMC7564294/) Cells, 9 (9) (2020). 
+:::
 
-<brk>
+::: {.publication}
 
-Britti, E.; Ros, J.; Esteras, N.; Abramov, A. Y. [Tau inhibits mitochondrial calcium efflux and makes neurons vulnerable to calcium-induced cell death](https://www.sciencedirect.com/science/article/pii/S0143416019302192?via%3Dihub) Cell Calcium, 86, 102150 (2020). 
+Esteras, N.; Abramov, A. Y. [Mitochondrial Calcium Deregulation in the Mechanism of Beta-Amyloid and Tau Pathology](https://pmc.ncbi.nlm.nih.gov/articles/PMC7564294/) Cells, 9 (9) (2020).
 
+:::
+
+::: {.publication}
+
+Britti, E.; Ros, J.; Esteras, N.; Abramov, A. Y. [Tau inhibits mitochondrial calcium efflux and makes neurons vulnerable to calcium-induced cell death](https://www.sciencedirect.com/science/article/pii/S0143416019302192?via%3Dihub) Cell Calcium, 86, 102150 (2020).
+
+:::

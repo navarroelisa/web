@@ -1,156 +1,162 @@
 ---
-title: "webpage"
-output: 
+title: "People | MitoGlia Lab"
+lang: en
+output:
   html_document:
-    theme: sandstone
-    highlight: haddock
-    fig_width: 20
-    fig_height: 6
+    theme: null
+    self_contained: false
+    template: site-template.html
 ---
 
-```{=html}
-<style type="text/css">
-.title {
-  display: none;
-}
+<div class="page-intro"><h1>Lab members</h1><p class="lead">Here you can meet the whole team!</p></div>
 
-main-container {
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
-}
+## PhD students
 
-body {
-text-align: justify
-}
+::: {.member-grid}
 
-</style>
-```
+::: {.member-card}
 
-# **Here you can meet the whole team!**
+<img src="images/mamen_nogales.jpg" alt="Mamen Nogales Valenciano" loading="lazy">
 
-### **Santiago Rodríguez-Carreiro**
+<span class="role">PhD student</span>
 
-<img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/santi_circle.jpg"> </a>
+### Mamen Nogales Valenciano
 
-</br>
-</br>
+Mamen graduated in Sanitary Biology in University of Alcalá and has Master in Biochemistry from UCM. She is currently a  **PhD student** of Mitoglia Lab with a CAM fellowship.
 
-Santi is a Biochemistry graduate from UCM and holds of a Master's in Neuroscience from the Autonomous University of Madrid (UAM). Currently, Santi is a **Ph.D student** in Biochemistry, Molecular Biology, and Biomedicine at UCM. 
+Her project focuses on exploring how mutations in *LRRK2* gene affect microglial biology. She is working with the G2019S knock-in strain and she is performing primary microglial cultures as well as *in vivo* approaches to better understand how this gene may affect microglial biology. If you don´t find Mamen in the lab, for sure she will be dancing bachata some where in Madrid... And if not, maybe playing Secret Code while having some ice-cream.
 
-His research centers on Parkinson's disease and explores the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
+:::
 
-</br>
-</br>
-</br>
-</br>
+::: {.member-card}
 
-### **Mamen Nogales Valenciano**
+<img src="images/lucia_iñigo.jpg" alt="Lucía Íñigo Catalina" loading="lazy">
 
-<img style="float: right; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/mamen_nogales.jpg"> </a>
+<span class="role">PhD student</span>
 
-</br>
-</br>
+### Lucía Íñigo Catalina
 
+Lucía is a Biochemistry graduate from UCM and holds a Master's in Molecular Biomedicine from the Autonomous University of Madrid (UAM). Lucía is a **PhD student**  in the lab under the supervision of Noemí Esteras and Lisa Rancán.
 
-Mamen graduated in Sanitary Biology in University of Alcalá and has Master in Biochemistry from UCM. She is currently a  **PhD student** of Mitoglia Lab with a CAM fellowship. 
+Lucía´s project focuses in understanding how different mutations in Tau associated to frontotemporal dementia can affect neuronal functionality, focusing on mitochondrial biology and calcium signaling. She is developing different experimental approaches, including neuronal cell lines, primary cultures and patient-derived neuronal lines obtained from iPSCs. Apart from neurons and mitochondria, she loves sports, crime books and nature. She also loves spending time in her village located in Guadalajara with family and friends.
 
-Her project focuses on exploring how mutations in *LRRK2* gene affect microglial biology. She is working with the G2019S knock-in strain and she is performing primary microglial cultures as well as *in vivo* approaches to better understand how this gene may affect microglial biology. If you don´t find Mamen in the lab, for sure she will be dancing bachata some where in Madrid... And if not, maybe playing Secret Code while having some ice-cream. 
+:::
 
-</br>
-</br>
-</br>
-</br>
-</br>
+::: {.member-card}
 
-### **Lucía Íñigo Catalina**
+<img src="images/maria_ortiz.png" alt="María Ortiz Cabello" loading="lazy">
 
-<img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/lucia_iñigo.jpg"> </a>
+<span class="role">PhD student</span>
 
-</br>
-</br>
+### María Ortiz Cabello
 
+María is a Biochemistry graduate from UCM and holds a Master's in Traslational Medicine from the Complutense University of Madrid (UCM). María is a **PhD student**  in the lab under the supervision of Elisa Navarro, Noemí Esteras and Sergio Paredes.
 
-Lucía is a Biochemistry graduate from UCM and holds of a Master's in Molecular Biomedicine from the Autonomous University of Madrid (UAM). Lucía is a **PhD student**  in the lab under the supervision of Noemí Esteras and Lisa Rancán.  
+María is trying to figure out the role of Nrf2 in different pathological conditions, including LRRK2 and Tau-related disorders. She combines neuronal and glial primary cultures with in vivo models to understand how Nrf2 gets dysregulated in disease and to find new ways to promote neuroprotection. Beyond Nrf2, María loves concerts and music festivals—or just hopping on a plane to anywhere in the world. Even though she loves living in Madrid, she always feels the need to escape back to her hometown, Cáceres.
 
-Lucía´s project focuses in understanding how different mutations in Tau associated to frontotemporal dementia can affect neuronal functionality, focusing on mitochondrial biology and calcium signaling. She is developing different experimental approaches, including neuronal cell lines, primary cultures and patient-derived neuronal lines obtained from iPSCs. Apart from neurons and mitochondria, she loves sports, crime books and nature. She also loves spending time in her village located in Guadalajara with family and friends. 
+:::
 
-</br>
-</br>
-</br>
-</br>
-</br>
+::: {.member-card}
 
-### **María Ortiz Cabello**
+<img src="images/david2.jpg" alt="David Jiménez Galán" loading="lazy">
 
-<img style="float: right; vertical-align:middle;margin:10px 20px" height=250 width=274 src="images/maria_ortiz.png"> </a>
+<span class="role">PhD student</span>
 
-</br>
+### David Jiménez Galán
 
-María is a Biochemistry graduate from UCM and holds of a Master's in Traslational Medicine from the Complutense University of Madrid (UCM). María is a **PhD student**  in the lab under the supervision of Elisa Navarro, Noemí Esteras and Sergio Paredes.
-
-María is trying to figure out the role of Nrf2 in different pathological conditions, including LRRK2 and Tau-related disorders. She combines neuronal and glial primary cultures with in vivo models to understand how Nrf2 gets dysregulated in disease and to find new ways to promote neuroprotection. Beyond Nrf2, María loves concerts and music festivals—or just hopping on a plane to anywhere in the world. Even though she loves living in Madrid, she always feels the need to escape back to her hometown, Cáceres. 
-
-</br>
-</br>
-</br>
-</br>
-</br>
-
-### **David Jiménez Galán**
-
-<img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=254 src="images/david2.jpg"> </a>
-
-</br>
-
-David is an **undergraduate student** of Biochemistry, currently working in the lab for his Master project under the supervision of Noemí Esteras. 
+David is a **PhD student** in the lab under the supervision of Noemí Esteras.
 
 David is focusing on studying the effects of Tau protein in neuronal functionality. He works with neuronal cell lines carrying different Tau mutations with the aim of exploring how Tau protein alters mitochondrial biology and calcium signalling. Beyond Tau, David loves playing table tennis and he is passionate about Real Madrid and nature. He also loves spending time with his friends!
 
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+:::
 
-### **Sara Carmona Lorenzo**
+:::
 
-<img style="float: right; vertical-align:middle;margin:10px 20px" height=220 width=245 src="images/sara_carmona.jpg"> </a>
+## PhDs defended in the lab
 
-</br>
-Sara is an **undergraduate student** of Biochemistry and she is doing her Master project in the lab under the supervision of Elisa Navarro and Noemí Esteras. 
+::: {.member-grid}
 
-Sara´s project focuses in using Nrf2 inducers as potential neuroprotective agents in neurodegenerative diseases. More specifically, she is studying the functional effect of inducing Nrf2 in different cell types and disease models associated to Parkinson, in order to positionate this approach for clinical development. Apart from the lab, Sara loves dancing, specially flamenco and jotas, as well as reading thrillers. She also enjoys walking her dog and spending time with her family and friends. 
+::: {.member-card}
 
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+<img src="images/santi_circle.jpg" alt="Santiago Rodríguez-Carreiro" loading="lazy">
 
-# **Alumni**
+<span class="role">PhD defended</span>
 
-### **Sara Pardo Calderón**
+### Santiago Rodríguez-Carreiro
+
+Santi is a Biochemistry graduate from UCM and holds a Master's in Neuroscience from the Autonomous University of Madrid (UAM). Santi defended his PhD in Biochemistry, Molecular Biology, and Biomedicine at UCM, carrying out his doctoral research in the lab.
+
+His doctoral research focused on Parkinson's disease and explored the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
+
+:::
+
+:::
+
+## Alumni
+
+::: {.alumni-grid}
+
+::: {.member-card}
+
+
+<span class="role">Alumni</span>
+
+### Sara Carmona Lorenzo
+
+Sara carried out her Master project in the lab under the supervision of Elisa Navarro and Noemí Esteras.
+
+Her project focused in using Nrf2 inducers as potential neuroprotective agents in neurodegenerative diseases. More specifically, she studied the functional effect of inducing Nrf2 in different cell types and disease models associated to Parkinson, in order to evaluate this approach for clinical development. Apart from the lab, Sara loves dancing, specially flamenco and jotas, as well as reading thrillers. She also enjoys walking her dog and spending time with her family and friends.
+
+:::
+
+::: {.member-card}
+
+<span class="role">Alumni</span>
+
+### Sara Pardo Calderón
 
 Sara has a degree and Master in Biochemistry from the UCM. Sara successfully completed her Master project in the lab titled *Investigating the role of GPR55 in Parkinson´s disease* under the supervision of Elisa Navarro (2023-2024).
 
-### **Irene Rodrigo Herrero**
+:::
+
+::: {.member-card}
+
+<span class="role">Alumni</span>
+
+### Irene Rodrigo Herrero
 
 Irene has a Master in Neuroscience from the UCM. Irene successfully completed her Master project in the lab titled *Evaluating the activation of Nrf2 for the treatment of frontotemporal dementia associated to Tau* under the supervision of Noemí Esteras (2023-2024).
 
-### **Alicia Caro**
+:::
+
+::: {.member-card}
+
+<span class="role">Alumni</span>
+
+### Alicia Caro
 
 Alicia has a degree in Biochemistry from the UCM. Alicia successfully completed her end-of-degree project in the lab titled *Studying the role of LRRK2 in the microglial inflammatory response* under the supervision of Elisa Navarro and Jorge Montesinos (2023-2024).
 
-### **Leire García Megía**
+:::
+
+::: {.member-card}
+
+<span class="role">Alumni</span>
+
+### Leire García Megía
 
 Leire has a degree in Biochemistry from the UCM. Leire successfully completed her end-of-degree project in the lab titled *Role of LRRK2 and lipid metabolism in the activity of microglial cells* under the supervision of Elisa Navarro and Jorge Montesinos (2022-2023).
 
-### **Musab Al-Abrash Ghalyoun**
+:::
+
+::: {.member-card}
+
+<span class="role">Alumni</span>
+
+### Musab Al-Abrash Ghalyoun
 
 Musab has a degree in Veterinary and Neuroscience Master from the UCM. Musab completed his final project of the Master in the lab titled *Characterization of a new model of Parkinson´s disease based in alpha-synucelin injection* under the supervision of Elisa Navarro (2021-2022).
 
+:::
 
-
+:::

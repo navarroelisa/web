@@ -1,405 +1,139 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
-
-
-
-<title>MitoGlia lab webpage</title>
-
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-
-
-
-
-
-
-
-
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
-</style>
-
-
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
-<!-- code folding -->
-
-
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MitoGlia Lab at Universidad Complutense de Madrid. Exploring mitochondria, microglia and the mechanisms of neurodegeneration.">
+<title>Home | MitoGlia Lab</title>
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 </head>
-
 <body>
-
-
-<div class="container-fluid main-container">
-
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Welcome</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="index.html">
-    <span class="fa fa-home"></span>
-     
-    Home
-  </a>
-</li>
-<li>
-  <a href="elisa.html">
-    <span class="fa fa-magnifying-glass"></span>
-     
-    Meet Elisa Navarro
-  </a>
-</li>
-<li>
-  <a href="noemi.html">
-    <span class="fa fa-magnifying-glass"></span>
-     
-    Meet Noemí Esteras
-  </a>
-</li>
-<li>
-  <a href="labmembers.html">
-    <span class="fa fa-person"></span>
-     
-    Lab members
-  </a>
-</li>
-<li>
-  <a href="papers.html">
-    <span class="fa fa-book"></span>
-     
-    Papers
-  </a>
-</li>
-<li>
-  <a href="outreach.html">
-    <span class="fa fa-volume-high"></span>
-     
-    Outreach
-  </a>
-</li>
-<li>
-  <a href="news.html">
-    <span class="fa fa-newspaper"></span>
-     
-    News &amp; lab events
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">MitoGlia lab webpage</h1>
-
-</div>
-
-
-<style type="text/css">
-.title {
-  display: none;
-}
-
-main-container {
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-body {
-text-align: justify
-}
-
-</style>
-<div class="row" style="padding-top: 30px;">
-
-<div id="mitoglia-lab" class="section level1">
-<h1><strong>Mitoglia lab</strong></h1>
-<div
-id="understanding-the-role-of-mitochondria-and-microglia-in-the-development-of-neurodegenerative-diseases"
-class="section level2">
-<h2><em>Understanding the role of <strong>mitochondria</strong> and
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-shell">
+<a class="brand" href="index.html" aria-label="MitoGlia Lab home"><span class="brand-symbol" aria-hidden="true">m<span>g</span></span><span>MitoGlia<span class="brand-lab"> LAB</span></span></a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu <span aria-hidden="true">☰</span></button>
+<nav id="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="elisa.html">Elisa Navarro</a><a href="noemi.html">Noemí Esteras</a><a href="labmembers.html">People</a><a href="papers.html">Publications</a><a href="outreach.html">Outreach</a><a href="news.html">News &amp; events</a></nav>
+</div></header>
+<main id="main" class="main-container" tabindex="-1">
+<section class="hero">
+<div>
+<span class="eyebrow">Neuroscience · Universidad Complutense de
+Madrid</span>
+<h1>
+MitoGlia <em>LAB</em>
+</h1>
+<p class="lead">
+Understanding the role of <strong>mitochondria</strong> and
 <strong>microglia</strong> in the development of neurodegenerative
-diseases</em></h2>
-<p></br></p>
-<p><img style="float: left; vertical-align:left;margin:10px 0px" height=403 width=937 src="images/labo2025.jpg">
-</a></p>
-<p></br></p>
-<p><a href = "https://www.ucm.es/">
-<img style="float: right; vertical-align:middle;margin:10px 50px" height=230 width=500 src="images/word-cloud.png">
-</a></p>
-<p></br></p>
-<p>We are <strong>Elisa Navarro &amp; Noemí Esteras</strong>, two young
-PIs joining forces to deepen in the understanding of neurodegenerative
-diseases. Our lab is located in the School of Medicine at <a
-href="https://www.ucm.es/">Universidad Complutense de Madrid</a>. We are
-a multidisciplinary team who share research interests and a common view
-on many aspects of science. We are interested in understanding the
-molecular basis of neurodegenerative diseases. Specifically, we focus on
-the role of mitochondria and the immnune system in the development of
-diseases such as Alzheimer´s, Parkinson´s and frontotemporal dementia.
-We are both passionate about different aspects of neuroscience, from
-microglia to neurons, from transcriptomics to live imaging, from
-mitochondria to lipid metabolism. We are committed to create a
-supportive environment for learning, encouraging collaborative
-opportunities, independence and growth.</p>
-<p></br></p>
-</div>
-<div id="contact-info" class="section level2">
-<h2>Contact info</h2>
-<p>Elisa Navarro: <em><a href="mailto:elisnava@ucm.es"
-class="email">elisnava@ucm.es</a></em> </br> Noemí Esteras: <em><a
-href="mailto:nesteras@ucm.es" class="email">nesteras@ucm.es</a></em></p>
+diseases.
+</p>
+<div class="actions">
+<a class="button primary" href="papers.html">Explore our research <span
+aria-hidden="true">↗</span></a><a class="button " href="labmembers.html">Meet
+the team <span aria-hidden="true">↗</span></a>
 </div>
 </div>
-
-
-
-
+<figure class="hero-visual">
+<img src="images/labo2025.jpg" alt="The MitoGlia Lab team at Universidad Complutense de Madrid" width="937" height="403">
+<figcaption class="image-caption">
+MitoGlia Lab · Madrid, Spain
+</figcaption>
+</figure>
+</section>
+<div class="section-intro">
+<div>
+<h2>
+Our research
+</h2>
 </div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-
-</body>
-</html>
+</div>
+<div class="research-grid">
+<article class="research-card">
+<span class="number">01 / MITOCHONDRIA</span>
+<h3>
+Energy, calcium &amp; cell fate
+</h3>
+<p>
+Investigating how mitochondrial function and calcium signalling
+influence neuronal health and tau-related disease.
+</p>
+</article>
+<article class="research-card">
+<span class="number">02 / MICROGLIA</span>
+<h3>
+The brain’s immune cells
+</h3>
+<p>
+Exploring how LRRK2, lipid metabolism and inflammatory responses shape
+microglial function in Parkinson’s disease.
+</p>
+</article>
+<article class="research-card">
+<span class="number">03 / NEUROPROTECTION</span>
+<h3>
+Nrf2 &amp; cannabinoid signalling
+</h3>
+<p>
+Studying Nrf2 and cannabinoid signalling to understand cellular
+resilience and identify therapeutic opportunities.
+</p>
+</article>
+</div>
+<section class="about-lab">
+<div>
+<h2>
+About the lab
+</h2>
+</div>
+<div>
+<p>
+We are <strong>Elisa Navarro and Noemí Esteras</strong>, two principal
+investigators joining forces to understand the molecular basis of
+neurodegenerative diseases. Our laboratory is based at the School of
+Medicine, <a href="https://www.ucm.es/">Universidad Complutense de
+Madrid</a>.
+</p>
+<p>
+From microglia to neurons, transcriptomics to live imaging, and
+mitochondria to lipid metabolism, we bring complementary approaches to
+Alzheimer’s disease, Parkinson’s disease and frontotemporal dementia.
+</p>
+<p>
+We are committed to a supportive environment for learning,
+collaboration, independence and growth.
+</p>
+</div>
+</section>
+<div class="pi-grid">
+<article class="pi-card">
+<img src="images/Elisa1.jpg" alt="Elisa Navarro" loading="lazy">
+<div>
+<h3>
+Elisa Navarro
+</h3>
+<p>
+Microglia · Neuroinflammation · LRRK2
+</p>
+<a href="elisa.html">Meet Elisa →</a>  
+<a href="https://orcid.org/0000-0002-4056-7146">ORCID ↗</a>
+</div>
+</article>
+<article class="pi-card">
+<img src="images/noemi_circle.jpg" alt="Noemí Esteras" loading="lazy">
+<div>
+<h3>
+Noemí Esteras
+</h3>
+<p>
+Mitochondria · Calcium · Tau
+</p>
+<a href="noemi.html">Meet Noemí →</a>  
+<a href="https://orcid.org/0000-0002-7938-6131">ORCID ↗</a>
+</div>
+</article>
+</div>
+</main>
+<footer class="site-footer"><div><a class="footer-brand" href="index.html">MitoGlia Lab</a><p>Mitochondria. Microglia. Neurodegeneration.</p><p>Department of Biochemistry · School of Medicine<br>Universidad Complutense de Madrid, Spain</p></div><div><h2>Contact info</h2><a href="mailto:elisnava@ucm.es">Elisa Navarro ↗</a><a href="mailto:nesteras@ucm.es">Noemí Esteras ↗</a><a href="https://www.ucm.es/">Universidad Complutense de Madrid ↗</a></div></footer>
+</body></html>

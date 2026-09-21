@@ -1,57 +1,22 @@
 ---
-title: "MitoGlia lab webpage"
-bibliography: references.bib
-output: 
+title: "Home | MitoGlia Lab"
+lang: en
+output:
   html_document:
-    theme: sandstone
-    highlight: haddock
-    fig_width: 20
-    fig_height: 6
+    theme: null
+    self_contained: false
+    template: site-template.html
 ---
 
-```{=html}
-<style type="text/css">
-.title {
-  display: none;
-}
-
-main-container {
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-body {
-text-align: justify
-}
-
-</style>
-```
-<div class="row" style="padding-top: 30px;">
-
-# **Mitoglia lab**
-
-## *Understanding the role of **mitochondria** and **microglia** in the development of neurodegenerative diseases*
-
-</br>
-
-<img style="float: left; vertical-align:left;margin:10px 0px" height=403 width=937 src="images/labo2025.jpg"> </a>
-
-</br>
-
-<a href = "https://www.ucm.es/"> <img style="float: right; vertical-align:middle;margin:10px 50px" height=230 width=500 src="images/word-cloud.png"> </a>
-
-</br>
-
-We are **Elisa Navarro & Noemí Esteras**, two young PIs joining forces to deepen in the understanding of neurodegenerative diseases. Our lab is located in the School of Medicine at [Universidad Complutense de Madrid](https://www.ucm.es/). We are a multidisciplinary team who share research interests and a common view on many aspects of science. We are interested in understanding the molecular basis of neurodegenerative diseases. Specifically, we focus on the role of mitochondria and the immnune system in the development of diseases such as Alzheimer´s, Parkinson´s and frontotemporal dementia. We are both passionate about different aspects of neuroscience, from microglia to neurons, from transcriptomics to live imaging, from mitochondria to lipid metabolism. We are committed to create a supportive environment for learning, encouraging collaborative opportunities, independence and growth.
-
-</br>
-
-## Contact info
-
-Elisa Navarro: *elisnava@ucm.es*
-</br>
-Noemí Esteras: *nesteras@ucm.es*
-
-
-
+<section class="hero">
+<div><span class="eyebrow">Neuroscience · Universidad Complutense de Madrid</span><h1>MitoGlia <em>LAB</em></h1><p class="lead">Understanding the role of <strong>mitochondria</strong> and <strong>microglia</strong> in the development of neurodegenerative diseases.</p><div class="actions"><a class="button primary" href="papers.html">Explore our research <span aria-hidden="true">↗</span></a><a class="button " href="labmembers.html">Meet the team <span aria-hidden="true">↗</span></a></div></div>
+<figure class="hero-visual"><img src="images/labo2025.jpg" alt="The MitoGlia Lab team at Universidad Complutense de Madrid" width="937" height="403"><figcaption class="image-caption">MitoGlia Lab · Madrid, Spain</figcaption></figure>
+</section>
+<div class="section-intro"><div><h2>Our research</h2></div></div>
+<div class="research-grid">
+<article class="research-card"><span class="number">01 / MITOCHONDRIA</span><h3>Energy, calcium &amp; cell fate</h3><p>Investigating how mitochondrial function and calcium signalling influence neuronal health and tau-related disease.</p></article>
+<article class="research-card"><span class="number">02 / MICROGLIA</span><h3>The brain’s immune cells</h3><p>Exploring how LRRK2, lipid metabolism and inflammatory responses shape microglial function in Parkinson’s disease.</p></article>
+<article class="research-card"><span class="number">03 / NEUROPROTECTION</span><h3>Nrf2 &amp; cannabinoid signalling</h3><p>Studying Nrf2 and cannabinoid signalling to understand cellular resilience and identify therapeutic opportunities.</p></article>
+</div>
+<section class="about-lab"><div><h2>About the lab</h2></div><div><p>We are <strong>Elisa Navarro and Noemí Esteras</strong>, two principal investigators joining forces to understand the molecular basis of neurodegenerative diseases. Our laboratory is based at the School of Medicine, <a href="https://www.ucm.es/">Universidad Complutense de Madrid</a>.</p><p>From microglia to neurons, transcriptomics to live imaging, and mitochondria to lipid metabolism, we bring complementary approaches to Alzheimer’s disease, Parkinson’s disease and frontotemporal dementia.</p><p>We are committed to a supportive environment for learning, collaboration, independence and growth.</p></div></section>
+<div class="pi-grid"><article class="pi-card"><img src="images/Elisa1.jpg" alt="Elisa Navarro" loading="lazy"><div><h3>Elisa Navarro</h3><p>Microglia · Neuroinflammation · LRRK2</p><a href="elisa.html">Meet Elisa →</a> &nbsp; <a href="https://orcid.org/0000-0002-4056-7146">ORCID ↗</a></div></article><article class="pi-card"><img src="images/noemi_circle.jpg" alt="Noemí Esteras" loading="lazy"><div><h3>Noemí Esteras</h3><p>Mitochondria · Calcium · Tau</p><a href="noemi.html">Meet Noemí →</a> &nbsp; <a href="https://orcid.org/0000-0002-7938-6131">ORCID ↗</a></div></article></div>

@@ -1,343 +1,38 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
-
-
-
-<title>webpage</title>
-
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-
-
-
-
-
-
-
-
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
-</style>
-
-
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
-<!-- code folding -->
-
-
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MitoGlia Lab at Universidad Complutense de Madrid. Exploring mitochondria, microglia and the mechanisms of neurodegeneration.">
+<title>People | MitoGlia Lab</title>
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
 </head>
-
 <body>
-
-
-<div class="container-fluid main-container">
-
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Welcome</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="index.html">
-    <span class="fa fa-home"></span>
-     
-    Home
-  </a>
-</li>
-<li>
-  <a href="elisa.html">
-    <span class="fa fa-magnifying-glass"></span>
-     
-    Meet Elisa Navarro
-  </a>
-</li>
-<li>
-  <a href="noemi.html">
-    <span class="fa fa-magnifying-glass"></span>
-     
-    Meet Noemí Esteras
-  </a>
-</li>
-<li>
-  <a href="labmembers.html">
-    <span class="fa fa-person"></span>
-     
-    Lab members
-  </a>
-</li>
-<li>
-  <a href="papers.html">
-    <span class="fa fa-book"></span>
-     
-    Papers
-  </a>
-</li>
-<li>
-  <a href="outreach.html">
-    <span class="fa fa-volume-high"></span>
-     
-    Outreach
-  </a>
-</li>
-<li>
-  <a href="news.html">
-    <span class="fa fa-newspaper"></span>
-     
-    News &amp; lab events
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">webpage</h1>
-
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-shell">
+<a class="brand" href="index.html" aria-label="MitoGlia Lab home"><span class="brand-symbol" aria-hidden="true">m<span>g</span></span><span>MitoGlia<span class="brand-lab"> LAB</span></span></a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu <span aria-hidden="true">☰</span></button>
+<nav id="site-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="elisa.html">Elisa Navarro</a><a href="noemi.html">Noemí Esteras</a><a href="labmembers.html">People</a><a href="papers.html">Publications</a><a href="outreach.html">Outreach</a><a href="news.html">News &amp; events</a></nav>
+</div></header>
+<main id="main" class="main-container" tabindex="-1">
+<div class="page-intro">
+<h1>
+Lab members
+</h1>
+<p class="lead">
+Here you can meet the whole team!
+</p>
 </div>
-
-
-<style type="text/css">
-.title {
-  display: none;
-}
-
-main-container {
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-body {
-text-align: justify
-}
-
-</style>
-<div id="here-you-can-meet-the-whole-team" class="section level1">
-<h1><strong>Here you can meet the whole team!</strong></h1>
-<div id="santiago-rodríguez-carreiro" class="section level3">
-<h3><strong>Santiago Rodríguez-Carreiro</strong></h3>
-<p><img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/santi_circle.jpg">
-</a></p>
-<p></br> </br></p>
-<p>Santi is a Biochemistry graduate from UCM and holds of a Master’s in
-Neuroscience from the Autonomous University of Madrid (UAM). Currently,
-Santi is a <strong>Ph.D student</strong> in Biochemistry, Molecular
-Biology, and Biomedicine at UCM.</p>
-<p>His research centers on Parkinson’s disease and explores the
-endocannabinoid system as a potential therapeutic avenue, employing
-diverse methodologies such as cell cultures, animal models and
-histological and biochemical assays. Apart from his academic pursuits,
-Santi enjoys board games, humming tunes in the lab, and collecting
-coins.</p>
-<p></br> </br> </br> </br></p>
-</div>
+<div id="phd-students" class="section level2">
+<h2>PhD students</h2>
+<div class="member-grid">
+<div class="member-card">
+<p><img src="images/mamen_nogales.jpg" alt="Mamen Nogales Valenciano" loading="lazy"></p>
+<p><span class="role">PhD student</span></p>
 <div id="mamen-nogales-valenciano" class="section level3">
-<h3><strong>Mamen Nogales Valenciano</strong></h3>
-<p><img style="float: right; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/mamen_nogales.jpg">
-</a></p>
-<p></br> </br></p>
+<h3>Mamen Nogales Valenciano</h3>
 <p>Mamen graduated in Sanitary Biology in University of Alcalá and has
 Master in Biochemistry from UCM. She is currently a <strong>PhD
 student</strong> of Mitoglia Lab with a CAM fellowship.</p>
@@ -348,14 +43,14 @@ strain and she is performing primary microglial cultures as well as
 affect microglial biology. If you don´t find Mamen in the lab, for sure
 she will be dancing bachata some where in Madrid… And if not, maybe
 playing Secret Code while having some ice-cream.</p>
-<p></br> </br> </br> </br> </br></p>
 </div>
+</div>
+<div class="member-card">
+<p><img src="images/lucia_i%C3%B1igo.jpg" alt="Lucía Íñigo Catalina" loading="lazy"></p>
+<p><span class="role">PhD student</span></p>
 <div id="lucía-íñigo-catalina" class="section level3">
-<h3><strong>Lucía Íñigo Catalina</strong></h3>
-<p><img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=224 src="images/lucia_i%C3%B1igo.jpg">
-</a></p>
-<p></br> </br></p>
-<p>Lucía is a Biochemistry graduate from UCM and holds of a Master’s in
+<h3>Lucía Íñigo Catalina</h3>
+<p>Lucía is a Biochemistry graduate from UCM and holds a Master’s in
 Molecular Biomedicine from the Autonomous University of Madrid (UAM).
 Lucía is a <strong>PhD student</strong> in the lab under the supervision
 of Noemí Esteras and Lisa Rancán.</p>
@@ -367,14 +62,14 @@ cell lines, primary cultures and patient-derived neuronal lines obtained
 from iPSCs. Apart from neurons and mitochondria, she loves sports, crime
 books and nature. She also loves spending time in her village located in
 Guadalajara with family and friends.</p>
-<p></br> </br> </br> </br> </br></p>
 </div>
+</div>
+<div class="member-card">
+<p><img src="images/maria_ortiz.png" alt="María Ortiz Cabello" loading="lazy"></p>
+<p><span class="role">PhD student</span></p>
 <div id="maría-ortiz-cabello" class="section level3">
-<h3><strong>María Ortiz Cabello</strong></h3>
-<p><img style="float: right; vertical-align:middle;margin:10px 20px" height=250 width=274 src="images/maria_ortiz.png">
-</a></p>
-<p></br></p>
-<p>María is a Biochemistry graduate from UCM and holds of a Master’s in
+<h3>María Ortiz Cabello</h3>
+<p>María is a Biochemistry graduate from UCM and holds a Master’s in
 Traslational Medicine from the Complutense University of Madrid (UCM).
 María is a <strong>PhD student</strong> in the lab under the supervision
 of Elisa Navarro, Noemí Esteras and Sergio Paredes.</p>
@@ -386,15 +81,14 @@ promote neuroprotection. Beyond Nrf2, María loves concerts and music
 festivals—or just hopping on a plane to anywhere in the world. Even
 though she loves living in Madrid, she always feels the need to escape
 back to her hometown, Cáceres.</p>
-<p></br> </br> </br> </br> </br></p>
 </div>
+</div>
+<div class="member-card">
+<p><img src="images/david2.jpg" alt="David Jiménez Galán" loading="lazy"></p>
+<p><span class="role">PhD student</span></p>
 <div id="david-jiménez-galán" class="section level3">
-<h3><strong>David Jiménez Galán</strong></h3>
-<p><img style="float: left; vertical-align:middle;margin:10px 20px" height=220 width=254 src="images/david2.jpg">
-</a></p>
-<p></br></p>
-<p>David is an <strong>undergraduate student</strong> of Biochemistry,
-currently working in the lab for his Master project under the
+<h3>David Jiménez Galán</h3>
+<p>David is a <strong>PhD student</strong> in the lab under the
 supervision of Noemí Esteras.</p>
 <p>David is focusing on studying the effects of Tau protein in neuronal
 functionality. He works with neuronal cell lines carrying different Tau
@@ -402,59 +96,96 @@ mutations with the aim of exploring how Tau protein alters mitochondrial
 biology and calcium signalling. Beyond Tau, David loves playing table
 tennis and he is passionate about Real Madrid and nature. He also loves
 spending time with his friends!</p>
-<p></br> </br> </br> </br> </br> </br></p>
 </div>
+</div>
+</div>
+</div>
+<div id="phds-defended-in-the-lab" class="section level2">
+<h2>PhDs defended in the lab</h2>
+<div class="member-grid">
+<div class="member-card">
+<p><img src="images/santi_circle.jpg" alt="Santiago Rodríguez-Carreiro" loading="lazy"></p>
+<p><span class="role">PhD defended</span></p>
+<div id="santiago-rodríguez-carreiro" class="section level3">
+<h3>Santiago Rodríguez-Carreiro</h3>
+<p>Santi is a Biochemistry graduate from UCM and holds a Master’s in
+Neuroscience from the Autonomous University of Madrid (UAM). Santi
+defended his PhD in Biochemistry, Molecular Biology, and Biomedicine at
+UCM, carrying out his doctoral research in the lab.</p>
+<p>His doctoral research focused on Parkinson’s disease and explored the
+endocannabinoid system as a potential therapeutic avenue, employing
+diverse methodologies such as cell cultures, animal models and
+histological and biochemical assays. Apart from his academic pursuits,
+Santi enjoys board games, humming tunes in the lab, and collecting
+coins.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="alumni" class="section level2">
+<h2>Alumni</h2>
+<div class="alumni-grid">
+<div class="member-card">
+<p><span class="role">Alumni</span></p>
 <div id="sara-carmona-lorenzo" class="section level3">
-<h3><strong>Sara Carmona Lorenzo</strong></h3>
-<p><img style="float: right; vertical-align:middle;margin:10px 20px" height=220 width=245 src="images/sara_carmona.jpg">
-</a></p>
-<p></br> Sara is an <strong>undergraduate student</strong> of
-Biochemistry and she is doing her Master project in the lab under the
-supervision of Elisa Navarro and Noemí Esteras.</p>
-<p>Sara´s project focuses in using Nrf2 inducers as potential
+<h3>Sara Carmona Lorenzo</h3>
+<p>Sara carried out her Master project in the lab under the supervision
+of Elisa Navarro and Noemí Esteras.</p>
+<p>Her project focused in using Nrf2 inducers as potential
 neuroprotective agents in neurodegenerative diseases. More specifically,
-she is studying the functional effect of inducing Nrf2 in different cell
-types and disease models associated to Parkinson, in order to
-positionate this approach for clinical development. Apart from the lab,
-Sara loves dancing, specially flamenco and jotas, as well as reading
-thrillers. She also enjoys walking her dog and spending time with her
-family and friends.</p>
-<p></br> </br> </br> </br> </br> </br></p>
+she studied the functional effect of inducing Nrf2 in different cell
+types and disease models associated to Parkinson, in order to evaluate
+this approach for clinical development. Apart from the lab, Sara loves
+dancing, specially flamenco and jotas, as well as reading thrillers. She
+also enjoys walking her dog and spending time with her family and
+friends.</p>
 </div>
 </div>
-<div id="alumni" class="section level1">
-<h1><strong>Alumni</strong></h1>
+<div class="member-card">
+<p><span class="role">Alumni</span></p>
 <div id="sara-pardo-calderón" class="section level3">
-<h3><strong>Sara Pardo Calderón</strong></h3>
+<h3>Sara Pardo Calderón</h3>
 <p>Sara has a degree and Master in Biochemistry from the UCM. Sara
 successfully completed her Master project in the lab titled
 <em>Investigating the role of GPR55 in Parkinson´s disease</em> under
 the supervision of Elisa Navarro (2023-2024).</p>
 </div>
+</div>
+<div class="member-card">
+<p><span class="role">Alumni</span></p>
 <div id="irene-rodrigo-herrero" class="section level3">
-<h3><strong>Irene Rodrigo Herrero</strong></h3>
+<h3>Irene Rodrigo Herrero</h3>
 <p>Irene has a Master in Neuroscience from the UCM. Irene successfully
 completed her Master project in the lab titled <em>Evaluating the
 activation of Nrf2 for the treatment of frontotemporal dementia
 associated to Tau</em> under the supervision of Noemí Esteras
 (2023-2024).</p>
 </div>
+</div>
+<div class="member-card">
+<p><span class="role">Alumni</span></p>
 <div id="alicia-caro" class="section level3">
-<h3><strong>Alicia Caro</strong></h3>
+<h3>Alicia Caro</h3>
 <p>Alicia has a degree in Biochemistry from the UCM. Alicia successfully
 completed her end-of-degree project in the lab titled <em>Studying the
 role of LRRK2 in the microglial inflammatory response</em> under the
 supervision of Elisa Navarro and Jorge Montesinos (2023-2024).</p>
 </div>
+</div>
+<div class="member-card">
+<p><span class="role">Alumni</span></p>
 <div id="leire-garcía-megía" class="section level3">
-<h3><strong>Leire García Megía</strong></h3>
+<h3>Leire García Megía</h3>
 <p>Leire has a degree in Biochemistry from the UCM. Leire successfully
 completed her end-of-degree project in the lab titled <em>Role of LRRK2
 and lipid metabolism in the activity of microglial cells</em> under the
 supervision of Elisa Navarro and Jorge Montesinos (2022-2023).</p>
 </div>
+</div>
+<div class="member-card">
+<p><span class="role">Alumni</span></p>
 <div id="musab-al-abrash-ghalyoun" class="section level3">
-<h3><strong>Musab Al-Abrash Ghalyoun</strong></h3>
+<h3>Musab Al-Abrash Ghalyoun</h3>
 <p>Musab has a degree in Veterinary and Neuroscience Master from the
 UCM. Musab completed his final project of the Master in the lab titled
 <em>Characterization of a new model of Parkinson´s disease based in
@@ -462,51 +193,8 @@ alpha-synucelin injection</em> under the supervision of Elisa Navarro
 (2021-2022).</p>
 </div>
 </div>
-
-
-
-
 </div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-
-</body>
-</html>
+</div>
+</main>
+<footer class="site-footer"><div><a class="footer-brand" href="index.html">MitoGlia Lab</a><p>Mitochondria. Microglia. Neurodegeneration.</p><p>Department of Biochemistry · School of Medicine<br>Universidad Complutense de Madrid, Spain</p></div><div><h2>Contact info</h2><a href="mailto:elisnava@ucm.es">Elisa Navarro ↗</a><a href="mailto:nesteras@ucm.es">Noemí Esteras ↗</a><a href="https://www.ucm.es/">Universidad Complutense de Madrid ↗</a></div></footer>
+</body></html>
