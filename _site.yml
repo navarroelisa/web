@@ -1,28 +1,9 @@
-name: "Neuroscience lab"
-icon: fa-home
-navbar:
-  title: "Welcome"
-  right:
-    - text: "Home"
-      icon: fa-home
-      href: index.html
-    - text: "Meet Elisa Navarro"
-      icon: fa-magnifying-glass
-      href: elisa.html
-    - text: "Meet Noemí Esteras"
-      icon: fa-magnifying-glass
-      href: noemi.html
-    - text: "Lab members"
-      icon: fa-person
-      href: labmembers.html
-    - text: "Papers"
-      icon: fa-book
-      href: papers.html
-    - text: "Outreach"
-      icon: fa-volume-high
-      href: outreach.html
-    - text: "News & lab events"
-      icon: fa-newspaper
-      href: news.html
+name: "MitoGlia Lab"
 output_dir: "docs"
-
+exclude: ["work", "scripts", "data", "README.md", "README.html", "build.ps1", "site-template.html"]
+include: ["assets", "images"]
+output:
+  html_document:
+    theme: null
+    self_contained: false
+    template: site-template.html

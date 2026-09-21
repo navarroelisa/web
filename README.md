@@ -17,3 +17,7 @@ The 21 September 2026 update uses the public ORCID records for Elisa (0000-0002-
 ## Team
 
 Current PhD students: Mamen, Lucía, María and David. Santiago is listed under “PhDs defended in the lab”; Sara Carmona is in Alumni. No defence date or current affiliation was inferred.
+
+## GitHub Pages entry point
+
+GitHub Pages currently publishes the repository root, while the generated website lives in `docs/`. Jekyll uses `_home.html` (included by `_config.yml`) to generate a root `index.html` that redirects to `docs/index.html`. The underscore keeps this entry separate from R Markdown's `index.Rmd` output, so rebuilding in RStudio does not overwrite it. `_site.yml` configures R Markdown; `_config.yml` configures GitHub Pages/Jekyll. Commit and push these configuration files along with the generated pages to deploy the correction.

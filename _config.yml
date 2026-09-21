@@ -1,0 +1,13 @@
+# GitHub Pages publishes the repository root. Keep the R Markdown site in docs/.
+# The underscore prevents R Markdown from treating this entry as a page source.
+include:
+  - _home.html
+exclude:
+  - work
+  - scripts
+  - data
+  - README.md
+  - README.html
+  - build.ps1
+  - site-template.html
+  - references.bib
