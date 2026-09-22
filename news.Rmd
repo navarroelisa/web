@@ -14,6 +14,16 @@ output:
 
 ::: {.event}
 
+## **Santi is oficcially a Doctor!**
+
+On September 15th 2025 Santi succesfully defended his PhD. He did amazing job and achieved the highest grade. It was an amazing day full of science and fun! Now he is moving into data analysis and we will miss him a lot!
+
+<img src="images/santi_defence.JPG" alt="anti is oficcially a Doctor!" loading="lazy">
+
+:::
+
+::: {.event}
+
 ## **Loving MAMitoGliers**
 
 Every month Montesinos´ and MitoGlia´s labs gather together to discuss science and enjoy homemade Noemi´s recipes. Here you can see a summary of what these last months have meant

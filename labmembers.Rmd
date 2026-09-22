@@ -84,9 +84,9 @@ David is focusing on studying the effects of Tau protein in neuronal functionali
 
 ### Santiago Rodríguez-Carreiro
 
-Santi is a Biochemistry graduate from UCM and holds a Master's in Neuroscience from the Autonomous University of Madrid (UAM). Santi defended his PhD in Biochemistry, Molecular Biology, and Biomedicine at UCM, carrying out his doctoral research in the lab.
+Santi is a Biochemistry graduate from UCM and holds a Master's in Neuroscience from the Autonomous University of Madrid (UAM). Santi defended his PhD in Biochemistry, Molecular Biology, and Biomedicine at UCM in 2025.
 
-His doctoral research focused on Parkinson's disease and explored the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. Apart from his academic pursuits, Santi enjoys board games, humming tunes in the lab, and collecting coins.
+His doctoral research focused on Parkinson's disease and explored the endocannabinoid system as a potential therapeutic avenue, employing diverse methodologies such as cell cultures, animal models and histological and biochemical assays. 
 
 :::
 
@@ -98,20 +98,17 @@ His doctoral research focused on Parkinson's disease and explored the endocannab
 
 ::: {.member-card}
 
-
-<span class="role">Alumni</span>
+<span class="role">Master student</span>
 
 ### Sara Carmona Lorenzo
 
-Sara carried out her Master project in the lab under the supervision of Elisa Navarro and Noemí Esteras.
-
-Her project focused in using Nrf2 inducers as potential neuroprotective agents in neurodegenerative diseases. More specifically, she studied the functional effect of inducing Nrf2 in different cell types and disease models associated to Parkinson, in order to evaluate this approach for clinical development. Apart from the lab, Sara loves dancing, specially flamenco and jotas, as well as reading thrillers. She also enjoys walking her dog and spending time with her family and friends.
+Sara carried out her end-of-degree and Master projects in the lab studying the Nrf2 pathway in the cotext of Parkinson´s disease. She succesfully completed her project *ESTUDIO DE LA VÍA NRF2 COMO DIANA FARMACOLÓGICA* in 2024-2025.
 
 :::
 
 ::: {.member-card}
 
-<span class="role">Alumni</span>
+<span class="role">Master student</span>
 
 ### Sara Pardo Calderón
 
@@ -121,7 +118,7 @@ Sara has a degree and Master in Biochemistry from the UCM. Sara successfully com
 
 ::: {.member-card}
 
-<span class="role">Alumni</span>
+<span class="role">Master student</span>
 
 ### Irene Rodrigo Herrero
 
@@ -131,7 +128,7 @@ Irene has a Master in Neuroscience from the UCM. Irene successfully completed he
 
 ::: {.member-card}
 
-<span class="role">Alumni</span>
+<span class="role">Undergraduate student</span>
 
 ### Alicia Caro
 
@@ -141,7 +138,7 @@ Alicia has a degree in Biochemistry from the UCM. Alicia successfully completed 
 
 ::: {.member-card}
 
-<span class="role">Alumni</span>
+<span class="role">Undergraduate student</span>
 
 ### Leire García Megía
 
@@ -151,7 +148,7 @@ Leire has a degree in Biochemistry from the UCM. Leire successfully completed he
 
 ::: {.member-card}
 
-<span class="role">Alumni</span>
+<span class="role">Master student</span>
 
 ### Musab Al-Abrash Ghalyoun
 
