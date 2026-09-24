@@ -100,9 +100,29 @@ His doctoral research focused on Parkinson's disease and explored the endocannab
 
 <span class="role">Master student</span>
 
+### Alba Soto Fuertes
+
+Alba performed the Master in Traslational Medicine in UCM and her master project focused on studying mechanisms of neurodegenration in tau-related diseases. She defended her Master project in 2025-2026 under the title *Mitochondrial alterations in the development of neurodegenerative diseases: potential therapeutic strategies*.
+
+:::
+
+::: {.member-card}
+
+<span class="role">Master student</span>
+
 ### Sara Carmona Lorenzo
 
-Sara carried out her end-of-degree and Master projects in the lab studying the Nrf2 pathway in the cotext of Parkinson´s disease. She succesfully completed her project *ESTUDIO DE LA VÍA NRF2 COMO DIANA FARMACOLÓGICA* in 2024-2025.
+Sara carried out her end-of-degree and Master projects in the lab studying the Nrf2 pathway in the cotext of Parkinson´s disease. She succesfully completed her project *Nrf2 pathway as pharmacological target* in 2024-2025.
+
+:::
+
+::: {.member-card}
+
+<span class="role">Undergraduate student</span>
+
+### Cristina Perea
+
+Cristina has a degree in Biochemistry and for her end-of-degree project studied the effects of different Tau isoforms in neuronal vulnerability. Her project was entitled *Impact of Tau isoforms in neuronal vulnerability*, which she succesfully defended in 2024-2025.
 
 :::
 
